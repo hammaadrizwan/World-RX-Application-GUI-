@@ -1,0 +1,17 @@
+#navBar{
+    -fx-background-color:#1f2a44;
+}
+.button {
+    -fx-background-color: #2a354e;
+    -fx-background-radius: 0;
+    -fx-text-fill: white;
+}
+.button:hover {
+    -fx-background-color: #02f3e9;
+    -fx-background-radius: 0;
+    -fx-text-fill: #1f2a44;
+}
+#addDriverSubmitButton {
+    -fx-background-color: #000000;
+    -fx-text-fill: #ffffff;
+}

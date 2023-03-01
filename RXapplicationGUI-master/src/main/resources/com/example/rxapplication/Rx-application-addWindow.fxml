@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1050.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rxapplication.Controller">
+   <children>
+      <AnchorPane fx:id="navBar" prefHeight="680.0" prefWidth="146.0">
+         <children>
+            <VBox layoutY="286.0" prefHeight="394.0" prefWidth="144.0">
+               <children>
+                  <Button fx:id="addDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="58.0" prefWidth="143.0" styleClass="navBarButton" text="Register Driver" textAlignment="RIGHT" wrapText="true" />
+                  <Button fx:id="updateDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updatebuttonclicked" prefHeight="58.0" prefWidth="143.0" styleClass="navBarButton" text="Update Driver" textAlignment="RIGHT" />
+                  <Button fx:id="deleteDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="50.0" prefWidth="151.0" styleClass="navBarButton" text="Delete Driver" textAlignment="RIGHT" />
+                  <Button fx:id="srrButton" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="50.0" prefWidth="163.0" styleClass="navBarButton" text="Simulate Race" textAlignment="RIGHT" />
+                  <Button fx:id="vctButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVCTButtonClicked" prefHeight="58.0" prefWidth="151.0" styleClass="navBarButton" text="Championship Standings" textAlignment="RIGHT" wrapText="true" />
+                  <Button fx:id="vrlButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updatebuttonclicked" prefHeight="58.0" prefWidth="146.0" styleClass="navBarButton" text="Race Data" textAlignment="RIGHT" wrapText="true">
+                     <graphic>
+                        <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="stfButton" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Save" textAlignment="RIGHT" />
+                  <Button fx:id="rffButton" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Load" textAlignment="RIGHT" />
+               </children>
+            </VBox>
+            <Button mnemonicParsing="false" onAction="#loadMainScreen" prefHeight="66.0" prefWidth="105.0 " style="-fx-background-color: #1f2a44;">
+               <graphic>
+                  <ImageView fitHeight="65.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logo.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="165.0" layoutY="180.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="366.0">
+         <children>
+            <Label layoutX="18.0" layoutY="40.0" prefHeight="20.0" prefWidth="59.0" text="First Name" />
+            <TextField fx:id="fnameInput" layoutX="18.0" layoutY="64.0" prefHeight="31.0" prefWidth="131.0" promptText="Enter firstname" />
+            <Label layoutX="162.0" layoutY="42.0" prefHeight="20.0" prefWidth="59.0" text="Last Name" />
+            <TextField fx:id="lnameInput" layoutX="162.0" layoutY="64.0" prefHeight="31.0" prefWidth="156.0" promptText="Enter lastname" />
+            <Label layoutX="17.0" layoutY="120.0" prefHeight="20.0" prefWidth="59.0" text="Age" />
+            <TextField fx:id="ageInput" layoutX="17.0" layoutY="143.0" prefHeight="31.0" prefWidth="131.0" promptText="Enter Age" />
+            <Label layoutX="15.0" layoutY="290.0" prefHeight="20.0" prefWidth="59.0" text="Car" />
+            <TextField fx:id="teamInput" layoutX="17.0" layoutY="225.0" prefHeight="31.0" prefWidth="301.0" promptText="Enter Team" />
+            <Label layoutX="17.0" layoutY="204.0" prefHeight="20.0" prefWidth="59.0" text="Team" />
+            <TextField fx:id="carInput" layoutX="15.0" layoutY="312.0" prefHeight="31.0" prefWidth="131.0" promptText="Enter Car" />
+            <Label layoutX="165.0" layoutY="291.0" prefHeight="20.0" prefWidth="59.0" text="Points" />
+            <TextField fx:id="pointsInput" layoutX="165.0" layoutY="312.0" prefHeight="31.0" prefWidth="156.0" promptText="Enter Points" />
+            <Button fx:id="addDriverSubmitButton" layoutX="18.0" layoutY="386.0" mnemonicParsing="false" onAction="#addButtonSignupClicked" prefHeight="45.0" prefWidth="311.0" style="-fx-background-color: Black; -fx-text-fill: white;" text="SIGN UP">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Label fx:id="fnameMessage" layoutX="18.0" layoutY="95.0" prefHeight="17.0" prefWidth="131.0" textFill="#f80101" />
+            <Label fx:id="ageMessage" layoutX="17.0" layoutY="174.0" prefHeight="17.0" prefWidth="131.0" textFill="#d30000" />
+            <Label fx:id="lnameMessage" layoutX="162.0" layoutY="95.0" prefHeight="17.0" prefWidth="131.0" textFill="#d30000" />
+            <Label fx:id="teamMessage" layoutX="17.0" layoutY="256.0" prefHeight="17.0" prefWidth="301.0" textFill="#d30000" />
+            <Label fx:id="carMessage" layoutX="15.0" layoutY="343.0" prefHeight="17.0" prefWidth="131.0" textFill="#d30000" />
+            <Label fx:id="pointsMessage" layoutX="165.0" layoutY="343.0" prefHeight="17.0" prefWidth="131.0" textFill="#d30000" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="181.0" layoutY="56.0" prefHeight="83.0" prefWidth="203.0" text="DRIVER ">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <Label layoutX="183.0" layoutY="89.0" prefHeight="69.0" prefWidth="301.0" text="REGISTRATION">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="511.0" fitWidth="767.0" layoutX="498.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/AddImages.jpg" />
+         </image></ImageView>
+      <Label fx:id="successLabel" alignment="CENTER" layoutX="261.0" opacity="0.0" prefHeight="36.0" prefWidth="735.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
