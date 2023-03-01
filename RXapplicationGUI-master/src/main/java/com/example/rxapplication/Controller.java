@@ -8,6 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -268,12 +271,29 @@ public class Controller {
             Integer points = Integer.parseInt(pointsInput.getText().toString());
 
             Driver driver = new Driver(firstName, lastName, age, team, car, points);//creates a new driver of the Driver class
-            drivers.add(driver);// adds the driver to the list of available drivers
+            boolean recordExsists = false;
+            for (Driver availableDriver:drivers) {
+                if (driver.getFname().equals(availableDriver.getFname())&&driver.getLname().equals(availableDriver.getLname())){
+                    recordExsists=true;
+                    break;
+                }
+            }
+            if (recordExsists==false){
+                drivers.add(driver);// adds the driver to the list of available drivers
 
-            writeToFileChampionshipData(drivers);//saves the updated changes into the championshipData
+                writeToFileChampionshipData(drivers);//saves the updated changes into the championshipData
 
-            successLabel.setOpacity(1.0f);
-            successLabel.setText(("Successfully added "+driver.getFname()));
+                successLabel.setOpacity(1.0f);
+                successLabel.setText(("Successfully added "+driver.getFname()));
+                successLabel.setTextFill(Color.rgb(47, 130, 73));
+                successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
+            }else {
+                successLabel.setOpacity(1.0f);
+                successLabel.setText(("Error: "+driver.getFname()+" ,already exists!"));
+                successLabel.setTextFill(Color.rgb(117, 29, 29));
+                successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
+            }
+
             fnameInput.setText("");
             lnameInput.setText("");
             ageInput.setText("");
@@ -331,9 +351,9 @@ public class Controller {
     }
 
     public void updatebuttonclicked() throws IOException, ClassNotFoundException {
-        System.out.println("works");
+        System.out.println("WORKS");
+        }
 
-    }
 //    public void onSRRButtonClicked() throws IOException {
 //        Date date= new Date("05/03/2004");
 //        Race race =new Race(date,"Riga",drivers);
@@ -460,3 +480,4 @@ public class Controller {
 
 
 }
+

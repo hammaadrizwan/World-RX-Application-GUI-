@@ -26,6 +26,7 @@ public class RxApplication extends Application {
     public void start(Stage stage) throws IOException, ClassNotFoundException {
         Parent root = FXMLLoader.load(getClass().getResource("SplashScreen-view.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("splashScreen-stylesheet.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("World RX Championship Management System");
         stage.show();

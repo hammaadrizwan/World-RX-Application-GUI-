@@ -13,7 +13,7 @@
             <Image url="@../images/placeholder_image_worldrx_6d43b_frz_1400x788.png" />
          </image>
       </ImageView>
-      <Button layoutX="410.0" layoutY="598.0" mnemonicParsing="false" onAction="#loadMainScreen" prefHeight="47.0" prefWidth="231.0" style="-fx-background-color: #1f2a44;" text="CLICK TO CONTINUE" textFill="WHITE">
+      <Button alignment="BASELINE_CENTER" contentDisplay="TEXT_ONLY" layoutX="406.0" layoutY="617.0" mnemonicParsing="false" onAction="#loadMainScreen" prefHeight="35.0" prefWidth="241.0" style="-fx-background-color: #1f2a44;" text="CLICK TO CONTINUE" textFill="#a4a4a4">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
