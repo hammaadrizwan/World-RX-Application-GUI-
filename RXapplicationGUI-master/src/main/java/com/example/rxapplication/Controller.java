@@ -394,11 +394,6 @@ public class Controller {
         stage.setTitle("Delete Driver Details");
         stage.show();
         stage.setResizable(false);
-
-        System.out.println(" ");
-        for (Driver individualDriver : drivers) {
-            System.out.println(String.format("%s   %s    %d  %s  %s      %d",individualDriver.getFname(),individualDriver.getLname(), individualDriver.getAge(), individualDriver.getTeam(), individualDriver.getCar(), individualDriver.getPoints()));
-        }
     }
     public void findDriverToBeDeleted() throws IOException, ClassNotFoundException {
         drivers=readFromFileChampionshipData();
@@ -668,7 +663,10 @@ public class Controller {
 //    }
 //
     public void onVCTButtonClicked(ActionEvent event) throws IOException, ClassNotFoundException  {
-        System.out.println("WORK IN PROGRESS");
+        System.out.println(" ");
+        for (Driver individualDriver : drivers) {
+            System.out.println(String.format("%s   %s    %d  %s  %s      %d",individualDriver.getFname(),individualDriver.getLname(), individualDriver.getAge(), individualDriver.getTeam(), individualDriver.getCar(), individualDriver.getPoints()));
+        }
         ////        opens a new window to display results
 //        root = FXMLLoader.load(getClass().getResource("Rx-application-VCT-view.fxml"));
 //        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
