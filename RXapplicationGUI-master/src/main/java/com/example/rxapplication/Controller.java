@@ -663,6 +663,7 @@ public class Controller {
 //    }
 //
     public void onVCTButtonClicked(ActionEvent event) throws IOException, ClassNotFoundException  {
+        drivers = readFromFileChampionshipData();
         System.out.println(" ");
         for (Driver individualDriver : drivers) {
             System.out.println(String.format("%s   %s    %d  %s  %s      %d",individualDriver.getFname(),individualDriver.getLname(), individualDriver.getAge(), individualDriver.getTeam(), individualDriver.getCar(), individualDriver.getPoints()));
