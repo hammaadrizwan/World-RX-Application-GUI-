@@ -11,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import org.controlsfx.control.textfield.TextFields;
@@ -111,10 +110,15 @@ public class Controller {
 
     //UDD ELEMENTS
     @FXML
-    private TextField nameInputofDriverToBeUpdated;
+    private TextField nameInputofDriver;
     @FXML
     private AnchorPane updateFieldsPane;
 
+    //DDD ELEMENTS
+    @FXML
+    private Label nameInputStored;
+    @FXML
+    private AnchorPane deletePane;
     @FXML
     private TableView<Driver> table;
     @FXML
@@ -396,6 +400,53 @@ public class Controller {
             System.out.println(String.format("%s   %s    %d  %s  %s      %d",individualDriver.getFname(),individualDriver.getLname(), individualDriver.getAge(), individualDriver.getTeam(), individualDriver.getCar(), individualDriver.getPoints()));
         }
     }
+    public void findDriverToBeDeleted() throws IOException, ClassNotFoundException {
+        drivers=readFromFileChampionshipData();
+        boolean found = false;
+        String nameOfDriverToBeUpdated = nameInputofDriver.getText().toString();
+
+        int index = 0;
+        for (Driver driver:drivers){
+            String availableDriverName = driver.getFname()+" "+driver.getLname();
+            if (availableDriverName.equals(nameOfDriverToBeUpdated)){
+                found=true;
+                nameInputStored.setText(nameOfDriverToBeUpdated);
+                break;
+            }
+            index++;
+        }
+        if (found==false){
+            successLabel.setOpacity(1.0f);
+            successLabel.setText(("Error: "+nameOfDriverToBeUpdated+" ,does not exist!"));
+            successLabel.setTextFill(Color.rgb(117, 29, 29));
+            successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
+        }else {
+            successLabel.setOpacity(1.0f);
+            successLabel.setText(("Found records of "+nameOfDriverToBeUpdated));
+            successLabel.setTextFill(Color.rgb(47, 130, 73));
+            successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
+            deletePane.setOpacity(1.0f);
+        }
+    }
+
+    public void onDeleteConfirmationClicked() throws IOException, ClassNotFoundException {
+        drivers = readFromFileChampionshipData();
+        String nameOfDriverToBeUpdated = nameInputStored.getText().toString();
+        for (Driver driver:drivers){
+            String availableDriverName = driver.getFname()+" "+driver.getLname();
+            if (availableDriverName.equals(nameOfDriverToBeUpdated)){
+                drivers.remove(driver);
+                break;
+            }
+        }
+        writeToFileChampionshipData(drivers);
+        successLabel.setOpacity(1.0f);
+        successLabel.setText(("Deleted records of "+nameOfDriverToBeUpdated));
+        successLabel.setTextFill(Color.rgb(47, 130, 73));
+        successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
+
+
+    }
 
     public void updatebuttonclicked(ActionEvent event) throws IOException, ClassNotFoundException {
         drivers=readFromFileChampionshipData();
@@ -421,13 +472,13 @@ public class Controller {
             index++;
         }
 
-        TextFields.bindAutoCompletion(nameInputofDriverToBeUpdated,possibleDriverNames); //https://www.youtube.com/watch?v=SkXYg3M0hOQ&ab_channel=CoolITHelp
+        TextFields.bindAutoCompletion(nameInputofDriver,possibleDriverNames); //https://www.youtube.com/watch?v=SkXYg3M0hOQ&ab_channel=CoolITHelp
 
     }
     public void findDriverToBeUpdated() throws IOException, ClassNotFoundException {
         drivers=readFromFileChampionshipData();
         boolean found = false;
-        String nameOfDriverToBeUpdated =nameInputofDriverToBeUpdated.getText().toString();
+        String nameOfDriverToBeUpdated = nameInputofDriver.getText().toString();
 
         int index = 0;
         for (Driver driver:drivers){
@@ -443,6 +494,7 @@ public class Controller {
             successLabel.setText(("Error: "+nameOfDriverToBeUpdated+" ,does not exist!"));
             successLabel.setTextFill(Color.rgb(117, 29, 29));
             successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
+
         }else {
             successLabel.setOpacity(1.0f);
             successLabel.setText(("Found records of "+nameOfDriverToBeUpdated));
