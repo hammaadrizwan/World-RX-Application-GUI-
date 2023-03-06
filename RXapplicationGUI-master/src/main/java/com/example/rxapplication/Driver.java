@@ -1,63 +1,69 @@
 package com.example.rxapplication;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
+
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.io.Serializable;
 
 public class Driver implements Serializable {
     // These are the information the player class will store
-    private String fname;
-    private String lname;
-    private int age;
-    private String team;
-    private String car;
-    private int points;
+    private SerializableSimpleStringProperty fname;
+    private SerializableSimpleStringProperty lname;
+    private SerializableSimpleIntegerProperty age;
+    private SerializableSimpleStringProperty team;
+    private SerializableSimpleStringProperty car;
+    private SerializableSimpleIntegerProperty points;
 
-    // assign all the details of the
-    Driver(String fname, String lname, int age, String team, String car, int points){
-        this.fname = fname;
-        this.lname = lname;
-        this.age = age;
-        this.team = team;
-        this.car = car;
-        this.points = points;
+    // assign all the details of the Driver
+    public Driver(String fname, String lname, Integer age, String team, String car, Integer points){
+        this.fname = new SerializableSimpleStringProperty(fname);
+        this.lname = new SerializableSimpleStringProperty(lname);
+        this.age = new SerializableSimpleIntegerProperty(age);
+        this.team = new SerializableSimpleStringProperty(team);
+        this.car = new SerializableSimpleStringProperty(car);
+        this.points = new SerializableSimpleIntegerProperty(points);
     }
 
     //Getters of player class  (Encapsulation)
-    String getFname(){
-        return this.fname;
+    public String getFname(){
+        return this.fname.get();
     }
-    String getLname(){
-        return this.lname;
+    public String getLname(){
+        return this.lname.get();
     }
-    int getAge(){
-        return this.age;
+    public int getAge(){
+        return this.age.get();
     }
-    String getTeam(){
-        return this.team;
+    public String getTeam(){
+        return this.team.get();
     }
-    String getCar(){
-        return this.car;
+    public String getCar(){
+        return this.car.get();
     }
-    int getPoints(){
-        return this.points;
+    public int getPoints(){
+        return this.points.get();
     }
 
     //Setters of player class (Encapsulation)
-    void setFname(String fname){
+    public void setFname(SerializableSimpleStringProperty fname){
         this.fname=fname;
     }
-    void setLname(String lname){
+    public void setLname(SerializableSimpleStringProperty lname){
         this.lname=lname;
     }
-    void setAge(int age){
+    public void setAge(SerializableSimpleIntegerProperty age){
         this.age=age;
     }
-    void setCar(String car){
+    public void setCar(SerializableSimpleStringProperty car){
         this.car=car;
     }
-    void setTeam(String team){this.team=team;}
-    void setPoints(int points){
+    public void setTeam(SerializableSimpleStringProperty team){
+        this.team=team;
+    }
+    public void setPoints(SerializableSimpleIntegerProperty points){
         this.points=points;
     }
 

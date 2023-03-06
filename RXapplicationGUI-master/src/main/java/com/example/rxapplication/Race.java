@@ -5,22 +5,22 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Race implements Serializable {
-    String date;
-    String Location;
+    SerializableSimpleStringProperty date;
+    SerializableSimpleStringProperty Location;
     ArrayList<Driver> drivers;
 
     public Race(String date, String location, ArrayList<Driver> drivers) {
-        this.date = date;
-        Location = location;
+        this.date = new SerializableSimpleStringProperty(date);
+        Location = new SerializableSimpleStringProperty(location);
         this.drivers = drivers;
     }
 
     public String getDate() {
-        return date;
+        return date.get();
     }
 
     public String getLocation() {
-        return Location;
+        return Location.get();
     }
 
     public ArrayList<Driver> getDrivers() {

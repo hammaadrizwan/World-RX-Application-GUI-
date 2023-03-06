@@ -1,5 +1,7 @@
 package com.example.rxapplication;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -127,25 +129,25 @@ public class Controller {
     @FXML
     private Button refreshButtonVCTWindow;
     @FXML
-    public TableView<Driver> championshipDataView;
+    private TableView<Driver> championshipDataView;
     @FXML
-    public TableColumn<Driver,String> firstnameColumnChampionshipData;
+    private TableColumn<Driver,String> firstnameColumnChampionshipData;
     @FXML
-    public TableColumn<Driver,String> lastnameColumnChampionshipData;
+    private TableColumn<Driver,String> lastnameColumnChampionshipData;
     @FXML
-    public TableColumn<Driver,Integer> ageColumnChampionshipData;
+    private TableColumn<Driver,Integer> ageColumnChampionshipData;
     @FXML
-    public TableColumn<Driver,String> teamColumnChampionshipData;
+    private TableColumn<Driver,String> teamColumnChampionshipData;
     @FXML
-    public TableColumn<Driver,String> carColumnChampionshipData;
+    private TableColumn<Driver,String> carColumnChampionshipData;
     @FXML
-    public TableColumn<Driver,Integer> pointsColumnChampionshipData;
+    private TableColumn<Driver,Integer> pointsColumnChampionshipData;
 
 
     ArrayList<Driver> drivers = new ArrayList<Driver>(2); //Initially creates an empty ArrayList of the relavent data types to save its specific object types
     ArrayList<Race> races = new ArrayList<Race>(2);
-    String championshipDataFilePath="/Users/hammaad/Documents/Java Bootcamp/java tutorials/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/championshipData.txt"; // the path of the file is being stored as variable
-    String raceDataFilePath="/Users/hammaad/Documents/Java Bootcamp/java tutorials/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/raceData.txt"; // the path of the file is being stored in the variable
+    String championshipDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt"; // the path of the file is being stored as variable
+    String raceDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\raceData.txt"; // the path of the file is being stored in the variable
 
     @FXML
     public void loadMainScreen(ActionEvent event) throws IOException { //this loads the main screen
@@ -346,6 +348,9 @@ public class Controller {
             teamInput.setText("");
             carInput.setText("");
             pointsInput.setText("");
+            for (Driver individualDriver : drivers) {
+            System.out.println(String.format("%s   %s    %d  %s  %s      %d",individualDriver.getFname(),individualDriver.getLname(), individualDriver.getAge(), individualDriver.getTeam(), individualDriver.getCar(), individualDriver.getPoints()));
+        }
         }
     }
 
@@ -461,9 +466,8 @@ public class Controller {
         stage.setTitle("Update Driver Details");
         stage.show();
         stage.setResizable(false);
-
-
         }
+
     public void refershDriverNames() throws IOException, ClassNotFoundException {
         drivers = readFromFileChampionshipData();
         String[] possibleDriverNames = new String[drivers.size()];
@@ -622,11 +626,12 @@ public class Controller {
             }
             if (recordExsists==false){
                 Driver storedDriver = drivers.get(index);
-                storedDriver.setFname(firstName);// adds the driver to the list of available drivers
-                storedDriver.setLname(lastName);
-                storedDriver.setAge(age);
-                storedDriver.setTeam(team);
-                storedDriver.setPoints(points);
+                storedDriver.setFname(new SerializableSimpleStringProperty(firstName));// adds the driver to the list of available drivers
+                storedDriver.setLname(new SerializableSimpleStringProperty(lastName));
+                storedDriver.setCar(new SerializableSimpleStringProperty(car));
+                storedDriver.setAge(new SerializableSimpleIntegerProperty(age));
+                storedDriver.setTeam(new SerializableSimpleStringProperty(team));
+                storedDriver.setPoints(new SerializableSimpleIntegerProperty(points));
                 writeToFileChampionshipData(drivers);//saves the updated changes into the championshipData
 
                 successLabel.setOpacity(1.0f);
@@ -722,24 +727,25 @@ public class Controller {
 //        stage.setScene(scene);
 //        stage.show();
     }
-//    public void onRefreshButtonVCTWindowClicked() throws IOException, ClassNotFoundException {
-//        drivers = readFromFileChampionshipData();
-//        firstnameColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Firstname"));
-//        lastnameColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Lastname"));
-//        ageColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver, Integer>("Age"));
-//        teamColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Team"));
-//        carColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Car"));
-//        pointsColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,Integer>("Points"));
-//
-//        ArrayList<Driver> sortedDrivers =sortChampionshipData(drivers);
-//        System.out.println(" ");
-//        ObservableList<Driver> championshipDataObject = FXCollections.observableArrayList();
-//        for (Driver individualDriver : sortedDrivers) {
-//            championshipDataObject.add(individualDriver);
-//        }
-//        championshipDataView.setItems(championshipDataObject);
-//
-//    }
+    public void onRefreshButtonVCTWindowClicked() throws IOException, ClassNotFoundException {
+        drivers = readFromFileChampionshipData();
+        refreshButtonVCTWindow.setOpacity(0.0f);
+        firstnameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Fname"));
+        lastnameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Lname"));
+        ageColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver, Integer>("Age"));
+        teamColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Team"));
+        carColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Car"));
+        pointsColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,Integer>("Points"));
+
+        ArrayList<Driver> sortedDrivers =sortChampionshipData(drivers);
+        System.out.println(" ");
+        ObservableList<Driver> championshipDataObject = FXCollections.observableArrayList();
+        for (Driver individualDriver : sortedDrivers) {
+            championshipDataObject.add(individualDriver);
+        }
+        championshipDataView.setItems(championshipDataObject);
+
+    }
 
     private ArrayList<Driver> sortChampionshipData(ArrayList<Driver> drivers) {
         // Function to sort the drivers in decreasing order of points
