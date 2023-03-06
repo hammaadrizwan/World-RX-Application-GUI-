@@ -1,11 +1,5 @@
 package com.example.rxapplication;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
-
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-
 import java.io.Serializable;
 
 public class Driver implements Serializable {
