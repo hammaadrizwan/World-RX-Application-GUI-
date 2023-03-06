@@ -1,7 +1,5 @@
 package com.example.rxapplication;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,157 +22,75 @@ import java.io.*;
 import java.util.*;
 import java.lang.*;
 
-//THS Contains all the buttons for the Program
+//This is the real deal. All functions, controlls and every single thing of the application runs from here.
 public class Controller {
     // Declaring all the variables that would be used from the FXML application.
     // sets it to private as it can be accessed only from inside this code
 
-    //ROOT window elements, this will change as we switch between scenes
-    public Stage stage;
-    public Scene scene;
-    public Parent root;
+    //ROOT window elements, this will change as we switch between scenes(the backbone of the GUI, everything depends on these 2)
+    private Stage stage;
+    private Scene scene;
 
-    //main screen elements
-    @FXML
-    private Button refreshButton;
-    @FXML
-    private Label lrhPos1Label;
-    @FXML
-    private Label lrhName1Label;
-    @FXML
-    private Label lrhCar1Label;
-    @FXML
-    private Label lrhPoints1Label;
-    @FXML
-    private Label lrhPos2Label;
-    @FXML
-    private Label lrhName2Label;
-    @FXML
-    private Label lrhCar2Label;
-    @FXML
-    private Label lrhPoints2Label;
-    @FXML
-    private Label lrhPos3Label;
-    @FXML
-    private Label lrhName3Label;
-    @FXML
-    private Label lrhCar3Label;
-    @FXML
-    private Label lrhPoints3Label;
-    @FXML
-    public Label lrhLocationLabel;
-    @FXML
-    private Label lrhDateLabel;
-    @FXML
-    private Label firstPlaceDriverFname;
-    @FXML
-    private Label firstPlaceDriverLname;
-    @FXML
-    private Label secondPlaceDriverFname;
-    @FXML
-    private Label secondPlaceDriverLname;
-    @FXML
-    private Label firstPlaceDriverWins;
-    @FXML
-    private Label firstPlaceDriverTop3;
-    @FXML
-    private Label secondPlaceDriverTop3;
-    @FXML
-    private Label secondPlaceDriverWins;
+    //main screen elements(Home page)
+    @FXML private Button refreshButton;//all the labels in the mainScreen are stored here, each an every cell in the Last race Table. Last Race Highlights is an improvement to program, and also Top2 head to head.
+    @FXML private Label lrhPos1Label,lrhName1Label,lrhCar1Label,lrhPoints1Label,lrhPos2Label,lrhName2Label,lrhCar2Label,lrhPoints2Label,lrhPos3Label,lrhName3Label,lrhCar3Label,lrhPoints3Label,lrhLocationLabel,lrhDateLabel,firstPlaceDriverFname,firstPlaceDriverLname,secondPlaceDriverFname,secondPlaceDriverLname,firstPlaceDriverWins,firstPlaceDriverTop3,secondPlaceDriverTop3;
+
+    //ADD window elements (this refers the addwindow FXML file)
+    @FXML public TextField fnameInput,lnameInput,ageInput,carInput,teamInput,pointsInput;//the input fields to add the driver
+    @FXML private Label fnameMessage,lnameMessage,ageMessage,teamMessage,carMessage,pointsMessage,successLabel;//the messages which need to be displayed if incorrect data has been entered
 
 
-    //ADD window elements
-    @FXML
-    public Label successLabel;
-    @FXML
-    public TextField fnameInput;
-    @FXML
-    private TextField lnameInput;
-    @FXML
-    private TextField ageInput;
-    @FXML
-    private TextField carInput;
-    @FXML
-    private TextField teamInput;
-    @FXML
-    private TextField pointsInput;
-    @FXML
-    private Label fnameMessage;
-    @FXML
-    private Label lnameMessage;
-    @FXML
-    private Label ageMessage;
-    @FXML
-    private Label teamMessage;
-    @FXML
-    private Label carMessage;
-    @FXML
-    private Label pointsMessage;
-    @FXML
-    private Label addMessageStatus;
+    //UDD window elements
+    @FXML private TextField nameInputofDriver;
+    @FXML private AnchorPane updateFieldsPane;//this is same as Add window, as fields will be updated
 
-    //UDD ELEMENTS
-    @FXML
-    private TextField nameInputofDriver;
-    @FXML
-    private AnchorPane updateFieldsPane;
+    //DDD window elements
+    @FXML private Label nameInputStored;
+    @FXML private AnchorPane deletePane;
 
-    //DDD ELEMENTS
-    @FXML
-    private Label nameInputStored;
-    @FXML
-    private AnchorPane deletePane;
+    //VCT window elements
+    @FXML private Button refreshButtonVCTWindow; //to refresh championship standings
+    @FXML private TableView<Driver> championshipDataView; //table to display the data
+    @FXML private TableColumn<Driver,String> firstnameColumnChampionshipData,lastnameColumnChampionshipData,teamColumnChampionshipData,carColumnChampionshipData; //each and every column and the data type it will store
+    @FXML private TableColumn<Driver,Integer> ageColumnChampionshipData,pointsColumnChampionshipData;
 
-
-    @FXML
-    private Button refreshButtonVCTWindow;
-    @FXML
-    private TableView<Driver> championshipDataView;
-    @FXML
-    private TableColumn<Driver,String> firstnameColumnChampionshipData;
-    @FXML
-    private TableColumn<Driver,String> lastnameColumnChampionshipData;
-    @FXML
-    private TableColumn<Driver,Integer> ageColumnChampionshipData;
-    @FXML
-    private TableColumn<Driver,String> teamColumnChampionshipData;
-    @FXML
-    private TableColumn<Driver,String> carColumnChampionshipData;
-    @FXML
-    private TableColumn<Driver,Integer> pointsColumnChampionshipData;
 
 
     ArrayList<Driver> drivers = new ArrayList<Driver>(2); //Initially creates an empty ArrayList of the relavent data types to save its specific object types
     ArrayList<Race> races = new ArrayList<Race>(2);
+
     String championshipDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt"; // the path of the file is being stored as variable
     String raceDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\raceData.txt"; // the path of the file is being stored in the variable
 
-    @FXML
+
     public void loadMainScreen(ActionEvent event) throws IOException { //this loads the main screen
         Parent root = FXMLLoader.load(getClass().getResource("Rx-application-main.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setTitle("World RX Championship Management System");
-        scene.getStylesheets().add(getClass().getResource("mainstylesheet.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("mainstylesheet.css").toExternalForm());//refers the main stylesheet
         stage.setScene(scene);
         stage.show();
-        stage.setResizable(false);
-
+        stage.setResizable(false);//now the Home page is open
     }
-    public void loadRastRaceData() throws IOException, ClassNotFoundException {
-        refreshButton.setOpacity(0.0f);
-        races = readFromFileRaceData(); // reads the drivers data to the system
+
+    public void loadLastRaceData() throws IOException, ClassNotFoundException {
+        refreshButton.setOpacity(0.0f);//once the refresh button is clicked it will be disspeared as it displays all the last race data, from the VRL function(gets the most recent race)
+
+        drivers = readFromFileChampionshipData();
+        races = readFromFileRaceData(); // loads the racedata to an ArrayList
+        //sortedRaces = vrlFunction(races);
         Race race = races.get(races.size()-1); //loads the last race..change to the sorted one later
-        String raceLocation = race.getLocation();
+        String raceLocation = race.getLocation();// gets the raceLocatoin and the raceDate from the last race,
         String raceDate = race.getDate();
 
-        lrhLocationLabel.setText(raceLocation.toUpperCase());
+        lrhLocationLabel.setText(raceLocation.toUpperCase());//setting it to the text to the table
         lrhDateLabel.setText(raceDate);
-        Driver firstPLaceDriverResult = race.getDrivers().get(0);
+        Driver firstPLaceDriverResult = race.getDrivers().get(0);//driver positions accordingly
         Driver secondPLaceDriverResult = race.getDrivers().get(1);
         Driver thirdPLaceDriverResult = race.getDrivers().get(2);
 
-        lrhPos1Label.setText("1");
+        lrhPos1Label.setText("1");//first place driver details
         lrhName1Label.setText((firstPLaceDriverResult.getFname()+" "+firstPLaceDriverResult.getLname()));
         lrhCar1Label.setText((firstPLaceDriverResult.getCar()));
         lrhPoints1Label.setText("+10");
@@ -189,8 +105,9 @@ public class Controller {
         lrhCar3Label.setText((thirdPLaceDriverResult.getCar()));
         lrhPoints3Label.setText("+5");
 
-        drivers = readFromFileChampionshipData();
+
         ArrayList<Driver> sortedDriver = sortChampionshipData(drivers);
+        //sortedDriver = vctFunction(drivers); takes in the sorted standings table and displays the top 2 drivers.
         firstPlaceDriverFname.setText(sortedDriver.get(0).getFname().toUpperCase());
         firstPlaceDriverLname.setText(sortedDriver.get(0).getLname().toUpperCase());
         secondPlaceDriverFname.setText(sortedDriver.get(1).getFname().toUpperCase());
@@ -208,7 +125,6 @@ public class Controller {
         stage.setTitle("Driver Registration");
         stage.show();
         stage.setResizable(false);
-
 
     }
 

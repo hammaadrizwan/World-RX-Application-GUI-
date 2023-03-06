@@ -60,4 +60,3 @@ public class Driver implements Serializable {// same as the Race class, the driv
     }
 
 }
-

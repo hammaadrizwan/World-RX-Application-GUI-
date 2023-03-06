@@ -251,7 +251,7 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="refreshButton" layoutX="-1.0" mnemonicParsing="false" onAction="#loadRastRaceData" opacity="0.79" prefHeight="683.0" prefWidth="916.0" text="Click here to access live updates. Refresh the page now" wrapText="true">
+                  <Button fx:id="refreshButton" layoutX="-1.0" mnemonicParsing="false" onAction="#loadLastRaceData" opacity="0.79" prefHeight="683.0" prefWidth="916.0" text="Click here to access live updates. Refresh the page now" wrapText="true">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
