@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 // THIS IS THE MAIN JAVA CLASS Which extends to be of Application class.Since we are using a GUI
