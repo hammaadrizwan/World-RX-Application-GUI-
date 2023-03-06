@@ -722,24 +722,24 @@ public class Controller {
 //        stage.setScene(scene);
 //        stage.show();
     }
-    public void onRefreshButtonVCTWindowClicked() throws IOException, ClassNotFoundException {
-        drivers = readFromFileChampionshipData();
-        firstnameColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Firstname"));
-        lastnameColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Lastname"));
-        ageColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver, Integer>("Age"));
-        teamColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Team"));
-        carColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Car"));
-        pointsColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,Integer>("Points"));
-
-        ArrayList<Driver> sortedDrivers =sortChampionshipData(drivers);
-        System.out.println(" ");
-        ObservableList<Driver> championshipDataObject = FXCollections.observableArrayList();
-        for (Driver individualDriver : sortedDrivers) {
-            championshipDataObject.add(individualDriver);
-        }
-        championshipDataView.setItems(championshipDataObject);
-
-    }
+//    public void onRefreshButtonVCTWindowClicked() throws IOException, ClassNotFoundException {
+//        drivers = readFromFileChampionshipData();
+//        firstnameColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Firstname"));
+//        lastnameColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Lastname"));
+//        ageColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver, Integer>("Age"));
+//        teamColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Team"));
+//        carColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Car"));
+//        pointsColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,Integer>("Points"));
+//
+//        ArrayList<Driver> sortedDrivers =sortChampionshipData(drivers);
+//        System.out.println(" ");
+//        ObservableList<Driver> championshipDataObject = FXCollections.observableArrayList();
+//        for (Driver individualDriver : sortedDrivers) {
+//            championshipDataObject.add(individualDriver);
+//        }
+//        championshipDataView.setItems(championshipDataObject);
+//
+//    }
 
     private ArrayList<Driver> sortChampionshipData(ArrayList<Driver> drivers) {
         // Function to sort the drivers in decreasing order of points
