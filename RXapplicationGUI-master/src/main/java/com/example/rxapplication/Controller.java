@@ -1,5 +1,7 @@
 package com.example.rxapplication;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
@@ -119,25 +122,30 @@ public class Controller {
     private Label nameInputStored;
     @FXML
     private AnchorPane deletePane;
+
+
     @FXML
-    private TableView<Driver> table;
+    private Button refreshButtonVCTWindow;
     @FXML
-    private TableColumn<Driver,String> fname;
+    public TableView<Driver> championshipDataView;
     @FXML
-    private TableColumn<Driver,String> lname;
+    public TableColumn<Driver,String> firstnameColumnChampionshipData;
     @FXML
-    private TableColumn<Driver,Integer> age;
+    public TableColumn<Driver,String> lastnameColumnChampionshipData;
     @FXML
-    private TableColumn<Driver,String> team;
+    public TableColumn<Driver,Integer> ageColumnChampionshipData;
     @FXML
-    private TableColumn<Driver,String> car;
+    public TableColumn<Driver,String> teamColumnChampionshipData;
     @FXML
-    private TableColumn<Driver,Integer> points;
+    public TableColumn<Driver,String> carColumnChampionshipData;
+    @FXML
+    public TableColumn<Driver,Integer> pointsColumnChampionshipData;
+
 
     ArrayList<Driver> drivers = new ArrayList<Driver>(2); //Initially creates an empty ArrayList of the relavent data types to save its specific object types
     ArrayList<Race> races = new ArrayList<Race>(2);
-    String championshipDataFilePath="Z:\\ProgrammingCW\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt"; // the path of the file is being stored as variable
-    String raceDataFilePath="Z:\\ProgrammingCW\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\raceData.txt"; // the path of the file is being stored in the variable
+    String championshipDataFilePath="/Users/hammaad/Documents/Java Bootcamp/java tutorials/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/championshipData.txt"; // the path of the file is being stored as variable
+    String raceDataFilePath="/Users/hammaad/Documents/Java Bootcamp/java tutorials/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/raceData.txt"; // the path of the file is being stored in the variable
 
     @FXML
     public void loadMainScreen(ActionEvent event) throws IOException { //this loads the main screen
@@ -180,7 +188,7 @@ public class Controller {
         lrhPoints3Label.setText("+5");
 
         drivers = readFromFileChampionshipData();
-        ArrayList<Driver> sortedDriver = vctFunction(drivers);
+        ArrayList<Driver> sortedDriver = sortChampionshipData(drivers);
         firstPlaceDriverFname.setText(sortedDriver.get(0).getFname().toUpperCase());
         firstPlaceDriverLname.setText(sortedDriver.get(0).getLname().toUpperCase());
         secondPlaceDriverFname.setText(sortedDriver.get(1).getFname().toUpperCase());
@@ -663,11 +671,17 @@ public class Controller {
 //    }
 //
     public void onVCTButtonClicked(ActionEvent event) throws IOException, ClassNotFoundException  {
-        drivers = readFromFileChampionshipData();
-        System.out.println(" ");
-        for (Driver individualDriver : drivers) {
-            System.out.println(String.format("%s   %s    %d  %s  %s      %d",individualDriver.getFname(),individualDriver.getLname(), individualDriver.getAge(), individualDriver.getTeam(), individualDriver.getCar(), individualDriver.getPoints()));
-        }
+
+        Parent root = FXMLLoader.load(getClass().getResource("Rx-application-VCT-view.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("mainstylesheet.css").toExternalForm());
+        stage.setScene(scene);
+        stage.setTitle("Championship standings");
+        stage.show();
+        stage.setResizable(false);
+
+
         ////        opens a new window to display results
 //        root = FXMLLoader.load(getClass().getResource("Rx-application-VCT-view.fxml"));
 //        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -708,8 +722,26 @@ public class Controller {
 //        stage.setScene(scene);
 //        stage.show();
     }
+    public void onRefreshButtonVCTWindowClicked() throws IOException, ClassNotFoundException {
+        drivers = readFromFileChampionshipData();
+        firstnameColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Firstname"));
+        lastnameColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Lastname"));
+        ageColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver, Integer>("Age"));
+        teamColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Team"));
+        carColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,String>("Car"));
+        pointsColumnChampionshipData.setCellFactory(new PropertyValueFactory<Driver,Integer>("Points"));
 
-    private ArrayList<Driver> vctFunction(ArrayList<Driver> drivers) {
+        ArrayList<Driver> sortedDrivers =sortChampionshipData(drivers);
+        System.out.println(" ");
+        ObservableList<Driver> championshipDataObject = FXCollections.observableArrayList();
+        for (Driver individualDriver : sortedDrivers) {
+            championshipDataObject.add(individualDriver);
+        }
+        championshipDataView.setItems(championshipDataObject);
+
+    }
+
+    private ArrayList<Driver> sortChampionshipData(ArrayList<Driver> drivers) {
         // Function to sort the drivers in decreasing order of points
         //this would nbe run when the VCT function is being called
         for (int i = 0; i < drivers.size(); i++) {

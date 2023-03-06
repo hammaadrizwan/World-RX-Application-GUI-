@@ -1,20 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rxapplication.Controller">
-   <children>
-      <TableView fx:id="table" layoutX="24.0" layoutY="42.0" prefHeight="316.0" prefWidth="557.0">
-        <columns>
-          <TableColumn fx:id="fname" editable="false" prefWidth="101.0" sortable="false" text="Firstname" />
-          <TableColumn fx:id="lname" prefWidth="111.0" text="Lastname" />
-            <TableColumn fx:id="age" prefWidth="48.0" text="Age" />
-            <TableColumn fx:id="team" prefWidth="145.0" text="Team" />
-            <TableColumn fx:id="car" prefWidth="70.0" text="Car" />
-            <TableColumn fx:id="points" text="Points" />
-        </columns>
-      </TableView>
-   </children>
+<AnchorPane prefHeight="680.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rxapplication.Controller">
+  <AnchorPane fx:id="navBar" prefHeight="680.0" prefWidth="146.0">
+    <children>
+      <VBox layoutY="286.0" prefHeight="394.0" prefWidth="144.0">
+        <children>
+          <Button fx:id="addDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="58.0" prefWidth="143.0" styleClass="navBarButton" text="Register Driver" textAlignment="RIGHT" wrapText="true" />
+          <Button fx:id="updateDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updatebuttonclicked" prefHeight="58.0" prefWidth="143.0" styleClass="navBarButton" text="Update Driver" textAlignment="RIGHT" />
+          <Button fx:id="deleteDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="50.0" prefWidth="151.0" styleClass="navBarButton" text="Delete Driver" textAlignment="RIGHT" />
+          <Button fx:id="srrButton" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="50.0" prefWidth="163.0" styleClass="navBarButton" text="Simulate Race" textAlignment="RIGHT" />
+          <Button fx:id="vctButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVCTButtonClicked" prefHeight="58.0" prefWidth="151.0" styleClass="navBarButton" text="Championship Standings" textAlignment="RIGHT" wrapText="true" />
+          <Button fx:id="vrlButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updatebuttonclicked" prefHeight="58.0" prefWidth="146.0" styleClass="navBarButton" text="Race Data" textAlignment="RIGHT" wrapText="true">
+            <graphic>
+              <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic>
+          </Button>
+          <Button fx:id="stfButton" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Save" textAlignment="RIGHT" />
+          <Button fx:id="rffButton" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Load" textAlignment="RIGHT" />
+        </children>
+      </VBox>
+      <Button mnemonicParsing="false" onAction="#loadMainScreen" prefHeight="66.0" prefWidth="105.0 " style="-fx-background-color: #1f2a44;">
+        <graphic>
+          <ImageView fitHeight="65.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+              <Image url="@../images/logo.png" />
+            </image>
+          </ImageView>
+        </graphic></Button>
+    </children>
+  </AnchorPane>
+  <TableView fx:id="championshipDataView" layoutX="156.0" layoutY="88.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="879.0">
+    <columns>
+      <TableColumn fx:id="firstnameColumnChampionshipData" prefWidth="134.0" text="Firstname" />
+      <TableColumn fx:id="lastnameColumnChampionshipData" prefWidth="171.0" text="Lastname" />
+      <TableColumn fx:id="ageColumnChampionshipData" minWidth="0.0" prefWidth="51.0" text="Age" />
+      <TableColumn fx:id="teamColumnChampionshipData" minWidth="0.0" prefWidth="248.0" text="Team" />
+      <TableColumn fx:id="carColumnChampionshipData" minWidth="0.0" prefWidth="205.0" text="Car" />
+      <TableColumn fx:id="pointsColumnChampionshipData" minWidth="0.0" prefWidth="79.0" text="Points" />
+    </columns>
+  </TableView>
+   <Button fx:id="refreshButtonVCTWindow" layoutX="365.0" layoutY="31.0" mnemonicParsing="false" onAction="#onRefreshButtonVCTWindowClicked" prefHeight="26.0" prefWidth="465.0" text="Button" />
 </AnchorPane>
