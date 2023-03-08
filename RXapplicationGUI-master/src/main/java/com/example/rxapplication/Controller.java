@@ -287,32 +287,6 @@ public class Controller {
 //            System.out.println(String.format("%s   %s    %d  %s  %s      %d",individualDriver.getFname(),individualDriver.getLname(), individualDriver.getAge(), individualDriver.getTeam(), individualDriver.getCar(), individualDriver.getPoints()));
 //        }
 
-    //🟢🟡🔴STF FUNCTION - Store in serialised text files - serialised⬇️
-        /*
-        writeToFileChampionshipData(drivers,"Z:\\ProgrammingCW\\RXapplication\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt");
-        writeToFileRaceData(Races,"Z:\\ProgrammingCW\\RXapplication\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt");
-        */
-
-    //🟢🟡🔴RFF FUNCTION - Reading from file to a seperate list of Driver and race datatypes - deserialized⬇️
-        /*
-        ArrayList<Driver> driverData = readFromFileChampionshipData("Z:\\ProgrammingCW\\RXapplication\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt");
-        ArrayList<Race> raceData = readFromFileRaceData("Z:\\ProgrammingCW\\RXapplication\\src\\main\\java\\com\\example\\rxapplication\\raceData.txt");
-        */
-
-    //🟢🟡🔴VCT FUNCTION - SORTING POINTS DESCENDING ORDER⬇️
-        /* for (int i = 1 ; i<driverData.size(); i++) {
-            for (int j = 1 ; j<driverData.size()-1; j++) {
-                Driver currentDriver = driverData.get(j);
-                Driver nextDriver = driverData.get(j+1);
-                if (currentDriver.getPoints()< nextDriver.getPoints()){
-                    Driver temp = currentDriver;
-                    driverData.set(j, nextDriver);
-                    driverData.set(j+1,temp);
-                }
-            }
-        }
-        */
-
     public void deleteButtonClicked(ActionEvent event) throws IOException, ClassNotFoundException {
         drivers=readFromFileChampionshipData();
         Parent root = FXMLLoader.load(getClass().getResource("Rx-application-dddWindow.fxml"));
@@ -572,16 +546,16 @@ public class Controller {
         }
     }
 
-//    public void onSRRButtonClicked() throws IOException {
-//        Date date= new Date("05/03/2004");
-//        Race race =new Race(date,"Riga",drivers);
-//        ArrayList<Driver> drivers = race.getDrivers();
-//        System.out.println((drivers.get(0)).getFname());
-//        System.out.println((drivers.get(1)).getFname());
-//        System.out.println((drivers.get(2)).getFname());
-//        onSTFButtonClicked();
-//
-//    }
+    public void onSRRButtonClicked(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Rx-application-SRR-view.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("mainstylesheet.css").toExternalForm());
+        stage.setScene(scene);
+        stage.setTitle("Driver Registration");
+        stage.show();
+        stage.setResizable(false);
+    }
 
     public void onSTFButtonClicked() throws IOException {
         successLabel.setOpacity(0.0f);

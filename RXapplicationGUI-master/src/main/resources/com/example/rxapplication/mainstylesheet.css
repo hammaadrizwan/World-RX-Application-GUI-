@@ -11,3 +11,8 @@
     -fx-background-radius: 0;
     -fx-text-fill: #1f2a44;
 }
+.navBarButton:active{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 0;
+    -fx-text-fill: #1f2a44;
+}

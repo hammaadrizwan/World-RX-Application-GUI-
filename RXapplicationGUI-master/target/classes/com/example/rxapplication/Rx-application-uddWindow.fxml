@@ -18,7 +18,7 @@
                     <Button fx:id="addDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="58.0" prefWidth="143.0" styleClass="navBarButton" text="Register Driver" textAlignment="RIGHT" wrapText="true" />
                     <Button fx:id="updateDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updatebuttonclicked" prefHeight="58.0" prefWidth="143.0" styleClass="navBarButton" text="Update Driver" textAlignment="RIGHT" />
                     <Button fx:id="deleteDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="50.0" prefWidth="151.0" styleClass="navBarButton" text="Delete Driver" textAlignment="RIGHT" />
-                    <Button fx:id="srrButton" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="50.0" prefWidth="163.0" styleClass="navBarButton" text="Simulate Race" textAlignment="RIGHT" />
+                    <Button fx:id="srrButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSRRButtonClicked" prefHeight="50.0" prefWidth="163.0" styleClass="navBarButton" text="Simulate Race" textAlignment="RIGHT" />
                     <Button fx:id="vctButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVCTButtonClicked" prefHeight="58.0" prefWidth="151.0" styleClass="navBarButton" text="Championship Standings" textAlignment="RIGHT" wrapText="true" />
                     <Button fx:id="vrlButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updatebuttonclicked" prefHeight="58.0" prefWidth="146.0" styleClass="navBarButton" text="Race Data" textAlignment="RIGHT" wrapText="true">
                         <graphic>
@@ -92,13 +92,12 @@
       </font>
    </Label>
    <Label layoutX="207.0" layoutY="213.0" prefHeight="20.0" prefWidth="311.0" text="Please enter the name of the driver to be updated." />
-   <Button layoutX="508.0" layoutY="243.0" mnemonicParsing="false" onAction="#findDriverToBeUpdated" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: #1f2a44; -fx-text-fill: ffffff;" text="Find" />
+   <Button layoutX="482.0" layoutY="243.0" mnemonicParsing="false" onAction="#findDriverToBeUpdated" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #1f2a44; -fx-text-fill: ffffff;" text="Find" />
    <Label fx:id="successLabel" alignment="CENTER" layoutX="248.0" layoutY="7.0" opacity="0.0" prefHeight="36.0" prefWidth="735.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">
       <font>
          <Font size="16.0" />
       </font>
    </Label>
-   <Button layoutX="480.0" layoutY="243.0" mnemonicParsing="false"  prefHeight="20.0" prefWidth="29.0" text="Find" />
 
 
 </AnchorPane>
