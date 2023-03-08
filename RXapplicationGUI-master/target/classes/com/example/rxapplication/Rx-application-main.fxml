@@ -26,10 +26,18 @@
                         <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="stfButton" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Save" textAlignment="RIGHT" />
-                  <Button fx:id="rffButton" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Load" textAlignment="RIGHT" />
+                  <Button fx:id="stfButton" alignment="CENTER_RIGHT" onAction="#onSTFButtonClicked" mnemonicParsing="false" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Save" textAlignment="RIGHT" />
+                  <Button fx:id="rffButton" alignment="CENTER_RIGHT" onAction="#onRFFButtonClicked" mnemonicParsing="false" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Load" textAlignment="RIGHT" />
                </children>
             </VBox>
+            <Button mnemonicParsing="false" onAction="#loadMainScreen" prefHeight="66.0" prefWidth="105.0 " style="-fx-background-color: #1f2a44;">
+               <graphic>
+                  <ImageView fitHeight="65.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logo.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </children>
       </AnchorPane>
       <ScrollPane hbarPolicy="NEVER" hmax="0.0" layoutX="143.0" layoutY="-1.0" prefHeight="680.0" prefWidth="916.0" vbarPolicy="ALWAYS">
@@ -269,5 +277,10 @@
             </ImageView>
          </graphic>
       </Button>
+      <Label fx:id="successLabel" alignment="CENTER" layoutX="261.0" opacity="0.0" prefHeight="36.0" prefWidth="735.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

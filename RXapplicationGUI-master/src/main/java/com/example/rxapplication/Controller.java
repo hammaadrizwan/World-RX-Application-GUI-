@@ -16,7 +16,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import org.controlsfx.control.textfield.TextFields;
+
 
 import java.io.*;
 import java.util.*;
@@ -265,8 +265,8 @@ public class Controller {
             carInput.setText("");
             pointsInput.setText("");
             for (Driver individualDriver : drivers) {
-            System.out.println(String.format("%s   %s    %d  %s  %s      %d",individualDriver.getFname(),individualDriver.getLname(), individualDriver.getAge(), individualDriver.getTeam(), individualDriver.getCar(), individualDriver.getPoints()));
-        }
+                System.out.println(String.format("%s   %s    %d  %s  %s      %d",individualDriver.getFname(),individualDriver.getLname(), individualDriver.getAge(), individualDriver.getTeam(), individualDriver.getCar(), individualDriver.getPoints()));
+            }
         }
     }
 
@@ -287,19 +287,19 @@ public class Controller {
 //            System.out.println(String.format("%s   %s    %d  %s  %s      %d",individualDriver.getFname(),individualDriver.getLname(), individualDriver.getAge(), individualDriver.getTeam(), individualDriver.getCar(), individualDriver.getPoints()));
 //        }
 
-        //🟢🟡🔴STF FUNCTION - Store in serialised text files - serialised⬇️
+    //🟢🟡🔴STF FUNCTION - Store in serialised text files - serialised⬇️
         /*
         writeToFileChampionshipData(drivers,"Z:\\ProgrammingCW\\RXapplication\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt");
         writeToFileRaceData(Races,"Z:\\ProgrammingCW\\RXapplication\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt");
         */
 
-        //🟢🟡🔴RFF FUNCTION - Reading from file to a seperate list of Driver and race datatypes - deserialized⬇️
+    //🟢🟡🔴RFF FUNCTION - Reading from file to a seperate list of Driver and race datatypes - deserialized⬇️
         /*
         ArrayList<Driver> driverData = readFromFileChampionshipData("Z:\\ProgrammingCW\\RXapplication\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt");
         ArrayList<Race> raceData = readFromFileRaceData("Z:\\ProgrammingCW\\RXapplication\\src\\main\\java\\com\\example\\rxapplication\\raceData.txt");
         */
 
-        //🟢🟡🔴VCT FUNCTION - SORTING POINTS DESCENDING ORDER⬇️
+    //🟢🟡🔴VCT FUNCTION - SORTING POINTS DESCENDING ORDER⬇️
         /* for (int i = 1 ; i<driverData.size(); i++) {
             for (int j = 1 ; j<driverData.size()-1; j++) {
                 Driver currentDriver = driverData.get(j);
@@ -382,22 +382,22 @@ public class Controller {
         stage.setTitle("Update Driver Details");
         stage.show();
         stage.setResizable(false);
-        }
-
-    public void refershDriverNames() throws IOException, ClassNotFoundException {
-        drivers = readFromFileChampionshipData();
-        String[] possibleDriverNames = new String[drivers.size()];
-
-        int index =0;
-        for (Driver driver:drivers){
-            String driverName = driver.getFname()+" "+driver.getLname();
-            possibleDriverNames[index] = driverName;
-            index++;
-        }
-
-        TextFields.bindAutoCompletion(nameInputofDriver,possibleDriverNames); //https://www.youtube.com/watch?v=SkXYg3M0hOQ&ab_channel=CoolITHelp
-
     }
+
+    //    public void refershDriverNames() throws IOException, ClassNotFoundException {
+//        drivers = readFromFileChampionshipData();
+//        String[] possibleDriverNames = new String[drivers.size()];
+//
+//        int index =0;
+//        for (Driver driver:drivers){
+//            String driverName = driver.getFname()+" "+driver.getLname();
+//            possibleDriverNames[index] = driverName;
+//            index++;
+//        }
+//
+//        TextFields.bindAutoCompletion(nameInputofDriver,possibleDriverNames); //https://www.youtube.com/watch?v=SkXYg3M0hOQ&ab_channel=CoolITHelp
+//
+//    }
     public void findDriverToBeUpdated() throws IOException, ClassNotFoundException {
         drivers=readFromFileChampionshipData();
         boolean found = false;
@@ -417,6 +417,7 @@ public class Controller {
             successLabel.setText(("Error: "+nameOfDriverToBeUpdated+" ,does not exist!"));
             successLabel.setTextFill(Color.rgb(117, 29, 29));
             successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
+            updateFieldsPane.setOpacity(0.0f);
 
         }else {
             successLabel.setOpacity(1.0f);
@@ -582,19 +583,29 @@ public class Controller {
 //
 //    }
 
-//    public void onSTFButtonClicked() throws IOException {
-//        writeToFileChampionshipData(drivers,"Z:\\ProgrammingCW\\RXapplication\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt");
-////        writeToFileRaceData(races,"Z:\\ProgrammingCW\\RXapplication\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt");
-//    }
+    public void onSTFButtonClicked() throws IOException {
+        successLabel.setOpacity(0.0f);
+        successLabel.setText(("Files have been saved"));
+        successLabel.setTextFill(Color.rgb(47, 130, 73));
+        successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
+        successLabel.setOpacity(1.0f);
+    }
+    public void onRFFButtonClicked() throws IOException {
+        successLabel.setOpacity(0.0f);
+        successLabel.setText(("Files have been successfully loaded"));
+        successLabel.setTextFill(Color.rgb(47, 130, 73));
+        successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
+        successLabel.setOpacity(1.0f);
+    }
 //    public void onRFFButtonClicked() throws IOException, ClassNotFoundException {
 //        drivers = readFromFileChampionshipData("championsipData.txt");
 ////        races= readFromFileRaceData("Z:\\ProgrammingCW\\RXapplication\\src\\main\\java\\com\\example\\rxapplication\\raceData.txt");
 //    }
-//
-    public void onVCTButtonClicked(ActionEvent event) throws IOException, ClassNotFoundException  {
+
+    public void onVCTButtonClicked(ActionEvent event) throws IOException, ClassNotFoundException {
 
         Parent root = FXMLLoader.load(getClass().getResource("Rx-application-VCT-view.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("mainstylesheet.css").toExternalForm());
         stage.setScene(scene);
@@ -603,66 +614,25 @@ public class Controller {
         stage.setResizable(false);
 
 
-        ////        opens a new window to display results
-//        root = FXMLLoader.load(getClass().getResource("Rx-application-VCT-view.fxml"));
-//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        ArrayList<Driver> drivers = readFromFileChampionshipData("Z:\\ProgrammingCW\\RXapplication\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt");
-//
-////        TableView tbv = new TableView();
-////        // Create two columns
-////        TableColumn<String, Driver> cl1 = new TableColumn<>("First name");
-////        cl1.setCellValueFactory(new PropertyValueFactory<>("fname"));
-////        TableColumn<String, Driver> cl2 = new TableColumn<>("Last name");
-////        cl2.setCellValueFactory(new PropertyValueFactory<>("lname"));
-////        TableColumn<Integer, Driver> cl3 = new TableColumn<>("Age");
-////        cl3.setCellValueFactory(new PropertyValueFactory<>("age"));
-////        TableColumn<String, Driver> cl4 = new TableColumn<>("Team");
-////        cl4.setCellValueFactory(new PropertyValueFactory<>("team"));
-////        TableColumn<String, Driver> cl5 = new TableColumn<>("Car");
-////        cl5.setCellValueFactory(new PropertyValueFactory<>("car"));
-////        TableColumn<Integer, Driver> cl6 = new TableColumn<>("Points");
-////        cl6.setCellValueFactory(new PropertyValueFactory<>("points"));
-////        // Add two columns into TableView
-////        tbv.getColumns().add(cl1);
-////        tbv.getColumns().add(cl2);
-////        tbv.getColumns().add(cl3);
-////        tbv.getColumns().add(cl4);
-////        tbv.getColumns().add(cl5);
-////        tbv.getColumns().add(cl6);
-//        ArrayList<Driver> sortedDrivers = vctFunction(drivers);
-//        fname.setCellValueFactory(new PropertyValueFactory<Driver,String>("fname"));
-//        lname.setCellValueFactory(new PropertyValueFactory<Driver,String>("lname"));
-//        age.setCellValueFactory(new PropertyValueFactory<Driver,Integer>("age"));
-//        team.setCellValueFactory(new PropertyValueFactory<Driver,String>("team"));
-//        car.setCellValueFactory(new PropertyValueFactory<Driver,String>("car"));
-//        points.setCellValueFactory(new PropertyValueFactory<Driver,Integer>("points"));
-//        ObservableList<Driver> list = (ObservableList) sortedDrivers;
-//        table.setItems(list);
-//
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
     }
-    public void onRefreshButtonVCTWindowClicked() throws IOException, ClassNotFoundException {
+    public void onRefreshButtonVCTWindowClicked() throws IOException, ClassNotFoundException { //This is to populate the fields of table view with the realvent data type
         drivers = readFromFileChampionshipData();
-        refreshButtonVCTWindow.setOpacity(0.0f);
-        firstnameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Fname"));
+        refreshButtonVCTWindow.setOpacity(0.0f);//once clicked the refresh button dissapears
+        firstnameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Fname"));// this sets the value which is stored under the fname property of the drivers object
         lastnameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Lname"));
         ageColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver, Integer>("Age"));
         teamColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Team"));
         carColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Car"));
         pointsColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,Integer>("Points"));
 
-        ArrayList<Driver> sortedDrivers =sortChampionshipData(drivers);
-        System.out.println(" ");
-        ObservableList<Driver> championshipDataObject = FXCollections.observableArrayList();
+        ArrayList<Driver> sortedDrivers =sortChampionshipData(drivers);// this calls the function sort championhip data, and stores it as a new sorted list
+        ObservableList<Driver> championshipDataObject = FXCollections.observableArrayList(); //then we create a championshipObject which is an object of Observalbe list that stores the detials of each Driver, we use Observable list as it supports any listners to use the elements in it, which and Arraylist cannot perform.
         for (Driver individualDriver : sortedDrivers) {
-            championshipDataObject.add(individualDriver);
+            championshipDataObject.add(individualDriver);//adds each from the list of drivers which has been sorted in descending order of points.
         }
-        championshipDataView.setItems(championshipDataObject);
+        championshipDataView.setItems(championshipDataObject);//once the list is ready we populate the tableview by calling the setItems which displays our observable list Object.
 
     }
-
     private ArrayList<Driver> sortChampionshipData(ArrayList<Driver> drivers) {
         // Function to sort the drivers in decreasing order of points
         //this would nbe run when the VCT function is being called
