@@ -20,13 +20,13 @@
                   <Button fx:id="deleteDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="50.0" prefWidth="151.0" styleClass="navBarButton" text="Delete Driver" textAlignment="RIGHT" />
                   <Button fx:id="srrButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSRRButtonClicked" prefHeight="50.0" prefWidth="163.0" styleClass="navBarButton" text="Simulate Race" textAlignment="RIGHT" />
                   <Button fx:id="vctButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVCTButtonClicked" prefHeight="58.0" prefWidth="151.0" styleClass="navBarButton" text="Championship Standings" textAlignment="RIGHT" wrapText="true" />
-                  <Button fx:id="vrlButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updatebuttonclicked" prefHeight="58.0" prefWidth="146.0" styleClass="navBarButton" text="Race Data" textAlignment="RIGHT" wrapText="true">
+                  <Button fx:id="vrlButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVRLButtonClicked" prefHeight="58.0" prefWidth="146.0" styleClass="navBarButton" text="Race Data" textAlignment="RIGHT" wrapText="true">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="stfButton" alignment="CENTER_RIGHT" onAction="#onSTFButtonClicked" mnemonicParsing="false" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Save" textAlignment="RIGHT" />
-                  <Button fx:id="rffButton" alignment="CENTER_RIGHT" onAction="#onRFFButtonClicked" mnemonicParsing="false" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Load" textAlignment="RIGHT" />
+                  <Button fx:id="stfButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSTFButtonClicked" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Save" textAlignment="RIGHT" />
+                  <Button fx:id="rffButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onRFFButtonClicked" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Load" textAlignment="RIGHT" />
                </children>
             </VBox>
             <Button mnemonicParsing="false" onAction="#loadMainScreen" prefHeight="66.0" prefWidth="105.0 " style="-fx-background-color: #1f2a44;">

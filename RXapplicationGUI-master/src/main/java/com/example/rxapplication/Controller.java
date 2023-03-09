@@ -32,8 +32,8 @@ public class Controller {
     private Scene scene;
 
     //main screen elements(Home page)
-    @FXML private Button refreshButton;//all the labels in the mainScreen are stored here, each an every cell in the Last race Table. Last Race Highlights is an improvement to program, and also Top2 head to head.
-    @FXML private Label lrhPos1Label,lrhName1Label,lrhCar1Label,lrhPoints1Label,lrhPos2Label,lrhName2Label,lrhCar2Label,lrhPoints2Label,lrhPos3Label,lrhName3Label,lrhCar3Label,lrhPoints3Label,lrhLocationLabel,lrhDateLabel,firstPlaceDriverFname,firstPlaceDriverLname,secondPlaceDriverFname,secondPlaceDriverLname,firstPlaceDriverWins,firstPlaceDriverTop3,secondPlaceDriverTop3;
+    @FXML private Button refreshButton,viewRaceDataButton;//all the labels in the mainScreen are stored here, each an every cell in the Last race Table. Last Race Highlights is an improvement to program, and also Top2 head to head.
+    @FXML private Label lrhPos1Label,lrhName1Label,lrhCar1Label,lrhPoints1Label,lrhPos2Label,lrhName2Label,lrhCar2Label,lrhPoints2Label,lrhPos3Label,lrhName3Label,lrhCar3Label,lrhPoints3Label,lrhLocationLabel,lrhDateLabel,firstPlaceDriverFname,firstPlaceDriverLname,secondPlaceDriverFname,secondPlaceDriverLname,firstPlaceDriverWins,firstPlaceDriverTop3,secondPlaceDriverTop3,secondPlaceDriverWins;
 
     //ADD window elements (this refers the addwindow FXML file)
     @FXML public TextField fnameInput,lnameInput,ageInput,carInput,teamInput,pointsInput;//the input fields to add the driver
@@ -54,15 +54,17 @@ public class Controller {
     @FXML private TableColumn<Driver,String> firstnameColumnChampionshipData,lastnameColumnChampionshipData,teamColumnChampionshipData,carColumnChampionshipData; //each and every column and the data type it will store
     @FXML private TableColumn<Driver,Integer> ageColumnChampionshipData,pointsColumnChampionshipData;
 
-
+    //SRR window elements
+    @FXML private Button simulateRaceButtonClicked;
 
     ArrayList<Driver> drivers = new ArrayList<Driver>(2); //Initially creates an empty ArrayList of the relavent data types to save its specific object types
     ArrayList<Race> races = new ArrayList<Race>(2);
 
     String championshipDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt"; // the path of the file is being stored as variable
     String raceDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\raceData.txt"; // the path of the file is being stored in the variable
+    Random random = new Random();
 
-
+    //Main Window Methods
     public void loadMainScreen(ActionEvent event) throws IOException { //this loads the main screen
         Parent root = FXMLLoader.load(getClass().getResource("Rx-application-main.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -75,12 +77,14 @@ public class Controller {
     }
 
     public void loadLastRaceData() throws IOException, ClassNotFoundException {
-        refreshButton.setOpacity(0.0f);//once the refresh button is clicked it will be disspeared as it displays all the last race data, from the VRL function(gets the most recent race)
-
         drivers = readFromFileChampionshipData();
         races = readFromFileRaceData(); // loads the racedata to an ArrayList
-        //sortedRaces = vrlFunction(races);
-        Race race = races.get(races.size()-1); //loads the last race..change to the sorted one later
+
+        refreshButton.setOpacity(0.0f);//once the refresh button is clicked it will be disspeared as it displays all the last race data, from the VRL function(gets the most recent race)
+        viewRaceDataButton.setOpacity(1.0f);
+
+        ArrayList<Race> sortedRaces = sortRaceData(races);
+        Race race = sortedRaces.get(races.size()-1); //loads the last race..change to the sorted one later
         String raceLocation = race.getLocation();// gets the raceLocatoin and the raceDate from the last race,
         String raceDate = race.getDate();
 
@@ -106,16 +110,41 @@ public class Controller {
         lrhPoints3Label.setText("+5");
 
 
-        ArrayList<Driver> sortedDriver = sortChampionshipData(drivers);
-        //sortedDriver = vctFunction(drivers); takes in the sorted standings table and displays the top 2 drivers.
-        firstPlaceDriverFname.setText(sortedDriver.get(0).getFname().toUpperCase());
-        firstPlaceDriverLname.setText(sortedDriver.get(0).getLname().toUpperCase());
-        secondPlaceDriverFname.setText(sortedDriver.get(1).getFname().toUpperCase());
-        secondPlaceDriverLname.setText(sortedDriver.get(1).getLname().toUpperCase());
+        ArrayList<Driver> sortedDriver = sortChampionshipData(drivers);//reads the top 2 drivers
+        Driver firstTitleContender = sortedDriver.get(0);
+        Driver secondTitleContender = sortedDriver.get(1);
+        firstPlaceDriverFname.setText(firstTitleContender.getFname().toUpperCase());//updates the main screen Title contender dashboard
+        firstPlaceDriverLname.setText(firstTitleContender.getLname().toUpperCase());
+        secondPlaceDriverFname.setText(secondTitleContender.getFname().toUpperCase());
+        secondPlaceDriverLname.setText(secondTitleContender.getLname().toUpperCase());
+        firstPlaceDriverTop3.setText(String.valueOf(podiumsCalculator(firstTitleContender,races)));//number of podiums between each driver
+        secondPlaceDriverTop3.setText(String.valueOf(podiumsCalculator(secondTitleContender,races)));
+        firstPlaceDriverWins.setText(String.valueOf(totalWinsCalculator(firstTitleContender,races)));//number of race wins
+        secondPlaceDriverWins.setText(String.valueOf(totalWinsCalculator(secondTitleContender,races)));
 
+    }
+    public String podiumsCalculator(Driver driver,ArrayList<Race> races){
+        int totalPodiums = 0;//this to calculate the number of podiums for any driver
+        for (Race race:races){//checks in every single race of the season
+            if(driver.getFname().equals(race.getDrivers().get(0).getFname())||driver.getFname().equals(race.getDrivers().get(1).getFname())||driver.getFname().equals(race.getDrivers().get(2).getFname())){
+                totalPodiums++;//if the driver name is present in any of the first 3 elements in the race, then it means thats a podium for the driver.
+            }
+        }
+        return String.valueOf(totalPodiums);//returns answer in String
+    }
+
+    public String totalWinsCalculator(Driver driver,ArrayList<Race> races){
+        int totalWins=0;
+        for (Race race:races){
+            if(driver.getFname().equals(race.getDrivers().get(0).getFname())){//checks in each race if the driver name is prsent at the first index, it means that the driver has won the race.
+                totalWins++;
+            }
+        }
+        return String.valueOf(totalWins);
     }
 
 
+    //ADD Window Methods
     public void addButtonClicked(ActionEvent event) throws IOException { //Opens the ADD driver window from main page
         Parent root = FXMLLoader.load(getClass().getResource("Rx-application-addWindow.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -270,23 +299,8 @@ public class Controller {
         }
     }
 
-//        Collections.shuffle(drivers);
-//        System.out.println();6
-//        for (int i = 1; i < drivers.size(); i++) {
-//            for (int j = 1; j < drivers.size() - 1; j++) {
-//                Driver currentDriver = drivers.get(j);
-//                Driver nextDriver = drivers.get(j + 1);
-//                if (currentDriver.getPoints() < nextDriver.getPoints()) {
-//                    Driver temp = currentDriver;
-//                    drivers.set(j, nextDriver);
-//                    drivers.set(j + 1, temp);
-//                }
-//            }
-//        }
-//        for (Driver individualDriver : drivers) {
-//            System.out.println(String.format("%s   %s    %d  %s  %s      %d",individualDriver.getFname(),individualDriver.getLname(), individualDriver.getAge(), individualDriver.getTeam(), individualDriver.getCar(), individualDriver.getPoints()));
-//        }
 
+    //DDD Window Methods
     public void deleteButtonClicked(ActionEvent event) throws IOException, ClassNotFoundException {
         drivers=readFromFileChampionshipData();
         Parent root = FXMLLoader.load(getClass().getResource("Rx-application-dddWindow.fxml"));
@@ -342,10 +356,10 @@ public class Controller {
         successLabel.setText(("Deleted records of "+nameOfDriverToBeUpdated));
         successLabel.setTextFill(Color.rgb(47, 130, 73));
         successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
-
-
     }
 
+
+    //UDD Window Methods
     public void updatebuttonclicked(ActionEvent event) throws IOException, ClassNotFoundException {
         drivers=readFromFileChampionshipData();
         Parent root = FXMLLoader.load(getClass().getResource("Rx-application-uddWindow.fxml"));
@@ -358,20 +372,6 @@ public class Controller {
         stage.setResizable(false);
     }
 
-    //    public void refershDriverNames() throws IOException, ClassNotFoundException {
-//        drivers = readFromFileChampionshipData();
-//        String[] possibleDriverNames = new String[drivers.size()];
-//
-//        int index =0;
-//        for (Driver driver:drivers){
-//            String driverName = driver.getFname()+" "+driver.getLname();
-//            possibleDriverNames[index] = driverName;
-//            index++;
-//        }
-//
-//        TextFields.bindAutoCompletion(nameInputofDriver,possibleDriverNames); //https://www.youtube.com/watch?v=SkXYg3M0hOQ&ab_channel=CoolITHelp
-//
-//    }
     public void findDriverToBeUpdated() throws IOException, ClassNotFoundException {
         drivers=readFromFileChampionshipData();
         boolean found = false;
@@ -536,7 +536,7 @@ public class Controller {
                 successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
             }
 
-            fnameInput.setText("");
+            fnameInput.setText("");//clears all the inputs,after updating
             lnameInput.setText("");
             ageInput.setText("");
             teamInput.setText("");
@@ -546,6 +546,8 @@ public class Controller {
         }
     }
 
+
+    //SRR Window Methods
     public void onSRRButtonClicked(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Rx-application-SRR-view.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -556,26 +558,84 @@ public class Controller {
         stage.show();
         stage.setResizable(false);
     }
+    public void startSimulationClicked() throws IOException, ClassNotFoundException {
+        drivers=readFromFileChampionshipData();//loads the data from both files
+        races=readFromFileRaceData();
 
-    public void onSTFButtonClicked() throws IOException {
-        successLabel.setOpacity(0.0f);
-        successLabel.setText(("Files have been saved"));
-        successLabel.setTextFill(Color.rgb(47, 130, 73));
-        successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
-        successLabel.setOpacity(1.0f);
-    }
-    public void onRFFButtonClicked() throws IOException {
-        successLabel.setOpacity(0.0f);
-        successLabel.setText(("Files have been successfully loaded"));
-        successLabel.setTextFill(Color.rgb(47, 130, 73));
-        successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
-        successLabel.setOpacity(1.0f);
-    }
-//    public void onRFFButtonClicked() throws IOException, ClassNotFoundException {
-//        drivers = readFromFileChampionshipData("championsipData.txt");
-////        races= readFromFileRaceData("Z:\\ProgrammingCW\\RXapplication\\src\\main\\java\\com\\example\\rxapplication\\raceData.txt");
-//    }
+        simulateRaceButtonClicked.setOpacity(0.0f);//once clicked to sim Button dissapears
+        String[] possibleLocations = {"Nyirád","Höljes","Montalegre","Barcelona","Rīga","Norway"};
+        int randomLocationIndex = random.nextInt(possibleLocations.length); //generate a random index from 0 until the last index of the list - https://www.geeksforgeeks.org/generating-random-numbers-in-java/
+        String raceLocation = possibleLocations[randomLocationIndex];
+        String raceDate = randomDate();
 
+        ArrayList<Driver> finalPositions = drivers;
+        Collections.shuffle(finalPositions);//simulates positions randomly using - shuffle
+
+        ArrayList<String> previousRaceDates = new ArrayList<>();//to store all the exsisting raceDates.
+        int repeatingDates = 0;//at start there are no same dates
+        for (Race previousRace : races){
+            String previousRaceDate = previousRace.getDate(); //gets the date which are available
+            repeatingDates++;//once entered the occurence increaments by one, as there is one instance of that date, which is itself.
+            if (repeatingDates==1){
+                previousRaceDates.add(previousRaceDate);//adds the date to the list which contains all the dates that had races, so new races cannot use the same raceDate
+                repeatingDates=0;
+            }
+        }
+        boolean dateExists = true;//initially we say that the generated date is available in the list of exsisiting dates.
+        while (dateExists==false){//if date exsists is not true, it means we can use this date
+            for (String date: previousRaceDates){//if we iterate in the list to check if the date is exsisitng
+                if (raceDate ==date){
+                    dateExists=true;
+                    raceDate = randomDate();//if the date is already taken we generate a new raceDate,until this new date is not in the list of exsisting dates.
+                }
+            }
+        }
+
+        Race race = new Race(raceDate,raceLocation,finalPositions);//then we create an object of Race class, which stores the date,location and finalPositions after the race.
+        races.add(race);//this adds to the list of exsisting races.
+
+        //now we add the points to the top3 drivers
+        Driver firstPlaceDriver = finalPositions.get(0);//loads the details of the first placed driver
+        Driver secondPlaceDriver = finalPositions.get(1);
+        Driver thirdPlaceDriver = finalPositions.get(2);//until the third place driver
+        for(Driver driver:drivers){//gives points for each driver
+            if (driver.equals(firstPlaceDriver)){//if first place 10 points are being added
+                int currentPoints = driver.getPoints();
+                driver.setPoints(new SerializableSimpleIntegerProperty(currentPoints+10));
+            }else if (driver.equals(secondPlaceDriver)){//7 points
+                int currentPoints = driver.getPoints();
+                driver.setPoints(new SerializableSimpleIntegerProperty(currentPoints+7));
+            }else if (driver.equals(thirdPlaceDriver)){
+                int currentPoints = driver.getPoints();//3rd place 5 points
+                driver.setPoints(new SerializableSimpleIntegerProperty(currentPoints+5));
+            }else {
+                int currentPoints = driver.getPoints();//0points for 4th and below
+                driver.setPoints(new SerializableSimpleIntegerProperty(currentPoints+0));
+            }
+        }
+        writeToFileRaceData(races);//updates both of the lists, saves the values into the textfile
+        writeToFileChampionshipData(drivers);
+
+    }
+    public String randomDate(){
+        int month = random.nextInt(12-1+1)+1;//random month
+        int day;
+        switch (month){
+            case 4,6,9,10:// if its one of these months such as april, there will be only 30 days
+                day = random.nextInt(30-1+1)+1;
+                break;
+            case 2:// if its february then it will be 28 days
+                day = random.nextInt(28-1+1)+1;
+                break;
+            default:
+                day = random.nextInt(31-1+1)+1;
+        }
+        String date = ((day)+"/"+(month)+"/23");//creates a String of Date format
+        return date;
+    }
+
+
+    //VCT Window Methods
     public void onVCTButtonClicked(ActionEvent event) throws IOException, ClassNotFoundException {
 
         Parent root = FXMLLoader.load(getClass().getResource("Rx-application-VCT-view.fxml"));
@@ -586,8 +646,6 @@ public class Controller {
         stage.setTitle("Championship standings");
         stage.show();
         stage.setResizable(false);
-
-
     }
     public void onRefreshButtonVCTWindowClicked() throws IOException, ClassNotFoundException { //This is to populate the fields of table view with the realvent data type
         drivers = readFromFileChampionshipData();
@@ -610,20 +668,64 @@ public class Controller {
     private ArrayList<Driver> sortChampionshipData(ArrayList<Driver> drivers) {
         // Function to sort the drivers in decreasing order of points
         //this would nbe run when the VCT function is being called
-        for (int i = 0; i < drivers.size(); i++) {
-            for (int j = 0; j < drivers.size() - 1; j++) {
-                Driver currentDriver = drivers.get(j);
-                Driver nextDriver = drivers.get(j + 1);
+        for (int outerLoop = 0; outerLoop < drivers.size(); outerLoop++) {
+            for (int innerLoop = 0; innerLoop < drivers.size() - 1; innerLoop++) {
+                Driver currentDriver = drivers.get(innerLoop);
+                Driver nextDriver = drivers.get(innerLoop + 1);
                 if (currentDriver.getPoints() < nextDriver.getPoints()) {
                     Driver temp = currentDriver;
-                    drivers.set(j, nextDriver);
-                    drivers.set(j + 1, temp);
+                    drivers.set(innerLoop, nextDriver);
+                    drivers.set(innerLoop + 1, temp);
                 }
             }
         }
-        return drivers;//returns the sorted list
+        return drivers;//returns the sorted list, implementation from https://www.geeksforgeeks.org/bubble-sort/
     }
 
+    
+    //VRL WINDOW METHODS
+    public void onVRLButtonClicked(ActionEvent event) throws IOException, ClassNotFoundException {
+        Parent root = FXMLLoader.load(getClass().getResource("Rx-application-VRL-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("mainstylesheet.css").toExternalForm());
+        stage.setScene(scene);
+        stage.setTitle("Championship standings");
+        stage.show();
+        stage.setResizable(false);
+    }
+    public ArrayList<Race> sortRaceData(ArrayList<Race> races){
+        for (int outerLoop = 0; outerLoop < races.size(); outerLoop++) {//outer loop to make sure every element is being considered
+            for (int innerLoop = 0; innerLoop < races.size() - 1; innerLoop++) {
+                Race currentRace = races.get(innerLoop);//gets the current race data
+                Race nextRace = races.get(innerLoop+1);
+                String[] currentRaceDate = currentRace.getDate().split("/");//splits the string to an array, which breaks the value into month and day
+                String[] nextRaceDate = nextRace.getDate().split("/");
+                int currentMonth = Integer.parseInt(currentRaceDate[1]);//second element in the date array is the month
+                int nextMonth = Integer.parseInt(nextRaceDate[1]);
+                int currentDay = Integer.parseInt(currentRaceDate[0]);//gets the day of the race
+                int nextDay = Integer.parseInt(nextRaceDate[0]);
+
+                if (currentMonth>nextMonth){//checks if current month is higher than next month(eg;is 5 is higher than 3)
+                    Race temp = currentRace;//if true then next date records will be transfered to current date, using temporary varialble
+                    races.set(innerLoop,nextRace);
+                    races.set(innerLoop+1,temp);
+                }
+                if (currentMonth==nextMonth){// if true then next date records will be transfered to current date, using temporary varialble
+                    if (currentDay>nextDay){
+                        Race temp = currentRace;//#true then next date records will be transfered to current date, using temporary varialble
+                        races.set(innerLoop,nextRace);
+                        races.set(innerLoop+1,temp);
+                    }
+                }
+
+            }
+        }
+        return races;//sends back the sorted list of races according to date
+    }
+
+
+    //STF Window Methods
     private void writeToFileChampionshipData(ArrayList<Driver> drivers) throws IOException {
         File ChampionshipFileData = new File(championshipDataFilePath);//opens the file from the locaion given
         FileOutputStream fileOutputStream = new FileOutputStream(ChampionshipFileData);// fileoutput stream is used to write the data to the file
@@ -640,7 +742,16 @@ public class Controller {
         objectOutputStream.close();
         fileOutputStream.close();
     }
+    public void onSTFButtonClicked() throws IOException {
+        successLabel.setOpacity(0.0f);
+        successLabel.setText(("Files have been saved"));
+        successLabel.setTextFill(Color.rgb(47, 130, 73));
+        successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
+        successLabel.setOpacity(1.0f);
+    }
 
+
+    //RFF Window Methods
     public  ArrayList<Driver> readFromFileChampionshipData() throws IOException, ClassNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(championshipDataFilePath); //takes in the filepath as input and returns it as an array list
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);//reads the objects in the file
@@ -655,7 +766,14 @@ public class Controller {
         fileInputStream.close();
         return races;
     }
-
+    public void onRFFButtonClicked() throws IOException {
+        successLabel.setOpacity(0.0f);
+        successLabel.setText(("Files have been successfully loaded"));
+        successLabel.setTextFill(Color.rgb(47, 130, 73));
+        successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
+        successLabel.setOpacity(1.0f);
+    }
+    
     public  String toTitleCase(String str){ // to convert a string to title case
         StringBuilder stringBuilder = new StringBuilder( str.length() );// creates a new instance of stringbuilder class
         char[] characters = str.toLowerCase().toCharArray();//converts the given string to list of characters in lowercase
