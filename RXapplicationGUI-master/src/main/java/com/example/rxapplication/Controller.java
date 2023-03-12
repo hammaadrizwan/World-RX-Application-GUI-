@@ -1,5 +1,7 @@
 package com.example.rxapplication;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,11 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+import javafx.util.Duration;
 
 
 import java.io.*;
@@ -56,6 +60,10 @@ public class Controller {
 
     //SRR window elements
     @FXML private Button simulateRaceButtonClicked;
+    @FXML private AnchorPane raceInfoPane;
+    @FXML private ImageView raceLocationFlag;
+    @FXML private Label raceLocationLabel,raceDateLabel,srrLapByLap0,srrLapByLap1,srrLapByLap2,srrLapByLap3,srrLapByLap4,srrLapByLap5,srrLapByLap6,srrLapByLap7,srrLapByLap8,srrLapByLap9,srrLapByLap10,srrLapByLap11,srrLapByLap12,srrLapByLap13,srrLapByLap14,windowHeading1,windowHeading2;
+
 
     ArrayList<Driver> drivers = new ArrayList<Driver>(2); //Initially creates an empty ArrayList of the relavent data types to save its specific object types
     ArrayList<Race> races = new ArrayList<Race>(2);
@@ -554,19 +562,60 @@ public class Controller {
         scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("mainstylesheet.css").toExternalForm());
         stage.setScene(scene);
-        stage.setTitle("Driver Registration");
+        stage.setTitle("Simulate Random Race");
         stage.show();
         stage.setResizable(false);
     }
-    public void startSimulationClicked() throws IOException, ClassNotFoundException {
+    public void startSimulationClicked() throws IOException, ClassNotFoundException, InterruptedException {
         drivers=readFromFileChampionshipData();//loads the data from both files
         races=readFromFileRaceData();
 
         simulateRaceButtonClicked.setOpacity(0.0f);//once clicked to sim Button dissapears
+        windowHeading1.setOpacity(1.0f);//these are the GUI labels, to give a lap by lap update to the user
+        windowHeading2.setOpacity(1.0f);
+        srrLapByLap0.setOpacity(1.0f);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {//using the timeline object where theres a one second delay after each command is run
+            srrLapByLap1.setOpacity(1.0f);
+            srrLapByLap2.setOpacity(1.0f);
+        }));
+        timeline.play();
+
+        timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {// this is used to delay the labels being appeard on the screen,
+            srrLapByLap3.setOpacity(1.0f);
+            srrLapByLap4.setOpacity(1.0f);
+        }));
+        timeline.play();
         String[] possibleLocations = {"Nyirád","Höljes","Montalegre","Barcelona","Rīga","Norway"};
         int randomLocationIndex = random.nextInt(possibleLocations.length); //generate a random index from 0 until the last index of the list - https://www.geeksforgeeks.org/generating-random-numbers-in-java/
         String raceLocation = possibleLocations[randomLocationIndex];
         String raceDate = randomDate();
+        timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
+            raceInfoPane.setOpacity(1.0f);
+        }));
+        timeline.play();
+        switch (raceLocation){
+            case "Nyirád":
+                Image image = new Image(getClass().getResourceAsStream("/com/example/images/hungaryFlag.jpg"));
+                raceLocationFlag.setImage(image);//the image displayed on the screen varies betwqeeen the race location, it displas the flag,racelocation and the date
+                break;
+            case "Höljes":
+                raceLocationFlag.setImage(new Image(getClass().getResourceAsStream("/com/example/images/holjesFlag.png")));
+                break;
+            case "Montalegre":
+                raceLocationFlag.setImage(new Image(getClass().getResourceAsStream("/com/example/images/montalegreFlag.png")));
+                break;
+            case "Barcelona":
+                raceLocationFlag.setImage(new Image(getClass().getResourceAsStream("/com/example/images/barcelonaFlag.png")));
+                break;
+            case "Rīga":
+                raceLocationFlag.setImage(new Image(getClass().getResourceAsStream("/com/example/images/rigaFlag.jpg")));
+                break;
+            case "Norway":
+                raceLocationFlag.setImage(new Image(getClass().getResourceAsStream("/com/example/images/norwayFlag.png")));
+                break;
+        }
+
+        raceLocationLabel.setText(raceLocation);
 
         ArrayList<Driver> finalPositions = drivers;
         Collections.shuffle(finalPositions);//simulates positions randomly using - shuffle
@@ -590,6 +639,40 @@ public class Controller {
                 }
             }
         }
+        raceDateLabel.setText(raceDate);//after the race is started. user will be updated avout the race
+        timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+            srrLapByLap5.setOpacity(1.0f);
+            srrLapByLap6.setOpacity(1.0f);
+        }));
+        timeline.play();
+        timeline = new Timeline(new KeyFrame(Duration.seconds(7), event -> {
+            srrLapByLap7.setOpacity(1.0f);
+            srrLapByLap8.setOpacity(1.0f);
+        }));
+        timeline.play();
+        timeline = new Timeline(new KeyFrame(Duration.seconds(9), event -> {
+            srrLapByLap9.setOpacity(1.0f);
+            srrLapByLap10.setOpacity(1.0f);
+        }));
+        timeline.play();//.play() used to display the given timeline
+        timeline = new Timeline(new KeyFrame(Duration.seconds(11), event -> {
+            srrLapByLap11.setOpacity(1.0f);
+            srrLapByLap12.setOpacity(1.0f);
+        }));
+        timeline.play();
+
+        timeline = new Timeline(new KeyFrame(Duration.seconds(13), event -> {
+            srrLapByLap13.setOpacity(1.0f);
+            srrLapByLap14.setOpacity(1.0f);
+        }));
+        timeline.play();
+        timeline = new Timeline(new KeyFrame(Duration.seconds(15), event -> {//after race session is complete user will be notified.
+            successLabel.setOpacity(1.0f);
+            successLabel.setText(("Simulation complete"));
+            successLabel.setTextFill(Color.rgb(47, 130, 73));
+            successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
+        }));
+        timeline.play();
 
         Race race = new Race(raceDate,raceLocation,finalPositions);//then we create an object of Race class, which stores the date,location and finalPositions after the race.
         races.add(race);//this adds to the list of exsisting races.
