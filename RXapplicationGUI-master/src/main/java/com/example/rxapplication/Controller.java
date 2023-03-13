@@ -2,6 +2,7 @@ package com.example.rxapplication;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,17 +68,15 @@ public class Controller {
 
     //VRL window elements
     @FXML private Button refreshButtonVRLWindow;
-    @FXML private TableView<Object[]> raceDataView;
-    @FXML private TableColumn<Object[], String> dateColumnRaceData;
-    @FXML private TableColumn<Object[], String> locationColumnRaceData;
-    @FXML private TableColumn<Object[], String> nameColumnRaceData;
-    @FXML private TableColumn<Driver, Integer> pointsColumnRaceData;
+    @FXML private TableView<RaceResult> raceDataView;
+    @FXML private TableColumn<RaceResult, String> dateColumnRaceData,locationColumnRaceData,nameColumnRaceData;
+    @FXML private TableColumn<RaceResult, Integer> pointsColumnRaceData;
 
     ArrayList<Driver> drivers = new ArrayList<Driver>(2); //Initially creates an empty ArrayList of the relavent data types to save its specific object types
     ArrayList<Race> races = new ArrayList<Race>(2);
 
-    String championshipDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt"; // the path of the file is being stored as variable
-    String raceDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\raceData.txt"; // the path of the file is being stored in the variable
+    String championshipDataFilePath="/Users/hammaad/Downloads/RXApplication-stable-main/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/championshipData.txt"; // the path of the file is being stored as variable
+    String raceDataFilePath="/Users/hammaad/Downloads/RXApplication-stable-main/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/raceData.txt"; // the path of the file is being stored in the variable
     Random random = new Random();
 
     //Main Window Methods
@@ -788,26 +787,20 @@ public class Controller {
     public void onRefreshButtonVRLWindowClicked() throws IOException, ClassNotFoundException {
         races=readFromFileRaceData();
         refreshButtonVRLWindow.setOpacity(0.0f);//once clicked the refresh button dissapears
-        dateColumnRaceData.setCellValueFactory(new PropertyValueFactory<>("Date"));
-        dateColumnRaceData.setText("Date");
-        locationColumnRaceData.setCellValueFactory(new PropertyValueFactory<>("Location"));
-        locationColumnRaceData.setText("Location");
-        nameColumnRaceData.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        nameColumnRaceData.setText("Driver Name");
-        pointsColumnRaceData.setCellValueFactory(new PropertyValueFactory<Driver, Integer>("Points"));
-        pointsColumnRaceData.setText("Points");
-        raceDataView.getColumns().addAll((TableColumn<Object[], ?>) dateColumnRaceData, locationColumnRaceData, nameColumnRaceData, pointsColumnRaceData);
+        dateColumnRaceData.setCellValueFactory(new PropertyValueFactory<RaceResult,String>("Date"));
+        locationColumnRaceData.setCellValueFactory(new PropertyValueFactory<RaceResult,String>("Location"));
+        nameColumnRaceData.setCellValueFactory(new PropertyValueFactory<RaceResult,String>("Fullname"));
+        pointsColumnRaceData.setCellValueFactory(new PropertyValueFactory<RaceResult,Integer>("Points"));
 
         ArrayList<Race> sortedRaceData =sortRaceData(races);
-        ObservableList<Object[]> raceDataObject = FXCollections.observableArrayList(); //then we create a championshipObject which is an object of Observalbe list that stores the detials of each Driver, we use Observable list as it supports any listners to use the elements in it, which and Arraylist cannot perform.
+        ObservableList<RaceResult> raceDataObject = FXCollections.observableArrayList();
         for (Race race : sortedRaceData) {
-            Object[] rowData = new Object[4];
             ArrayList<Driver> driversFromRace=race.getDrivers();
-            int index=0;
+            int index = 0;
             for (Driver driver : driversFromRace) {
-                rowData[0] = race.getDate();
-                rowData[1] = race.getLocation();
-                rowData[2] = driver.getFname() + " " + driver.getLname();
+                String date = race.getDate();
+                String location = race.getLocation();
+                String name = driver.getFname().toString() + "  " + driver.getLname().toString();
                 int points = 0;
                 if (index == 0) {
                     points = 10;
@@ -816,15 +809,13 @@ public class Controller {
                 } else if (index == 2) {
                     points = 5;
                 }
-                rowData[3] = points;
-                raceDataObject.add(rowData);
                 index++;
+                RaceResult raceResult = new RaceResult(date,location,name,points);
+                raceDataObject.add(raceResult);
             }
         }
         raceDataView.setItems(raceDataObject);
-            //adds each from the list of drivers which has been sorted in descending order of points.
-        }
-//        championshipDataView.setItems(championshipDataObject);//once the list is ready we populate the tableview by calling the setItems which displays our observable list Object.
+    }
 
     public ArrayList<Race> sortRaceData(ArrayList<Race> races){
         for (int outerLoop = 0; outerLoop < races.size(); outerLoop++) {//outer loop to make sure every element is being considered

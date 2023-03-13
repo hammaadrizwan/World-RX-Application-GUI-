@@ -39,12 +39,12 @@
                 </graphic></Button>
         </children>
     </AnchorPane>
-   <TableView fx:id="raceDataView" layoutX="188.0" layoutY="148.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="460.0" prefWidth="753.0">
+   <TableView fx:id="raceDataView" layoutX="181.0" layoutY="158.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="460.0" prefWidth="832.0">
       <columns>
-         <TableColumn fx:id="dateColumnRaceData" prefWidth="117.0" resizable="false" text="Date" />
-         <TableColumn fx:id="locationColumnRaceData" prefWidth="171.0" resizable="false" text="Location" />
-         <TableColumn fx:id="nameColumnRaceData" minWidth="0.0" prefWidth="358.0" resizable="false" text="Name" />
-         <TableColumn fx:id="pointsColumnRaceData" editable="false" minWidth="0.0" prefWidth="106.0" resizable="false" sortable="false" text="Points" />
+         <TableColumn fx:id="dateColumnRaceData" editable="false" prefWidth="175.0" resizable="false" sortable="false" text="Date" />
+         <TableColumn fx:id="locationColumnRaceData" editable="false" prefWidth="249.0" resizable="false" sortable="false" text="Location" />
+         <TableColumn fx:id="nameColumnRaceData" editable="false" minWidth="0.0" prefWidth="281.0" resizable="false" sortable="false" text="Name" />
+         <TableColumn fx:id="pointsColumnRaceData" editable="false" minWidth="0.0" prefWidth="105.0" resizable="false" sortable="false" text="Points" />
       </columns>
       <columnResizePolicy>
          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
