@@ -13,20 +13,45 @@
 <AnchorPane prefHeight="680.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rxapplication.Controller">
     <AnchorPane fx:id="navBar" prefHeight="680.0" prefWidth="146.0">
         <children>
-            <VBox layoutY="286.0" prefHeight="394.0" prefWidth="144.0">
+            <VBox layoutY="256.0" prefHeight="424.0" prefWidth="144.0">
                 <children>
-                    <Button fx:id="addDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="58.0" prefWidth="143.0" styleClass="navBarButton" text="Register Driver" textAlignment="RIGHT" wrapText="true" />
-                    <Button fx:id="updateDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updatebuttonclicked" prefHeight="58.0" prefWidth="143.0" styleClass="navBarButton" text="Update Driver" textAlignment="RIGHT" />
-                    <Button fx:id="deleteDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="50.0" prefWidth="151.0" styleClass="navBarButton" text="Delete Driver" textAlignment="RIGHT" />
-                    <Button fx:id="srrButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSRRButtonClicked" prefHeight="50.0" prefWidth="163.0" styleClass="navBarButton" text="Simulate Race" textAlignment="RIGHT" />
-                    <Button fx:id="vctButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVCTButtonClicked" prefHeight="58.0" prefWidth="151.0" styleClass="navBarButton" text="Championship Standings" textAlignment="RIGHT" wrapText="true" />
-                    <Button fx:id="vrlButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVRLButtonClicked" prefHeight="58.0" prefWidth="146.0" styleClass="navBarButton" text="Race Data" textAlignment="RIGHT" wrapText="true">
+                    <Button fx:id="addDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="54.0" prefWidth="143.0" styleClass="navBarButton" text="         REGISTER DRIVER" textAlignment="RIGHT" wrapText="true">
+                        <font>
+                            <Font name="Futura Medium" size="12.0" />
+                        </font>
+                    </Button>
+                    <Button fx:id="updateDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updatebuttonclicked" prefHeight="58.0" prefWidth="143.0" styleClass="navBarButton" text="            UPDATE DRIVER" textAlignment="RIGHT" wrapText="true">
+                        <font>
+                            <Font name="Futura Medium" size="12.0" />
+                        </font></Button>
+                    <Button fx:id="deleteDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="52.0" prefWidth="144.0" styleClass="navBarButton" text="                 DELETE DRIVER" textAlignment="RIGHT" wrapText="true">
+                        <font>
+                            <Font name="Futura Medium" size="12.0" />
+                        </font></Button>
+                    <Button fx:id="srrButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSRRButtonClicked" prefHeight="58.0" prefWidth="144.0" styleClass="navBarButton" text="           SIMULATE RACE" textAlignment="RIGHT" wrapText="true">
+                        <font>
+                            <Font name="Futura Medium" size="12.0" />
+                        </font></Button>
+                    <Button fx:id="vctButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVCTButtonClicked" prefHeight="58.0" prefWidth="151.0" styleClass="navBarButton" text="CHAMPIONSHIP STANDINGS" textAlignment="RIGHT" wrapText="true">
+                        <font>
+                            <Font name="Futura Medium" size="12.0" />
+                        </font></Button>
+                    <Button fx:id="vrlButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVRLButtonClicked" prefHeight="58.0" prefWidth="146.0" styleClass="navBarButton" text="              RACE TABLE" textAlignment="RIGHT" wrapText="true">
                         <graphic>
                             <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
                         </graphic>
+                        <font>
+                            <Font name="Futura Medium" size="12.0" />
+                        </font>
                     </Button>
-                    <Button fx:id="stfButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSTFButtonClicked" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Save" textAlignment="RIGHT" />
-                    <Button fx:id="rffButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onRFFButtonClicked" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Load" textAlignment="RIGHT" />
+                    <Button fx:id="stfButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSTFButtonClicked" prefHeight="53.0" prefWidth="144.0" styleClass="navBarButton" text="SAVE" textAlignment="RIGHT" wrapText="true">
+                        <font>
+                            <Font name="Futura Medium" size="12.0" />
+                        </font></Button>
+                    <Button fx:id="rffButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onRFFButtonClicked" prefHeight="50.0" prefWidth="144.0" styleClass="navBarButton" text="LOAD" textAlignment="RIGHT" wrapText="true">
+                        <font>
+                            <Font name="Futura Medium" size="12.0" />
+                        </font></Button>
                 </children>
             </VBox>
             <Button mnemonicParsing="false" onAction="#loadMainScreen" prefHeight="66.0" prefWidth="105.0 " style="-fx-background-color: #1f2a44;">
@@ -39,7 +64,7 @@
                 </graphic></Button>
         </children>
     </AnchorPane>
-  <TableView fx:id="championshipDataView" layoutX="156.0" layoutY="119.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="547.0" prefWidth="878.0">
+  <TableView fx:id="championshipDataView" layoutX="158.0" layoutY="139.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="448.0" prefWidth="878.0">
     <columns>
       <TableColumn fx:id="firstnameColumnChampionshipData" prefWidth="134.0" text="Firstname" />
       <TableColumn fx:id="lastnameColumnChampionshipData" prefWidth="171.0" text="Lastname" />
@@ -56,14 +81,14 @@
       <font>
          <Font size="13.0" />
       </font></Button>
-   <Label layoutX="156.0" layoutY="25.0" prefHeight="83.0" prefWidth="269.0" text="CHAMPIONSHIP">
+   <Label layoutX="156.0" layoutY="25.0" prefHeight="83.0" prefWidth="269.0" text="CHAMPIONSHIP" textFill="#5e5b5b">
       <font>
-         <Font size="27.0" />
+         <Font name="Futura Medium" size="27.0" />
       </font>
    </Label>
    <Label layoutX="158.0" layoutY="59.0" prefHeight="69.0" prefWidth="301.0" text="STANDINGS">
       <font>
-         <Font name="System Bold" size="29.0" />
+         <Font name="Futura Medium" size="29.0" />
       </font>
    </Label>
    <Label fx:id="successLabel" alignment="CENTER" layoutX="239.0" layoutY="-1.0" opacity="0.0" prefHeight="36.0" prefWidth="735.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">

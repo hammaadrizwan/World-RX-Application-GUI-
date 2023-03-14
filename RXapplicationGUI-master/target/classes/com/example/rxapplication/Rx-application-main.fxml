@@ -14,20 +14,45 @@
    <children>
       <AnchorPane fx:id="navBar" prefHeight="680.0" prefWidth="146.0">
          <children>
-            <VBox layoutY="286.0" prefHeight="394.0" prefWidth="144.0">
+            <VBox layoutY="256.0" prefHeight="424.0" prefWidth="144.0">
                <children>
-                  <Button fx:id="addDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="58.0" prefWidth="143.0" styleClass="navBarButton" text="Register Driver" textAlignment="RIGHT" wrapText="true" />
-                  <Button fx:id="updateDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updatebuttonclicked" prefHeight="58.0" prefWidth="143.0" styleClass="navBarButton" text="Update Driver" textAlignment="RIGHT" />
-                  <Button fx:id="deleteDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="50.0" prefWidth="151.0" styleClass="navBarButton" text="Delete Driver" textAlignment="RIGHT" />
-                  <Button fx:id="srrButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSRRButtonClicked" prefHeight="50.0" prefWidth="163.0" styleClass="navBarButton" text="Simulate Race" textAlignment="RIGHT" />
-                  <Button fx:id="vctButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVCTButtonClicked" prefHeight="58.0" prefWidth="151.0" styleClass="navBarButton" text="Championship Standings" textAlignment="RIGHT" wrapText="true" />
-                  <Button fx:id="vrlButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVRLButtonClicked" prefHeight="58.0" prefWidth="146.0" styleClass="navBarButton" text="Race Data" textAlignment="RIGHT" wrapText="true">
+                  <Button fx:id="addDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="54.0" prefWidth="143.0" styleClass="navBarButton" text="         REGISTER DRIVER" textAlignment="RIGHT" wrapText="true">
+                     <font>
+                        <Font name="Futura Medium" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="updateDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updatebuttonclicked" prefHeight="58.0" prefWidth="143.0" styleClass="navBarButton" text="            UPDATE DRIVER" textAlignment="RIGHT" wrapText="true">
+                     <font>
+                        <Font name="Futura Medium" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="deleteDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="52.0" prefWidth="144.0" styleClass="navBarButton" text="                 DELETE DRIVER" textAlignment="RIGHT" wrapText="true">
+                     <font>
+                        <Font name="Futura Medium" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="srrButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSRRButtonClicked" prefHeight="58.0" prefWidth="144.0" styleClass="navBarButton" text="           SIMULATE RACE" textAlignment="RIGHT" wrapText="true">
+                     <font>
+                        <Font name="Futura Medium" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="vctButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVCTButtonClicked" prefHeight="58.0" prefWidth="151.0" styleClass="navBarButton" text="         STANDINGS TABLE" textAlignment="RIGHT" wrapText="true">
+                     <font>
+                        <Font name="Futura Medium" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="vrlButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVRLButtonClicked" prefHeight="58.0" prefWidth="146.0" styleClass="navBarButton" text="              RACE TABLE" textAlignment="RIGHT" wrapText="true">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
+                     <font>
+                        <Font name="Futura Medium" size="12.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="stfButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSTFButtonClicked" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Save" textAlignment="RIGHT" />
-                  <Button fx:id="rffButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onRFFButtonClicked" prefHeight="58.0" prefWidth="150.0" styleClass="navBarButton" text="Load" textAlignment="RIGHT" />
+                  <Button fx:id="stfButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSTFButtonClicked" prefHeight="53.0" prefWidth="144.0" styleClass="navBarButton" text="SAVE" textAlignment="RIGHT" wrapText="true">
+                     <font>
+                        <Font name="Futura Medium" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="rffButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onRFFButtonClicked" prefHeight="50.0" prefWidth="144.0" styleClass="navBarButton" text="LOAD" textAlignment="RIGHT" wrapText="true">
+                     <font>
+                        <Font name="Futura Medium" size="12.0" />
+                     </font></Button>
                </children>
             </VBox>
             <Button mnemonicParsing="false" onAction="#loadMainScreen" prefHeight="66.0" prefWidth="105.0 " style="-fx-background-color: #1f2a44;">
@@ -48,12 +73,12 @@
                      <children>
                         <Label fx:id="firstPlaceDriverFname" alignment="CENTER" layoutX="32.0" prefHeight="63.0" prefWidth="155.0" text="FIRSTNAME">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Arial" size="19.0" />
                            </font>
                         </Label>
                         <Label fx:id="firstPlaceDriverLname" alignment="CENTER" layoutX="7.0" layoutY="24.0" prefHeight="63.0" prefWidth="212.0" text="LASTNAME">
                            <font>
-                              <Font name="System Bold" size="23.0" />
+                              <Font name="Arial Bold" size="23.0" />
                            </font>
                         </Label>
                      </children>
@@ -62,12 +87,12 @@
                      <children>
                         <Label fx:id="secondPlaceDriverFname" alignment="CENTER" layoutX="266.0" prefHeight="63.0" prefWidth="132.0" text="FIRSTNAME">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Arial" size="19.0" />
                            </font>
                         </Label>
                         <Label fx:id="secondPlaceDriverLname" alignment="CENTER" layoutX="224.0" layoutY="23.0" prefHeight="63.0" prefWidth="215.0" text="LASTNAME">
                            <font>
-                              <Font name="System Bold" size="23.0" />
+                              <Font name="Arial Bold" size="23.0" />
                            </font>
                         </Label>
                      </children></AnchorPane>
@@ -175,24 +200,19 @@
                         </VBox>
                         <Label fx:id="lrhLocationLabel" layoutX="3.0" layoutY="3.0" prefHeight="83.0" prefWidth="361.0">
                            <font>
-                              <Font name="System Bold" size="48.0" />
+                              <Font name="Arial Bold" size="48.0" />
                            </font>
                         </Label>
                         <Label fx:id="lrhDateLabel" layoutX="3.0" layoutY="90.0" prefHeight="52.0" prefWidth="333.0">
                            <font>
-                              <Font size="34.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lrhLocationLabel1" layoutX="3.0" layoutY="14.0" prefHeight="83.0" prefWidth="361.0">
-                           <font>
-                              <Font size="47.0" />
+                              <Font name="Arial" size="34.0" />
                            </font>
                         </Label>
                      </children>
                   </AnchorPane>
-                  <Label layoutX="58.0" layoutY="21.0" prefHeight="62.0" prefWidth="410.0" text="LAST RACE HIGHLIGHTS" textFill="#1f2a44">
+                  <Label layoutX="58.0" layoutY="21.0" prefHeight="62.0" prefWidth="475.0" text="LAST RACE HIGHLIGHTS" textFill="#1f2a44">
                      <font>
-                        <Font name="System Bold" size="32.0" />
+                        <Font name="Futura Medium" size="32.0" />
                      </font>
                   </Label>
                   <AnchorPane layoutX="102.0" layoutY="352.0" prefHeight="316.0" prefWidth="359.0">
@@ -214,7 +234,7 @@
                         </Label>
                         <Label layoutX="-43.0" layoutY="-34.0" prefHeight="67.0" prefWidth="374.0" text="TITLE CONTENDERS" textFill="#1f2a44">
                            <font>
-                              <Font name="System Bold" size="31.0" />
+                              <Font name="Futura Medium" size="31.0" />
                            </font>
                         </Label>
                         <Label alignment="CENTER" layoutX="31.0" layoutY="129.0" prefHeight="52.0" prefWidth="78.0" text="1" textFill="#1f2a44">
@@ -258,9 +278,9 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="refreshButton" layoutX="-1.0" mnemonicParsing="false" onAction="#loadLastRaceData" opacity="0.79" prefHeight="683.0" prefWidth="901.0" text="Click here to access live updates. Refresh the page now" wrapText="true">
+                  <Button fx:id="refreshButton" layoutX="-1.0" mnemonicParsing="false" onAction="#loadLastRaceData" opacity="0.83" prefHeight="683.0" prefWidth="901.0" text="CLICK HERE TO ACCESS LIVE UPDATES. REFRESH NOW" wrapText="true">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Button>
                   <Button fx:id="viewRaceDataButton" layoutX="422.0" layoutY="226.0" mnemonicParsing="false" onAction="#onVRLButtonClicked" opacity="0.0" prefHeight="25.0" prefWidth="446.0" style="-fx-background-color: #e9e9e9;" text="View the entire race date here" />

@@ -2,7 +2,6 @@ package com.example.rxapplication;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,6 +35,11 @@ public class Controller {
     private Stage stage;
     private Scene scene;
 
+    @FXML private Label adminFname,adminLname;
+    //SIGN IN screen
+    @FXML private TextField emailInput;
+    @FXML private PasswordField passwordInput;
+    @FXML private Button signInButton,continueToApp;
     //main screen elements(Home page)
     @FXML private Button refreshButton,viewRaceDataButton;//all the labels in the mainScreen are stored here, each an every cell in the Last race Table. Last Race Highlights is an improvement to program, and also Top2 head to head.
     @FXML private Label lrhPos1Label,lrhName1Label,lrhCar1Label,lrhPoints1Label,lrhPos2Label,lrhName2Label,lrhCar2Label,lrhPoints2Label,lrhPos3Label,lrhName3Label,lrhCar3Label,lrhPoints3Label,lrhLocationLabel,lrhDateLabel,firstPlaceDriverFname,firstPlaceDriverLname,secondPlaceDriverFname,secondPlaceDriverLname,firstPlaceDriverWins,firstPlaceDriverTop3,secondPlaceDriverTop3,secondPlaceDriverWins;
@@ -79,6 +83,28 @@ public class Controller {
     String raceDataFilePath="/Users/hammaad/Downloads/RXApplication-stable-main/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/raceData.txt"; // the path of the file is being stored in the variable
     Random random = new Random();
 
+    public void loadSignInScreen(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("signIn-view.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setTitle("SignIn");
+        scene.getStylesheets().add(getClass().getResource("mainstylesheet.css").toExternalForm());//refers the main stylesheet
+        stage.setScene(scene);
+        stage.show();
+        stage.setResizable(false);//now the Home page is open
+    }
+    public void validateFields(){
+        Admin admin = new Admin();
+        if (emailInput.getText().toString().equals(admin.getEmail())){
+            if (passwordInput.getText().toString().equals(admin.getPassword())){
+                signInButton.setOpacity(0.0f);
+                continueToApp.setOpacity(1.0f);
+            }
+        }else{
+            System.out.println("Invalid Username or password");
+        }
+
+    }
     //Main Window Methods
     public void loadMainScreen(ActionEvent event) throws IOException { //this loads the main screen
         Parent root = FXMLLoader.load(getClass().getResource("Rx-application-main.fxml"));
@@ -896,7 +922,13 @@ public class Controller {
         successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
         successLabel.setOpacity(1.0f);
     }
-    
+    public void onExitButtonClicked(){
+        System.exit(0);
+    }
+    public void onLogoutButtonClicked(){
+        System.out.println("Log out works");
+    }
+
     public  String toTitleCase(String str){ // to convert a string to title case
         StringBuilder stringBuilder = new StringBuilder( str.length() );// creates a new instance of stringbuilder class
         char[] characters = str.toLowerCase().toCharArray();//converts the given string to list of characters in lowercase
