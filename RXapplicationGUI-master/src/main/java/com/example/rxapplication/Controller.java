@@ -79,8 +79,8 @@ public class Controller {
     ArrayList<Driver> drivers = new ArrayList<Driver>(2); //Initially creates an empty ArrayList of the relavent data types to save its specific object types
     ArrayList<Race> races = new ArrayList<Race>(2);
 
-    String championshipDataFilePath="/Users/hammaad/Downloads/RXApplication-stable-main/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/championshipData.txt"; // the path of the file is being stored as variable
-    String raceDataFilePath="/Users/hammaad/Downloads/RXApplication-stable-main/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/raceData.txt"; // the path of the file is being stored in the variable
+    String championshipDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt"; // the path of the file is being stored as variable
+    String raceDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\raceData.txt"; // the path of the file is being stored in the variable
     Random random = new Random();
 
     public void loadSignInScreen(ActionEvent event) throws IOException {

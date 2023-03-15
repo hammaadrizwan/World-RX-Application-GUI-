@@ -4,7 +4,7 @@
 .navBarButton {
     -fx-background-color: #2a354e;
     -fx-background-radius: 0;
-    -fx-text-fill: white;
+    -fx-text-fill: #E4E4E4;
 }
 .navBarButton:hover {
     -fx-background-color: #02f3e9;

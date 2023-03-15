@@ -14,55 +14,107 @@
    <children>
       <AnchorPane fx:id="navBar" prefHeight="680.0" prefWidth="146.0">
          <children>
+            <Button layoutX="-14.0" mnemonicParsing="false" onAction="#loadMainScreen" prefHeight="45.0" prefWidth="75.0" style="-fx-background-color: #1f2a44;">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" x="-2.0">
+                     <image>
+                        <Image url="@../images/logo.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <VBox layoutY="256.0" prefHeight="424.0" prefWidth="144.0">
                <children>
                   <Button fx:id="addDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="54.0" prefWidth="143.0" styleClass="navBarButton" text="         REGISTER DRIVER" textAlignment="RIGHT" wrapText="true">
                      <font>
                         <Font name="Futura Medium" size="12.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/registerDriverIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                   <Button fx:id="updateDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updatebuttonclicked" prefHeight="58.0" prefWidth="143.0" styleClass="navBarButton" text="            UPDATE DRIVER" textAlignment="RIGHT" wrapText="true">
                      <font>
                         <Font name="Futura Medium" size="12.0" />
-                     </font></Button>
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/updateDriverIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <Button fx:id="deleteDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="52.0" prefWidth="144.0" styleClass="navBarButton" text="                 DELETE DRIVER" textAlignment="RIGHT" wrapText="true">
                      <font>
                         <Font name="Futura Medium" size="12.0" />
-                     </font></Button>
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/deleteDriverIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <Button fx:id="srrButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSRRButtonClicked" prefHeight="58.0" prefWidth="144.0" styleClass="navBarButton" text="           SIMULATE RACE" textAlignment="RIGHT" wrapText="true">
                      <font>
                         <Font name="Futura Medium" size="12.0" />
-                     </font></Button>
-                  <Button fx:id="vctButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVCTButtonClicked" prefHeight="58.0" prefWidth="151.0" styleClass="navBarButton" text="         STANDINGS TABLE" textAlignment="RIGHT" wrapText="true">
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/srrIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="vctButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVCTButtonClicked" prefHeight="58.0" prefWidth="151.0" styleClass="navBarButton" text="CHAMPIONSHIP STANDINGS" textAlignment="RIGHT" wrapText="true">
                      <font>
                         <Font name="Futura Medium" size="12.0" />
-                     </font></Button>
-                  <Button fx:id="vrlButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVRLButtonClicked" prefHeight="58.0" prefWidth="146.0" styleClass="navBarButton" text="              RACE TABLE" textAlignment="RIGHT" wrapText="true">
+                     </font>
                      <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/standingsIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="vrlButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onVRLButtonClicked" prefHeight="58.0" prefWidth="146.0" styleClass="navBarButton" text="               RACE TABLE" textAlignment="RIGHT" wrapText="true">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/raceTableIcon.png" />
+                           </image></ImageView>
                      </graphic>
                      <font>
                         <Font name="Futura Medium" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="stfButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSTFButtonClicked" prefHeight="53.0" prefWidth="144.0" styleClass="navBarButton" text="SAVE" textAlignment="RIGHT" wrapText="true">
+                  <Button fx:id="stfButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSTFButtonClicked" prefHeight="53.0" prefWidth="144.0" styleClass="navBarButton" text="                      SAVE" textAlignment="RIGHT" wrapText="true">
                      <font>
                         <Font name="Futura Medium" size="12.0" />
-                     </font></Button>
-                  <Button fx:id="rffButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onRFFButtonClicked" prefHeight="50.0" prefWidth="144.0" styleClass="navBarButton" text="LOAD" textAlignment="RIGHT" wrapText="true">
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/saveIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="rffButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onRFFButtonClicked" prefHeight="50.0" prefWidth="144.0" styleClass="navBarButton" text="                    LOAD" textAlignment="RIGHT" wrapText="true">
                      <font>
                         <Font name="Futura Medium" size="12.0" />
-                     </font></Button>
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/loadIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </VBox>
-            <Button mnemonicParsing="false" onAction="#loadMainScreen" prefHeight="66.0" prefWidth="105.0 " style="-fx-background-color: #1f2a44;">
-               <graphic>
-                  <ImageView fitHeight="65.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/logo.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
          </children>
       </AnchorPane>
       <ScrollPane hbarPolicy="NEVER" hmax="0.0" layoutX="143.0" layoutY="-1.0" prefHeight="680.0" prefWidth="916.0" vbarPolicy="ALWAYS">
@@ -288,15 +340,6 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Button mnemonicParsing="false" onAction="#loadMainScreen" prefHeight="66.0" prefWidth="105.0 " style="-fx-background-color: #1f2a44;">
-         <graphic>
-            <ImageView fitHeight="65.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/logo.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
       <Label fx:id="successLabel" alignment="CENTER" layoutX="261.0" opacity="0.0" prefHeight="36.0" prefWidth="735.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">
          <font>
             <Font size="16.0" />

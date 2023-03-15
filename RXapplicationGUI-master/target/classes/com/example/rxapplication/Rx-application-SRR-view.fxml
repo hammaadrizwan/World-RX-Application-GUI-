@@ -52,9 +52,9 @@
                         </font></Button>
                 </children>
             </VBox>
-            <Button mnemonicParsing="false" onAction="#loadMainScreen" prefHeight="66.0" prefWidth="105.0 " style="-fx-background-color: #1f2a44;">
+            <Button layoutX="-14.0" mnemonicParsing="false" onAction="#loadMainScreen" prefHeight="45.0" prefWidth="75.0" style="-fx-background-color: #1f2a44;">
                 <graphic>
-                    <ImageView fitHeight="65.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="40.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" x="-2.0">
                         <image>
                             <Image url="@../images/logo.png" />
                         </image>
