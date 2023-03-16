@@ -17,12 +17,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.lang.*;
 
@@ -32,10 +34,12 @@ public class Controller {
     // sets it to private as it can be accessed only from inside this code
 
     //ROOT window elements, this will change as we switch between scenes(the backbone of the GUI, everything depends on these 2)
+    private String adminFullName;
     private Stage stage;
     private Scene scene;
 
-    @FXML private Label adminFname,adminLname;
+    @FXML private VBox optionsPane;
+
     //SIGN IN screen
     @FXML private TextField emailInput;
     @FXML private PasswordField passwordInput;
@@ -80,10 +84,12 @@ public class Controller {
     ArrayList<Race> races = new ArrayList<Race>(2);
     ArrayList<Admin> admins = new ArrayList<Admin>(2);
 
-    String championshipDataFilePath="/Users/hammaad/Downloads/RXApplication-stable-main/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/championshipData.txt"; // the path of the file is being stored as variable
-    String raceDataFilePath="/Users/hammaad/Downloads/RXApplication-stable-main/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/raceData.txt"; // the path of the file is being stored in the variable
-    String adminDataFilePath="/Users/hammaad/Downloads/RXApplication-stable-main/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/adminData.txt";
+    String championshipDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt"; // the path of the file is being stored as variable
+    String raceDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\raceData.txt"; // the path of the file is being stored in the variable
+    String adminDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\adminData.txt";
     Random random = new Random();
+
+
 
     public void loadSignInScreen(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("signIn-view.fxml"));
@@ -98,18 +104,28 @@ public class Controller {
     public void validateFields() throws IOException, ClassNotFoundException {
         admins=readFromFileAdminData();
         String emailEntered = emailInput.getText().toString();
+        String adminFullName = null;
         for (Admin admin:admins){
             if (admin.getEmail().equals(emailEntered)){
                 if (admin.getPassword().equals(passwordInput.getText())){
                     signInButton.setOpacity(0.0f);
                     continueToApp.setOpacity(1.0f);
+                    adminFullName = admin.getDetails();
                     break;
                 }
                 System.out.println("Invalid Username or password");
                 break;
             }
         }
+        writeToFileAdminData(admins);
+        System.out.println(opertionTime()+" "+adminFullName+" : Logged in.");
 
+    }
+    public void onUserIconClicked(){
+        optionsPane.setOpacity(1.0f);
+    }
+    public void onClearOptionsButtonClicked(){
+        optionsPane.setOpacity(0.0f);
     }
     //Main Window Methods
     public void loadMainScreen(ActionEvent event) throws IOException { //this loads the main screen
@@ -322,9 +338,38 @@ public class Controller {
                 drivers.add(driver);// adds the driver to the list of available drivers
 
                 writeToFileChampionshipData(drivers);//saves the updated changes into the championshipData
-
+                System.out.println(opertionTime()+" : added "+driver.getDetails()+".");
                 successLabel.setOpacity(1.0f);
                 successLabel.setText(("Successfully added "+driver.getFname()));
+                RaceCar raceCar;
+                switch (carInput.getText()) {
+                    case "PWR RX1e" -> {
+                        raceCar = new RaceCar("PWR RX1e", "500kW", driver.getDetails());
+                        raceCar.getVehicleDetails();
+                        break;
+                    }
+                    case "Volkswagen RX1e" -> {
+                        raceCar = new RaceCar("Volkswagen RX1e", "NA", driver.getDetails());
+                        raceCar.getVehicleDetails();
+                        break;
+                    }
+                    case "Lancia Delta Evo-e RX" -> {
+                        raceCar = new RaceCar("Lancia Delta Evo-e RX", "158kW", driver.getDetails());
+                        raceCar.getVehicleDetails();
+                        break;
+                    }
+                    case "Peugeot 208 RX1e" -> {
+                        raceCar = new RaceCar("Peugeot 208 RX1e", " 500kW ", driver.getDetails());
+                        raceCar.getVehicleDetails();
+                        break;
+                    }
+                    default -> {
+                        raceCar = new RaceCar(car, "NA", driver.getDetails());
+                        raceCar.getVehicleDetails();
+                        break;
+                    }
+
+                }
                 successLabel.setTextFill(Color.rgb(47, 130, 73));
                 successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
             }else {
@@ -340,9 +385,6 @@ public class Controller {
             teamInput.setText("");
             carInput.setText("");
             pointsInput.setText("");
-            for (Driver individualDriver : drivers) {
-                System.out.println(String.format("%s   %s    %d  %s  %s      %d",individualDriver.getFname(),individualDriver.getLname(), individualDriver.getAge(), individualDriver.getTeam(), individualDriver.getCar(), individualDriver.getPoints()));
-            }
         }
     }
 
@@ -376,7 +418,11 @@ public class Controller {
         }
         if (found==false){
             successLabel.setOpacity(1.0f);
-            successLabel.setText(("Error: "+nameOfDriverToBeUpdated+" ,does not exist!"));
+            if (nameInputofDriver.getText().equals("")){
+                successLabel.setText(("Cannot be empty."));
+            }else{
+                successLabel.setText(("Error: "+nameOfDriverToBeUpdated+", does not exist!"));
+            }
             successLabel.setTextFill(Color.rgb(117, 29, 29));
             successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
         }else {
@@ -395,9 +441,11 @@ public class Controller {
             String availableDriverName = driver.getFname()+" "+driver.getLname();
             if (availableDriverName.equals(nameOfDriverToBeUpdated)){
                 drivers.remove(driver);
+                System.out.println(opertionTime()+" : Deleted "+driver.getDetails()+".");
                 break;
             }
         }
+
         writeToFileChampionshipData(drivers);
         successLabel.setOpacity(1.0f);
         successLabel.setText(("Deleted records of "+nameOfDriverToBeUpdated));
@@ -435,7 +483,11 @@ public class Controller {
         }
         if (found==false){
             successLabel.setOpacity(1.0f);
-            successLabel.setText(("Error: "+nameOfDriverToBeUpdated+" ,does not exist!"));
+            if (nameInputofDriver.getText().equals("")){
+                successLabel.setText(("Cannot be empty."));
+            }else{
+                successLabel.setText(("Error: "+nameOfDriverToBeUpdated+", does not exist!"));
+            }
             successLabel.setTextFill(Color.rgb(117, 29, 29));
             successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
             updateFieldsPane.setOpacity(0.0f);
@@ -571,6 +623,7 @@ public class Controller {
                 storedDriver.setTeam(new SerializableSimpleStringProperty(team));
                 storedDriver.setPoints(new SerializableSimpleIntegerProperty(points));
                 writeToFileChampionshipData(drivers);//saves the updated changes into the championshipData
+                System.out.println(opertionTime()+" : Updated records of "+storedDriver.getDetails()+".");
 
                 successLabel.setOpacity(1.0f);
                 successLabel.setText(("Successfully updated "+firstName));
@@ -655,6 +708,7 @@ public class Controller {
         }
 
         raceLocationLabel.setText(raceLocation);
+        System.out.println(opertionTime()+" "+adminFullName+" : Is simulating a race.");
 
         ArrayList<Driver> finalPositions = drivers;
         Collections.shuffle(finalPositions);//simulates positions randomly using - shuffle
@@ -712,9 +766,12 @@ public class Controller {
             successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
         }));
         timeline.play();
+        System.out.println(opertionTime()+" : Simulated a race at "+raceLocation+" "+raceDate);
 
         Race race = new Race(raceDate,raceLocation,finalPositions);//then we create an object of Race class, which stores the date,location and finalPositions after the race.
         races.add(race);//this adds to the list of exsisting races.
+        SafetyCar safetyCar = new SafetyCar("Audi a6 avant","245 kW",2023);//This displays the safteyCar details for the race.
+        safetyCar.getVehicleDetails();
 
         //now we add the points to the top3 drivers
         Driver firstPlaceDriver = finalPositions.get(0);//loads the details of the first placed driver
@@ -735,8 +792,11 @@ public class Controller {
                 driver.setPoints(new SerializableSimpleIntegerProperty(currentPoints+0));
             }
         }
+        System.out.println(opertionTime()+" : Points updated");
+
         writeToFileRaceData(races);//updates both of the lists, saves the values into the textfile
         writeToFileChampionshipData(drivers);
+        System.out.println(opertionTime()+" : Autosave complete ");
 
     }
     public String randomDate(){
@@ -784,6 +844,7 @@ public class Controller {
         for (Driver individualDriver : sortedDrivers) {
             championshipDataObject.add(individualDriver);//adds each from the list of drivers which has been sorted in descending order of points.
         }
+        System.out.println(opertionTime()+" : Viewed Championship table ");
         championshipDataView.setItems(championshipDataObject);//once the list is ready we populate the tableview by calling the setItems which displays our observable list Object.
 
     }
@@ -801,6 +862,7 @@ public class Controller {
                 }
             }
         }
+        System.out.println(opertionTime()+" : Sorted data according to descending order of points ");
         return drivers;//returns the sorted list, implementation from https://www.geeksforgeeks.org/bubble-sort/
     }
 
@@ -846,6 +908,7 @@ public class Controller {
                 raceDataObject.add(raceResult);
             }
         }
+        System.out.println(opertionTime()+" : Viewed previous race data ");
         raceDataView.setItems(raceDataObject);
     }
 
@@ -876,6 +939,7 @@ public class Controller {
 
             }
         }
+        System.out.println(opertionTime()+" : Sorted data according ascending order of date.");
         return races;//sends back the sorted list of races according to date
     }
 
@@ -905,12 +969,13 @@ public class Controller {
         objectOutputStream.close();
         fileOutputStream.close();
     }
-    public void onSTFButtonClicked() throws IOException {
+    public void onSTFButtonClicked() throws IOException, ClassNotFoundException {
         successLabel.setOpacity(0.0f);
         successLabel.setText(("Files have been saved"));
         successLabel.setTextFill(Color.rgb(47, 130, 73));
         successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
         successLabel.setOpacity(1.0f);
+        System.out.println(opertionTime()+" : Saved files into the system.");
     }
 
 
@@ -943,12 +1008,34 @@ public class Controller {
         successLabel.setTextFill(Color.rgb(47, 130, 73));
         successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
         successLabel.setOpacity(1.0f);
+        System.out.println(opertionTime()+" : Loaded files from the system.");
     }
     public void onExitButtonClicked(){
+        System.out.println(opertionTime()+" : Terminated the program.");
+        System.out.println();
         System.exit(0);
     }
-    public void onLogoutButtonClicked(){
-        System.out.println("Log out works");
+    public void onLogoutButtonClicked(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("signIn-view.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setTitle("SignIn");
+        scene.getStylesheets().add(getClass().getResource("mainstylesheet.css").toExternalForm());//refers the main stylesheet
+        stage.setScene(scene);
+        stage.show();
+        stage.setResizable(false);//now the Home page is open
+        System.out.println(opertionTime()+" : Logged out.");
+    }
+    public void onRestartButtonClicked(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("SplashScreen-view.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setTitle("SignIn");
+        scene.getStylesheets().add(getClass().getResource("mainstylesheet.css").toExternalForm());//refers the main stylesheet
+        stage.setScene(scene);
+        stage.show();
+        stage.setResizable(false);//now the Home page is open
+        System.out.println(opertionTime()+" : Restarted the program.");
     }
 
     public  String toTitleCase(String str){ // to convert a string to title case
@@ -959,6 +1046,13 @@ public class Controller {
         return stringBuilder.toString(); // converts the stringbuilder object to a string
 
         // reference: https://www.javacodeexamples.com/convert-string-to-title-case-in-java-example/641
+    }
+
+    public String opertionTime(){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        String currentTime = formatter.format(date).toString();
+        return currentTime;
     }
 
 

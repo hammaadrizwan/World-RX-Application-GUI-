@@ -4,7 +4,7 @@
 .navBarButton {
     -fx-background-color: #2a354e;
     -fx-background-radius: 0;
-    -fx-text-fill: #E4E4E4;
+    -fx-text-fill: #8ea3d4;
 }
 .navBarButton:hover {
     -fx-background-color: #02f3e9;
@@ -15,4 +15,28 @@
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 0;
     -fx-text-fill: #1f2a44;
+}
+.logoutRestartButtonOptions{
+    -fx-background-color: #273454;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 0;
+}
+.logoutRestartButtonOptions:hover{
+    -fx-background-color: #5673ba;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 0;
+}
+.exitButtonOptions{
+    -fx-background-color: #e35b5b;
+    -fx-text-fill: #801919;
+    -fx-background-radius: 0;
+}
+.exitButtonOptions:hover{
+    -fx-background-color: #801919;
+    -fx-text-fill: #e35b5b;
+    -fx-background-radius: 0;
+}
+#addDriverSubmitButton {
+    -fx-background-color: #000000;
+    -fx-text-fill: #ffffff;
 }
