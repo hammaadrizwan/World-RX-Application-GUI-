@@ -1,35 +1,40 @@
 package com.example.rxapplication;
 
-public class Person {
-    public String fname;
-    public String lname;
+import java.io.Serializable;
+
+public class Person implements Serializable {
+    private SerializableSimpleStringProperty fname,lname;
+    private SerializableSimpleIntegerProperty age;
+
+    public Person(String fname, String lname,Integer age) {
+        this.fname = new SerializableSimpleStringProperty(fname);
+        this.lname = new SerializableSimpleStringProperty(lname);
+        this.age= new SerializableSimpleIntegerProperty(age);
+    }
 
     public String getFname() {
-        return fname;
+        return fname.get();
     }
 
     public String getLname() {
-        return lname;
+        return lname.get();
+    }
+    public int getAge(){
+        return age.get();
     }
 
 
-}
-class Admin extends Person {//used for signup page
-    private String email;
-    private String password;
-
-    public String getEmail() {
-        return email;
+    public String getDetails() {
+        return fname.get().toString() + " " + lname.get().toString();
     }
-
-    public String getPassword() {
-        return password;
+    public void setFname(SerializableSimpleStringProperty fname){
+        this.fname=fname;//gets the value from the user and replaces it with the value which was stored previously in the object
     }
-
-    public Admin() {
-        this.fname="Micheal";
-        this.lname="Masi";
-        this.email="admin@fia.com";
-        this.password="admin@123";
+    public void setLname(SerializableSimpleStringProperty lname){
+        this.lname=lname;
+    }
+    public void setAge(SerializableSimpleIntegerProperty age){
+        this.age=age;
     }
 }
+

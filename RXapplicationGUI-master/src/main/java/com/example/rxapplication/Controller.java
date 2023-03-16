@@ -78,9 +78,11 @@ public class Controller {
 
     ArrayList<Driver> drivers = new ArrayList<Driver>(2); //Initially creates an empty ArrayList of the relavent data types to save its specific object types
     ArrayList<Race> races = new ArrayList<Race>(2);
+    ArrayList<Admin> admins = new ArrayList<Admin>(2);
 
-    String championshipDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt"; // the path of the file is being stored as variable
-    String raceDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\raceData.txt"; // the path of the file is being stored in the variable
+    String championshipDataFilePath="/Users/hammaad/Downloads/RXApplication-stable-main/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/championshipData.txt"; // the path of the file is being stored as variable
+    String raceDataFilePath="/Users/hammaad/Downloads/RXApplication-stable-main/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/raceData.txt"; // the path of the file is being stored in the variable
+    String adminDataFilePath="/Users/hammaad/Downloads/RXApplication-stable-main/RXApplication-stable/RXapplicationGUI-master/src/main/java/com/example/rxapplication/adminData.txt";
     Random random = new Random();
 
     public void loadSignInScreen(ActionEvent event) throws IOException {
@@ -93,15 +95,19 @@ public class Controller {
         stage.show();
         stage.setResizable(false);//now the Home page is open
     }
-    public void validateFields(){
-        Admin admin = new Admin();
-        if (emailInput.getText().toString().equals(admin.getEmail())){
-            if (passwordInput.getText().toString().equals(admin.getPassword())){
-                signInButton.setOpacity(0.0f);
-                continueToApp.setOpacity(1.0f);
+    public void validateFields() throws IOException, ClassNotFoundException {
+        admins=readFromFileAdminData();
+        String emailEntered = emailInput.getText().toString();
+        for (Admin admin:admins){
+            if (admin.getEmail().equals(emailEntered)){
+                if (admin.getPassword().equals(passwordInput.getText())){
+                    signInButton.setOpacity(0.0f);
+                    continueToApp.setOpacity(1.0f);
+                    break;
+                }
+                System.out.println("Invalid Username or password");
+                break;
             }
-        }else{
-            System.out.println("Invalid Username or password");
         }
 
     }
@@ -891,6 +897,14 @@ public class Controller {
         objectOutputStream.close();
         fileOutputStream.close();
     }
+    private void writeToFileAdminData(ArrayList<Admin> admins) throws IOException {
+        File ChampionshipFileData = new File(adminDataFilePath);
+        FileOutputStream fileOutputStream = new FileOutputStream(ChampionshipFileData);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(admins);
+        objectOutputStream.close();
+        fileOutputStream.close();
+    }
     public void onSTFButtonClicked() throws IOException {
         successLabel.setOpacity(0.0f);
         successLabel.setText(("Files have been saved"));
@@ -914,6 +928,14 @@ public class Controller {
         ArrayList<Race> races = (ArrayList<Race>) objectInputStream.readObject();
         fileInputStream.close();
         return races;
+    }
+
+    public  ArrayList<Admin> readFromFileAdminData() throws IOException, ClassNotFoundException {
+        FileInputStream fileInputStream = new FileInputStream(adminDataFilePath);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        ArrayList<Admin> admins = (ArrayList<Admin>) objectInputStream.readObject();
+        fileInputStream.close();
+        return admins;
     }
     public void onRFFButtonClicked() throws IOException {
         successLabel.setOpacity(0.0f);
