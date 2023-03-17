@@ -44,6 +44,7 @@ public class Controller {
     @FXML private TextField emailInput;
     @FXML private PasswordField passwordInput;
     @FXML private Button signInButton,continueToApp;
+    @FXML private Label emailInputMessage,passwordInputMessage;
     //main screen elements(Home page)
     @FXML private Button refreshButton,viewRaceDataButton;//all the labels in the mainScreen are stored here, each an every cell in the Last race Table. Last Race Highlights is an improvement to program, and also Top2 head to head.
     @FXML private Label lrhPos1Label,lrhName1Label,lrhCar1Label,lrhPoints1Label,lrhPos2Label,lrhName2Label,lrhCar2Label,lrhPoints2Label,lrhPos3Label,lrhName3Label,lrhCar3Label,lrhPoints3Label,lrhLocationLabel,lrhDateLabel,firstPlaceDriverFname,firstPlaceDriverLname,secondPlaceDriverFname,secondPlaceDriverLname,firstPlaceDriverWins,firstPlaceDriverTop3,secondPlaceDriverTop3,secondPlaceDriverWins;
@@ -104,21 +105,41 @@ public class Controller {
     public void validateFields() throws IOException, ClassNotFoundException {
         admins=readFromFileAdminData();
         String emailEntered = emailInput.getText().toString();
-        String adminFullName = null;
+        String adminFullName;
+        boolean loginSuccessfull = false;
+        boolean fieldEmpty = false;
+        if (emailInput.getText().toString().equals("")) {//checks if the first name input field is blank
+            emailInputMessage.setText("Cannot be empty");//displays a message to the user to re-enter;
+            fieldEmpty=true;
+        }else {
+            emailInputMessage.setText("");
+        }
+        if(passwordInput.getText().equals("")){
+            passwordInputMessage.setText("Cannot be empty");
+            fieldEmpty=true;
+        }else{
+            passwordInputMessage.setText("");
+        }
+
         for (Admin admin:admins){
             if (admin.getEmail().equals(emailEntered)){
                 if (admin.getPassword().equals(passwordInput.getText())){
                     signInButton.setOpacity(0.0f);
                     continueToApp.setOpacity(1.0f);
+                    loginSuccessfull=true;
+                    fieldEmpty=false;
                     adminFullName = admin.getDetails();
+                    System.out.println(opertionTime()+" "+adminFullName+" : Logged in.");
+                    passwordInputMessage.setText("");
                     break;
                 }
-                System.out.println("Invalid Username or password");
-                break;
             }
         }
+        if (!loginSuccessfull && !fieldEmpty){
+            passwordInputMessage.setText("Invalid Username or password");
+        }
         writeToFileAdminData(admins);
-        System.out.println(opertionTime()+" "+adminFullName+" : Logged in.");
+
 
     }
     public void onUserIconClicked(){
@@ -828,12 +849,13 @@ public class Controller {
         stage.setTitle("Championship standings");
         stage.show();
         stage.setResizable(false);
+        System.out.println(opertionTime()+" : Sorted data according to descending order of points ");
     }
     public void onRefreshButtonVCTWindowClicked() throws IOException, ClassNotFoundException { //This is to populate the fields of table view with the realvent data type
         drivers = readFromFileChampionshipData();
         refreshButtonVCTWindow.setOpacity(0.0f);//once clicked the refresh button dissapears
-        firstnameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Fname"));// this sets the value which is stored under the fname property of the drivers object
-        lastnameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Lname"));
+        firstnameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Details"));// this sets the value which is stored under the fname property of the drivers object
+        //lastnameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Details"));
         ageColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver, Integer>("Age"));
         teamColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Team"));
         carColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Car"));
@@ -862,7 +884,7 @@ public class Controller {
                 }
             }
         }
-        System.out.println(opertionTime()+" : Sorted data according to descending order of points ");
+
         return drivers;//returns the sorted list, implementation from https://www.geeksforgeeks.org/bubble-sort/
     }
 
@@ -877,6 +899,7 @@ public class Controller {
         stage.setTitle("Championship standings");
         stage.show();
         stage.setResizable(false);
+        System.out.println(opertionTime()+" : Sorted data according ascending order of date.");
     }
     public void onRefreshButtonVRLWindowClicked() throws IOException, ClassNotFoundException {
         races=readFromFileRaceData();
@@ -894,7 +917,7 @@ public class Controller {
             for (Driver driver : driversFromRace) {
                 String date = race.getDate();
                 String location = race.getLocation();
-                String name = driver.getFname().toString() + "  " + driver.getLname().toString();
+                String name = driver.getDetails();
                 int points = 0;
                 if (index == 0) {
                     points = 10;
@@ -939,7 +962,6 @@ public class Controller {
 
             }
         }
-        System.out.println(opertionTime()+" : Sorted data according ascending order of date.");
         return races;//sends back the sorted list of races according to date
     }
 
