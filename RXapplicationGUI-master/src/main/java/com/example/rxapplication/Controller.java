@@ -34,7 +34,6 @@ public class Controller {
     // sets it to private as it can be accessed only from inside this code
 
     //ROOT window elements, this will change as we switch between scenes(the backbone of the GUI, everything depends on these 2)
-    private String adminFullName;
     private Stage stage;
     private Scene scene;
 
@@ -65,7 +64,7 @@ public class Controller {
     //VCT window elements
     @FXML private Button refreshButtonVCTWindow; //to refresh championship standings
     @FXML private TableView<Driver> championshipDataView; //table to display the data
-    @FXML private TableColumn<Driver,String> firstnameColumnChampionshipData,lastnameColumnChampionshipData,teamColumnChampionshipData,carColumnChampionshipData; //each and every column and the data type it will store
+    @FXML private TableColumn<Driver,String> firstnameColumnChampionshipData,teamColumnChampionshipData,carColumnChampionshipData; //each and every column and the data type it will store
     @FXML private TableColumn<Driver,Integer> ageColumnChampionshipData,pointsColumnChampionshipData;
 
     //SRR window elements
@@ -81,13 +80,17 @@ public class Controller {
     @FXML private TableColumn<RaceResult, String> dateColumnRaceData,locationColumnRaceData,nameColumnRaceData;
     @FXML private TableColumn<RaceResult, Integer> pointsColumnRaceData;
 
-    ArrayList<Driver> drivers = new ArrayList<Driver>(2); //Initially creates an empty ArrayList of the relavent data types to save its specific object types
-    ArrayList<Race> races = new ArrayList<Race>(2);
-    ArrayList<Admin> admins = new ArrayList<Admin>(2);
+    ArrayList<Driver> drivers = new ArrayList<>(2); //Initially creates an empty ArrayList of the relavent data types to save its specific object types
+    ArrayList<Race> races = new ArrayList<>(2);
+    ArrayList<Admin> admins = new ArrayList<>(2);
 
     String championshipDataFilePath="RXapplicationGUI-master/src/main/resources/com/example/files/championshipData.txt"; // the path of the file is being stored as variable
     String raceDataFilePath="RXapplicationGUI-master/src/main/resources/com/example/files/raceData.txt"; // the path of the file is being stored in the variable
     String adminDataFilePath="RXapplicationGUI-master/src/main/resources/com/example/files/adminData.txt";
+    //Use this after completing the project
+//    String championshipDataFilePath="src/main/resources/com/example/files/championshipData.txt"; // the path of the file is being stored as variable
+//    String raceDataFilePath="src/main/resources/com/example/files/raceData.txt"; // the path of the file is being stored in the variable
+//    String adminDataFilePath="src/main/resources/com/example/files/adminData.txt";
     Random random = new Random();
 
 
@@ -104,11 +107,11 @@ public class Controller {
     }
     public void validateFields() throws IOException, ClassNotFoundException {
         admins=readFromFileAdminData();
-        String emailEntered = emailInput.getText().toString();
+        String emailEntered = emailInput.getText();
         String adminFullName;
         boolean loginSuccessfull = false;
         boolean fieldEmpty = false;
-        if (emailInput.getText().toString().equals("")) {//checks if the first name input field is blank
+        if (emailInput.getText().equals("")) {//checks if the first name input field is blank
             emailInputMessage.setText("Cannot be empty");//displays a message to the user to re-enter;
             fieldEmpty=true;
         }else {
@@ -251,18 +254,18 @@ public class Controller {
         boolean carValid=true;
         boolean pointsValid=true;
 
-        if (fnameInput.getText().toString().equals("")){//checks if the first name input field is blank
+        if (fnameInput.getText().equals("")){//checks if the first name input field is blank
             fnameMessage.setText("Cannot be empty");//displays a message to the user to re-enter
             fnameValid=false;//sets fname validity to be false
         }else{//checks whether there is atleast one integer in the firstname: since name cannot contain any number/digits
-            char[] fnameCharacters= fnameInput.getText().toString().toCharArray();// converts the string to a sqeuence of characters
+            char[] fnameCharacters= fnameInput.getText().toCharArray();// converts the string to a sqeuence of characters
             for (char character: fnameCharacters) {//and by using an enhanced for loop, the program checks whether a number is present in the list of characters
                 if (Character.isDigit(character)){// using Character object's in buikt isDigit() methid to check whehter the character is a digit
                     fnameValid=false;//if it is then fnameInput will be invalid and the loop will break
                     break;
                 }
             }
-            if (fnameValid==false){//if the fname is invalid, a message will be displayed to the user saying its incorrect
+            if (!fnameValid){//if the fname is invalid, a message will be displayed to the user saying its incorrect
                 fnameMessage.setText("Incorrect Value");
             }else{
                 fnameMessage.setText("");//if it is valid there will be no message dispalyed as the field is of correct data type.
@@ -270,18 +273,18 @@ public class Controller {
             }
         }
 
-        if (lnameInput.getText().toString().equals("")){//the same procedure to check for correct value entered in lastname field
+        if (lnameInput.getText().equals("")){//the same procedure to check for correct value entered in lastname field
             lnameMessage.setText("Cannot be empty");
             lnameValid=false;
         }else{
-            char[] lnameCharacters= lnameInput.getText().toString().toCharArray();
+            char[] lnameCharacters= lnameInput.getText().toCharArray();
             for (char character: lnameCharacters) {
                 if (Character.isDigit(character)){
                     lnameValid=false;
                     break;
                 }
             }
-            if (lnameValid==false){
+            if (!lnameValid){
                 lnameMessage.setText("Incorrect Value");
             }else{
                 lnameMessage.setText("");
@@ -289,17 +292,17 @@ public class Controller {
             }
         }
 
-        if (ageInput.getText().toString().equals("")){
+        if (ageInput.getText().equals("")){
             ageMessage.setText("Cannot be empty");
             ageValid=false;
         }else{
-            char[] ageCharacters = ageInput.getText().toString().toCharArray();// for age we check if there is no digit in the character sequence meaning it is not an integer
+            char[] ageCharacters = ageInput.getText().toCharArray();// for age we check if there is no digit in the character sequence meaning it is not an integer
             for (char character: ageCharacters) {
                 if (!Character.isDigit(character)){
                     ageValid=false;//if there is atleast one non integer element the validity will be false
                     break;
                 }
-            }if (ageValid==false){
+            }if (!ageValid){
                 ageMessage.setText("Incorrect Type");
             }else{
                 ageValid = true;
@@ -308,31 +311,31 @@ public class Controller {
             }
         }
 
-        if (carInput.getText().toString().equals("")){//checks if the car input field is empty as these inputs are important
+        if (carInput.getText().equals("")){//checks if the car input field is empty as these inputs are important
             carMessage.setText("Cannot be empty");
             carValid=false;
         }else{
             carMessage.setText("");
         }
 
-        if (teamInput.getText().toString().equals("")){//same procedure as carInput field
+        if (teamInput.getText().equals("")){//same procedure as carInput field
             teamMessage.setText("Cannot be empty");
             teamValid=false;
         }else{
             teamMessage.setText("");
         }
 
-        if (pointsInput.getText().toString().equals("")){//validation procedure is same as age as we only check if the data tpe for the field is an integer.
+        if (pointsInput.getText().equals("")){//validation procedure is same as age as we only check if the data tpe for the field is an integer.
             pointsMessage.setText("Cannot be empty");
             pointsValid=false;
         }else{
-            char[] pointsCharacters = pointsInput.getText().toString().toCharArray();
+            char[] pointsCharacters = pointsInput.getText().toCharArray();
             for (char character: pointsCharacters) {
                 if (!Character.isDigit(character)){
                     pointsValid=false;
                     break;
                 }
-            }if (pointsValid==false){
+            }if (!pointsValid){
                 pointsMessage.setText("Incorrect Type");
             }else{
                 pointsMessage.setText("");
@@ -340,12 +343,12 @@ public class Controller {
         }
 
         if (fnameValid && lnameValid && ageValid && teamValid && carValid && pointsValid) {// if all are valid
-            String firstName = toTitleCase(fnameInput.getText().toString().strip());// we clean all the input as it is ready for the being written to the file
-            String lastName = toTitleCase(lnameInput.getText().toString().strip());
-            Integer age = Integer.parseInt(ageInput.getText().toString());//convert the string to an integer
-            String team = (teamInput.getText().toString().strip());
-            String car = (carInput.getText().toString().strip());
-            Integer points = Integer.parseInt(pointsInput.getText().toString());
+            String firstName = toTitleCase(fnameInput.getText().strip());// we clean all the input as it is ready for the being written to the file
+            String lastName = toTitleCase(lnameInput.getText().strip());
+            Integer age = Integer.parseInt(ageInput.getText());//convert the string to an integer
+            String team = (teamInput.getText().strip());
+            String car = (carInput.getText().strip());
+            Integer points = Integer.parseInt(pointsInput.getText());
 
             Driver driver = new Driver(firstName, lastName, age, team, car, points);//creates a new driver of the Driver class
             boolean recordExsists = false;
@@ -355,7 +358,7 @@ public class Controller {
                     break;
                 }
             }
-            if (recordExsists==false){
+            if (!recordExsists){
                 drivers.add(driver);// adds the driver to the list of available drivers
 
                 writeToFileChampionshipData(drivers);//saves the updated changes into the championshipData
@@ -425,7 +428,7 @@ public class Controller {
     public void findDriverToBeDeleted() throws IOException, ClassNotFoundException {
         drivers=readFromFileChampionshipData();
         boolean found = false;
-        String nameOfDriverToBeUpdated = nameInputofDriver.getText().toString();
+        String nameOfDriverToBeUpdated = nameInputofDriver.getText();
 
         int index = 0;
         for (Driver driver:drivers){
@@ -437,7 +440,7 @@ public class Controller {
             }
             index++;
         }
-        if (found==false){
+        if (!found){
             successLabel.setOpacity(1.0f);
             if (nameInputofDriver.getText().equals("")){
                 successLabel.setText(("Cannot be empty."));
@@ -457,7 +460,7 @@ public class Controller {
 
     public void onDeleteConfirmationClicked() throws IOException, ClassNotFoundException {
         drivers = readFromFileChampionshipData();
-        String nameOfDriverToBeUpdated = nameInputStored.getText().toString();
+        String nameOfDriverToBeUpdated = nameInputStored.getText();
         for (Driver driver:drivers){
             String availableDriverName = driver.getFname()+" "+driver.getLname();
             if (availableDriverName.equals(nameOfDriverToBeUpdated)){
@@ -491,7 +494,7 @@ public class Controller {
     public void findDriverToBeUpdated() throws IOException, ClassNotFoundException {
         drivers=readFromFileChampionshipData();
         boolean found = false;
-        String nameOfDriverToBeUpdated = nameInputofDriver.getText().toString();
+        String nameOfDriverToBeUpdated = nameInputofDriver.getText();
 
         int index = 0;
         for (Driver driver:drivers){
@@ -502,7 +505,7 @@ public class Controller {
             }
             index++;
         }
-        if (found==false){
+        if (!found){
             successLabel.setOpacity(1.0f);
             if (nameInputofDriver.getText().equals("")){
                 successLabel.setText(("Cannot be empty."));
@@ -527,18 +530,18 @@ public class Controller {
         boolean carValid=true;
         boolean pointsValid=true;
 
-        if (fnameInput.getText().toString().equals("")){//checks if the first name input field is blank
+        if (fnameInput.getText().equals("")){//checks if the first name input field is blank
             fnameMessage.setText("Cannot be empty");//displays a message to the user to re-enter
             fnameValid=false;//sets fname validity to be false
         }else{//checks whether there is atleast one integer in the firstname: since name cannot contain any number/digits
-            char[] fnameCharacters= fnameInput.getText().toString().toCharArray();// converts the string to a sqeuence of characters
+            char[] fnameCharacters= fnameInput.getText().toCharArray();// converts the string to a sqeuence of characters
             for (char character: fnameCharacters) {//and by using an enhanced for loop, the program checks whether a number is present in the list of characters
                 if (Character.isDigit(character)){// using Character object's in buikt isDigit() methid to check whehter the character is a digit
                     fnameValid=false;//if it is then fnameInput will be invalid and the loop will break
                     break;
                 }
             }
-            if (fnameValid==false){//if the fname is invalid, a message will be displayed to the user saying its incorrect
+            if (!fnameValid){//if the fname is invalid, a message will be displayed to the user saying its incorrect
                 fnameMessage.setText("Incorrect Value");
             }else{
                 fnameMessage.setText("");//if it is valid there will be no message dispalyed as the field is of correct data type.
@@ -546,18 +549,18 @@ public class Controller {
             }
         }
 
-        if (lnameInput.getText().toString().equals("")){//the same procedure to check for correct value entered in lastname field
+        if (lnameInput.getText().equals("")){//the same procedure to check for correct value entered in lastname field
             lnameMessage.setText("Cannot be empty");
             lnameValid=false;
         }else{
-            char[] lnameCharacters= lnameInput.getText().toString().toCharArray();
+            char[] lnameCharacters= lnameInput.getText().toCharArray();
             for (char character: lnameCharacters) {
                 if (Character.isDigit(character)){
                     lnameValid=false;
                     break;
                 }
             }
-            if (lnameValid==false){
+            if (!lnameValid){
                 lnameMessage.setText("Incorrect Value");
             }else{
                 lnameMessage.setText("");
@@ -565,17 +568,17 @@ public class Controller {
             }
         }
 
-        if (ageInput.getText().toString().equals("")){
+        if (ageInput.getText().equals("")){
             ageMessage.setText("Cannot be empty");
             ageValid=false;
         }else{
-            char[] ageCharacters = ageInput.getText().toString().toCharArray();// for age we check if there is no digit in the character sequence meaning it is not an integer
+            char[] ageCharacters = ageInput.getText().toCharArray();// for age we check if there is no digit in the character sequence meaning it is not an integer
             for (char character: ageCharacters) {
                 if (!Character.isDigit(character)){
                     ageValid=false;//if there is atleast one non integer element the validity will be false
                     break;
                 }
-            }if (ageValid==false){
+            }if (!ageValid){
                 ageMessage.setText("Incorrect Type");
             }else{
                 ageValid = true;
@@ -584,31 +587,31 @@ public class Controller {
             }
         }
 
-        if (carInput.getText().toString().equals("")){//checks if the car input field is empty as these inputs are important
+        if (carInput.getText().equals("")){//checks if the car input field is empty as these inputs are important
             carMessage.setText("Cannot be empty");
             carValid=false;
         }else{
             carMessage.setText("");
         }
 
-        if (teamInput.getText().toString().equals("")){//same procedure as carInput field
+        if (teamInput.getText().equals("")){//same procedure as carInput field
             teamMessage.setText("Cannot be empty");
             teamValid=false;
         }else{
             teamMessage.setText("");
         }
 
-        if (pointsInput.getText().toString().equals("")){//validation procedure is same as age as we only check if the data tpe for the field is an integer.
+        if (pointsInput.getText().equals("")){//validation procedure is same as age as we only check if the data tpe for the field is an integer.
             pointsMessage.setText("Cannot be empty");
             pointsValid=false;
         }else{
-            char[] pointsCharacters = pointsInput.getText().toString().toCharArray();
+            char[] pointsCharacters = pointsInput.getText().toCharArray();
             for (char character: pointsCharacters) {
                 if (!Character.isDigit(character)){
                     pointsValid=false;
                     break;
                 }
-            }if (pointsValid==false){
+            }if (!pointsValid){
                 pointsMessage.setText("Incorrect Type");
             }else{
                 pointsMessage.setText("");
@@ -616,12 +619,12 @@ public class Controller {
         }
 
         if (fnameValid && lnameValid && ageValid && teamValid && carValid && pointsValid) {// if all are valid
-            String firstName = toTitleCase(fnameInput.getText().toString().strip());// we clean all the input as it is ready for the being written to the file
-            String lastName = toTitleCase(lnameInput.getText().toString().strip());
-            Integer age = Integer.parseInt(ageInput.getText().toString());//convert the string to an integer
-            String team = (teamInput.getText().toString().strip());
-            String car = (carInput.getText().toString().strip());
-            Integer points = Integer.parseInt(pointsInput.getText().toString());
+            String firstName = toTitleCase(fnameInput.getText().strip());// we clean all the input as it is ready for the being written to the file
+            String lastName = toTitleCase(lnameInput.getText().strip());
+            Integer age = Integer.parseInt(ageInput.getText());//convert the string to an integer
+            String team = (teamInput.getText().strip());
+            String car = (carInput.getText().strip());
+            Integer points = Integer.parseInt(pointsInput.getText());
 
             boolean recordExsists = false;
             int availableIndex = 0;
@@ -635,7 +638,7 @@ public class Controller {
                 }
                 availableIndex++;
             }
-            if (recordExsists==false){
+            if (!recordExsists){
                 Driver storedDriver = drivers.get(index);
                 storedDriver.setFname(new SerializableSimpleStringProperty(firstName));// adds the driver to the list of available drivers
                 storedDriver.setLname(new SerializableSimpleStringProperty(lastName));
@@ -729,7 +732,8 @@ public class Controller {
         }
 
         raceLocationLabel.setText(raceLocation);
-        System.out.println(opertionTime()+" "+adminFullName+" : Is simulating a race.");
+
+        System.out.println(opertionTime()+" : Is simulating a race.");
 
         ArrayList<Driver> finalPositions = drivers;
         Collections.shuffle(finalPositions);//simulates positions randomly using - shuffle
@@ -745,7 +749,7 @@ public class Controller {
             }
         }
         boolean dateExists = true;//initially we say that the generated date is available in the list of exsisiting dates.
-        while (dateExists==false){//if date exsists is not true, it means we can use this date
+        while (!dateExists){//if date exsists is not true, it means we can use this date
             for (String date: previousRaceDates){//if we iterate in the list to check if the date is exsisitng
                 if (raceDate ==date){
                     dateExists=true;
@@ -810,7 +814,7 @@ public class Controller {
                 driver.setPoints(new SerializableSimpleIntegerProperty(currentPoints+5));
             }else {
                 int currentPoints = driver.getPoints();//0points for 4th and below
-                driver.setPoints(new SerializableSimpleIntegerProperty(currentPoints+0));
+                driver.setPoints(new SerializableSimpleIntegerProperty(currentPoints));
             }
         }
         System.out.println(opertionTime()+" : Points updated");
@@ -1073,7 +1077,7 @@ public class Controller {
     public String opertionTime(){
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
-        String currentTime = formatter.format(date).toString();
+        String currentTime = formatter.format(date);
         return currentTime;
     }
 
