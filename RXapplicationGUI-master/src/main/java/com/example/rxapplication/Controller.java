@@ -85,9 +85,9 @@ public class Controller {
     ArrayList<Race> races = new ArrayList<Race>(2);
     ArrayList<Admin> admins = new ArrayList<Admin>(2);
 
-    String championshipDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\championshipData.txt"; // the path of the file is being stored as variable
-    String raceDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\raceData.txt"; // the path of the file is being stored in the variable
-    String adminDataFilePath="Z:\\ProgrammingCW\\RXAppStable\\RXapplicationGUI-master\\src\\main\\java\\com\\example\\rxapplication\\adminData.txt";
+    String championshipDataFilePath="RXapplicationGUI-master/src/main/resources/com/example/files/championshipData.txt"; // the path of the file is being stored as variable
+    String raceDataFilePath="RXapplicationGUI-master/src/main/resources/com/example/files/raceData.txt"; // the path of the file is being stored in the variable
+    String adminDataFilePath="RXapplicationGUI-master/src/main/resources/com/example/files/adminData.txt";
     Random random = new Random();
 
 

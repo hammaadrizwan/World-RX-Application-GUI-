@@ -8,9 +8,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.shape.Circle?>
 <AnchorPane prefHeight="680.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rxapplication.Controller">
     <AnchorPane fx:id="navBar" prefHeight="680.0" prefWidth="146.0">
         <children>
@@ -135,12 +135,12 @@
             </VBox>
         </children>
     </AnchorPane>
-   <TableView fx:id="raceDataView" layoutX="188.0" layoutY="123.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="460.0" prefWidth="832.0">
+   <TableView fx:id="raceDataView" layoutX="200.0" layoutY="123.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="460.0" prefWidth="794.0">
       <columns>
-         <TableColumn fx:id="dateColumnRaceData" editable="false" prefWidth="175.0" resizable="false" sortable="false" text="Date" />
-         <TableColumn fx:id="locationColumnRaceData" editable="false" prefWidth="213.0" resizable="false" sortable="false" text="Location" />
-         <TableColumn fx:id="nameColumnRaceData" editable="false" minWidth="0.0" prefWidth="317.0" resizable="false" sortable="false" text="Name" />
-         <TableColumn fx:id="pointsColumnRaceData" editable="false" minWidth="0.0" prefWidth="105.0" resizable="false" sortable="false" text="Points" />
+         <TableColumn fx:id="dateColumnRaceData" editable="false" prefWidth="123.0" resizable="false" sortable="false" text="DATE" />
+         <TableColumn fx:id="locationColumnRaceData" editable="false" prefWidth="195.0" resizable="false" sortable="false" text="LOCATION" />
+         <TableColumn fx:id="nameColumnRaceData" editable="false" minWidth="0.0" prefWidth="367.0" resizable="false" sortable="false" text="NAME" />
+         <TableColumn fx:id="pointsColumnRaceData" editable="false" minWidth="0.0" prefWidth="87.0" resizable="false" sortable="false" text="POINTS" />
       </columns>
       <columnResizePolicy>
          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -163,7 +163,7 @@
          <Font name="Futura Medium" size="27.0" />
       </font>
    </Label>
-   <Label layoutX="188.0" layoutY="47.0" prefHeight="69.0" prefWidth="301.0" text="RACE">
+   <Label layoutX="200.0" layoutY="47.0" prefHeight="69.0" prefWidth="301.0" text="RACE">
       <font>
          <Font name="Futura Medium" size="27.0" />
       </font>
