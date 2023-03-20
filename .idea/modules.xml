@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/RXAppStable.iml" filepath="$PROJECT_DIR$/.idea/RXAppStable.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RXapplicationGUI-master/RXapplication.iml" filepath="$PROJECT_DIR$/RXapplicationGUI-master/RXapplication.iml" />
-    </modules>
-  </component>
-</project>
