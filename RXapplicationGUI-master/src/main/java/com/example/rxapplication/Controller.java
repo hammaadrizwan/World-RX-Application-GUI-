@@ -126,6 +126,10 @@ public class Controller {
                 if (admin.getPassword().equals(passwordInput.getText())){
                     signInButton.setOpacity(0.0f);
                     continueToApp.setOpacity(1.0f);
+                    successLabel.setOpacity(1.0f);
+                    successLabel.setText("Welcome back, "+admin.getFname()+"!");
+                    successLabel.setTextFill(Color.rgb(47, 130, 73));
+                    successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
                     loginSuccessfull=true;
                     fieldEmpty=false;
                     adminFullName = admin.getDetails();
@@ -136,6 +140,7 @@ public class Controller {
             }
         }
         if (!loginSuccessfull && !fieldEmpty){
+            successLabel.setOpacity(0.0f);
             passwordInputMessage.setText("Invalid Username or password");
         }
         writeToFileAdminData(admins);

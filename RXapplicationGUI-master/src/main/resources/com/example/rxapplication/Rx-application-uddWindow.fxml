@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.shape.Circle?>
 <AnchorPane prefHeight="680.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rxapplication.Controller">
     <AnchorPane fx:id="navBar" prefHeight="680.0" prefWidth="146.0">
         <children>
@@ -135,24 +135,42 @@
             </VBox>
         </children>
     </AnchorPane>
-   <TextField fx:id="nameInputofDriver" layoutX="207.0" layoutY="243.0" prefHeight="25.0" prefWidth="273.0" />
-   <AnchorPane fx:id="updateFieldsPane" layoutX="631.0" layoutY="128.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" prefHeight="465.0" prefWidth="366.0">
+   <TextField fx:id="nameInputofDriver" layoutX="194.0" layoutY="243.0" prefHeight="25.0" prefWidth="273.0" promptText="EG. TIMMY HANSEN" />
+   <AnchorPane fx:id="updateFieldsPane" layoutX="631.0" layoutY="143.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" prefHeight="470.0" prefWidth="349.0" style="-fx-background-color: E7E7E7;">
       <children>
-         <Label layoutX="18.0" layoutY="40.0" prefHeight="20.0" prefWidth="59.0" text="First Name" />
+         <Label layoutX="18.0" layoutY="40.0" prefHeight="20.0" prefWidth="88.0" text="FIRSTNAME">
+            <font>
+               <Font name="Futura Medium" size="13.0" />
+            </font></Label>
          <TextField fx:id="fnameInput" layoutX="18.0" layoutY="64.0" prefHeight="31.0" prefWidth="131.0" promptText="Enter firstname" />
-         <Label layoutX="162.0" layoutY="42.0" prefHeight="20.0" prefWidth="59.0" text="Last Name" />
+         <Label layoutX="164.0" layoutY="42.0" prefHeight="20.0" prefWidth="74.0" text="LASTNAME">
+            <font>
+               <Font name="Futura Medium" size="13.0" />
+            </font></Label>
          <TextField fx:id="lnameInput" layoutX="162.0" layoutY="64.0" prefHeight="31.0" prefWidth="156.0" promptText="Enter lastname" />
-         <Label layoutX="17.0" layoutY="120.0" prefHeight="20.0" prefWidth="59.0" text="Age" />
+         <Label layoutX="19.0" layoutY="120.0" prefHeight="20.0" prefWidth="59.0" text="AGE">
+            <font>
+               <Font name="Futura Medium" size="13.0" />
+            </font></Label>
          <TextField fx:id="ageInput" layoutX="17.0" layoutY="143.0" prefHeight="31.0" prefWidth="131.0" promptText="Enter Age" />
-         <Label layoutX="15.0" layoutY="290.0" prefHeight="20.0" prefWidth="59.0" text="Car" />
+         <Label layoutX="17.0" layoutY="290.0" prefHeight="20.0" prefWidth="59.0" text="CAR">
+            <font>
+               <Font name="Futura Medium" size="13.0" />
+            </font></Label>
          <TextField fx:id="teamInput" layoutX="17.0" layoutY="225.0" prefHeight="31.0" prefWidth="301.0" promptText="Enter Team" />
-         <Label layoutX="17.0" layoutY="204.0" prefHeight="20.0" prefWidth="59.0" text="Team" />
+         <Label layoutX="19.0" layoutY="204.0" prefHeight="20.0" prefWidth="59.0" text="TEAM">
+            <font>
+               <Font name="Futura Medium" size="13.0" />
+            </font></Label>
          <TextField fx:id="carInput" layoutX="15.0" layoutY="312.0" prefHeight="31.0" prefWidth="131.0" promptText="Enter Car" />
-         <Label layoutX="165.0" layoutY="291.0" prefHeight="20.0" prefWidth="59.0" text="Points" />
+         <Label layoutX="165.0" layoutY="291.0" prefHeight="20.0" prefWidth="59.0" text="POINTS">
+            <font>
+               <Font name="Futura Medium" size="13.0" />
+            </font></Label>
          <TextField fx:id="pointsInput" layoutX="165.0" layoutY="312.0" prefHeight="31.0" prefWidth="156.0" promptText="Enter Points" />
          <Button fx:id="updateButtonSubmitButton" layoutX="18.0" layoutY="386.0" mnemonicParsing="false" onAction="#findDriverToBeUpdated" prefHeight="45.0" prefWidth="311.0" style="-fx-background-color: Black; -fx-text-fill: white;" text="UPDATE">
             <font>
-               <Font name="System Bold" size="13.0" />
+               <Font name="Futura Medium" size="17.0" />
             </font>
          </Button>
          <Label fx:id="fnameMessage" layoutX="18.0" layoutY="95.0" prefHeight="17.0" prefWidth="131.0" textFill="#f80101" />
@@ -163,33 +181,43 @@
          <Label fx:id="pointsMessage" layoutX="165.0" layoutY="343.0" prefHeight="17.0" prefWidth="131.0" textFill="#d30000" />
       </children>
    </AnchorPane>
-   <Pane layoutX="211.0" layoutY="511.0" opacity="0.95" prefHeight="82.0" prefWidth="366.0" style="-fx-background-color: #FFE1A7; -fx-border-radius: 60px;">
+   <Pane layoutX="194.0" layoutY="499.0" opacity="0.95" prefHeight="77.0" prefWidth="321.0" style="-fx-background-color: #FFE1A7; -fx-border-radius: 60px;">
       <children>
          <Label layoutX="7.0" layoutY="6.0" opacity="0.71" prefHeight="31.0" prefWidth="132.0" style="-fx-text-fill: C71717;" text="NOTE">
             <font>
-               <Font name="System Bold" size="12.0" />
+               <Font name="Futura Medium" size="20.0" />
             </font>
          </Label>
-         <Label layoutX="7.0" layoutY="22.0" prefHeight="52.0" prefWidth="343.0" style="-fx-text-fill: CA4F4F;" text="You are about to overwrite information that is vital for the RX Championship system. Please be mindful!" wrapText="true">
+         <Label layoutX="7.0" layoutY="23.0" prefHeight="52.0" prefWidth="311.0" style="-fx-text-fill: CA4F4F;" text="You are about to overwrite information that is vital for the RX Championship system. Please be mindful!" wrapText="true">
             <font>
                <Font name="System Italic" size="12.0" />
             </font>
          </Label>
       </children>
    </Pane>
-   <Label layoutX="191.0" layoutY="66.0" prefHeight="83.0" prefWidth="203.0" text="UPDATE">
+   <Label layoutX="194.0" layoutY="64.0" prefHeight="83.0" prefWidth="203.0" text="UPDATE">
       <font>
-         <Font size="28.0" />
+         <Font name="Futura Medium" size="31.0" />
       </font>
    </Label>
-   <Label layoutX="193.0" layoutY="99.0" prefHeight="69.0" prefWidth="301.0" text="DRIVER DETAILS">
+   <Label layoutX="195.0" layoutY="99.0" prefHeight="69.0" prefWidth="301.0" text="DRIVER DETAILS" textFill="#807b7b">
       <font>
-         <Font name="System Bold" size="26.0" />
+         <Font name="Futura Medium" size="24.0" />
       </font>
    </Label>
-   <Label layoutX="207.0" layoutY="213.0" prefHeight="20.0" prefWidth="311.0" text="Please enter the name of the driver to be updated." />
-   <Button layoutX="482.0" layoutY="243.0" mnemonicParsing="false" onAction="#findDriverToBeUpdated" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #1f2a44; -fx-text-fill: ffffff;" text="Find" />
-   <Label fx:id="successLabel" alignment="CENTER" layoutX="248.0" layoutY="7.0" opacity="0.0" prefHeight="36.0" prefWidth="735.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">
+   <Label layoutX="195.0" layoutY="215.0" prefHeight="20.0" prefWidth="311.0" text="ENTER THE NAME OF THE DRIVER">
+      <font>
+         <Font name="Futura Medium" size="14.0" />
+      </font></Label>
+   <Button layoutX="472.0" layoutY="243.0" mnemonicParsing="false" onAction="#findDriverToBeUpdated" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #02f3e9;">
+      <graphic>
+         <ImageView fitHeight="16.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/searchIcon.png" />
+            </image>
+         </ImageView>
+      </graphic></Button>
+   <Label fx:id="successLabel" alignment="CENTER" layoutX="248.0" layoutY="2.0" opacity="0.0" prefHeight="36.0" prefWidth="735.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">
       <font>
          <Font size="16.0" />
       </font>

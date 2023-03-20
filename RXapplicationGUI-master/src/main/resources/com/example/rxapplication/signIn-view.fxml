@@ -18,17 +18,31 @@
       </ImageView>
       <TextField fx:id="emailInput" layoutX="66.0" layoutY="277.0" prefHeight="41.0" prefWidth="361.0" promptText="Enter Email" style="-fx-background-color: #707070; -fx-border-radius: 20;  -fx-text-inner-color: #dedcdc;" />
       <PasswordField fx:id="passwordInput" layoutX="66.0" layoutY="386.0" prefHeight="41.0" prefWidth="361.0" promptText="Enter Password" style="-fx-background-color: #707070; -fx-border-radius: 20px;-fx-text-inner-color: #dedcdc;" />
-      <Label layoutX="68.0" layoutY="254.0" prefHeight="17.0" prefWidth="50.0" text="Email" textFill="#bfbfbf" />
+      <Label layoutX="68.0" layoutY="254.0" prefHeight="17.0" prefWidth="50.0" text="EMAIL" textFill="#bfbfbf">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></Label>
       <Button fx:id="continueToApp" layoutX="100.0" layoutY="589.0" mnemonicParsing="false" onAction="#loadMainScreen" opacity="0.0" prefHeight="41.0" prefWidth="293.0" style="-fx-background-color: #02f3e9;" text="NEXT" textFill="#1f2a44">
          <font>
-            <Font size="17.0" />
+            <Font name="Futura Medium" size="19.0" />
          </font></Button>
-      <Button fx:id="signInButton" layoutX="100.0" layoutY="535.0" mnemonicParsing="false" onAction="#validateFields" prefHeight="41.0" prefWidth="293.0" text="LOG IN">
+      <Button fx:id="signInButton" layoutX="100.0" layoutY="535.0" mnemonicParsing="false" onAction="#validateFields" prefHeight="41.0" prefWidth="293.0" style="-fx-background-color: #E3E3E3; -fx-background-radius: 0;" text="LOG IN">
+         <font>
+            <Font name="Futura Medium" size="20.0" />
+         </font></Button>
+      <Label layoutX="68.0" layoutY="361.0" prefHeight="17.0" prefWidth="105.0" text="PASSWORD" textFill="#bfbfbf">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></Label>
+      <Label fx:id="emailInputMessage" layoutX="68.0" layoutY="323.0" prefHeight="17.0" prefWidth="194.0" textFill="#ff6969" />
+      <Label fx:id="passwordInputMessage" layoutX="68.0" layoutY="433.0" prefHeight="17.0" prefWidth="337.0" textFill="#ff6969">
          <font>
             <Font size="17.0" />
-         </font></Button>
-      <Label layoutX="68.0" layoutY="361.0" prefHeight="17.0" prefWidth="50.0" text="Password" textFill="#bfbfbf" />
-      <Label fx:id="emailInputMessage" layoutX="68.0" layoutY="323.0" prefHeight="17.0" prefWidth="194.0" textFill="#ff6969" />
-      <Label fx:id="passwordInputMessage" layoutX="68.0" layoutY="433.0" prefHeight="17.0" prefWidth="194.0" textFill="#ff6969" />
+         </font></Label>
+      <Label fx:id="successLabel" alignment="CENTER" layoutX="146.0" layoutY="2.0" opacity="0.0" prefHeight="36.0" prefWidth="735.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

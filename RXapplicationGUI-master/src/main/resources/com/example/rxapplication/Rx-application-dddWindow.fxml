@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.shape.Circle?>
 <AnchorPane prefHeight="680.0" prefWidth="1050.0" style="-fx-background-color: #333;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rxapplication.Controller">
    <children>
       <AnchorPane fx:id="navBar" prefHeight="680.0" prefWidth="146.0">
@@ -138,47 +138,57 @@
             </VBox>
          </children>
       </AnchorPane>
-      <TextField fx:id="nameInputofDriver" layoutX="217.0" layoutY="253.0" prefHeight="25.0" prefWidth="273.0" />
-      <Pane layoutX="217.0" layoutY="363.0" opacity="0.95" prefHeight="115.0" prefWidth="366.0" style="-fx-background-color: #ffb6b6; -fx-border-radius: 60px;">
+      <TextField fx:id="nameInputofDriver" layoutX="217.0" layoutY="253.0" prefHeight="25.0" prefWidth="273.0" promptText="EG. TIMMY HANSEN" />
+      <Pane layoutX="217.0" layoutY="363.0" opacity="0.95" prefHeight="130.0" prefWidth="335.0" style="-fx-background-color: #ffb6b6; -fx-border-radius: 60px;">
          <children>
-            <Label layoutX="7.0" layoutY="6.0" opacity="0.71" prefHeight="31.0" prefWidth="132.0" style="-fx-text-fill: C71717;" text="NOTE">
+            <Label layoutX="7.0" layoutY="14.0" prefHeight="31.0" prefWidth="132.0" style="-fx-text-fill: C71717;" text="NOTE" textFill="#b50000">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="Futura Medium" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="7.0" layoutY="46.0" prefHeight="52.0" prefWidth="343.0" style="-fx-text-fill: CA4F4F;" text="You are about to overwrite information that is vital for the RX Championship system. Please be mindful!" wrapText="true">
+            <Label layoutX="7.0" layoutY="46.0" prefHeight="69.0" prefWidth="323.0" text="You are about to overwrite information that is vital for the RX Championship system. Please be mindful!" textFill="#970d0d" wrapText="true">
                <font>
-                  <Font name="System Italic" size="12.0" />
+                  <Font name="System Italic" size="15.0" />
                </font>
             </Label>
          </children>
       </Pane>
       <Label layoutX="217.0" layoutY="80.0" prefHeight="83.0" prefWidth="203.0" text="DELETE" textFill="#fcfcfc">
          <font>
-            <Font size="28.0" />
+            <Font name="Futura Medium" size="32.0" />
          </font>
       </Label>
-      <Label layoutX="217.0" layoutY="113.0" prefHeight="69.0" prefWidth="301.0" text="DRIVER DETAILS" textFill="#fcfcfc">
+      <Label layoutX="217.0" layoutY="115.0" prefHeight="69.0" prefWidth="301.0" text="DRIVER DETAILS" textFill="#d3d1d1">
          <font>
-            <Font name="System Bold" size="26.0" />
+            <Font name="Futura Medium" size="28.0" />
          </font>
       </Label>
-      <Label layoutX="217.0" layoutY="223.0" prefHeight="20.0" prefWidth="311.0" text="Please enter the name of the driver to be deleted." textFill="WHITE" />
-      <Button layoutX="495.0" layoutY="253.0" mnemonicParsing="false" onAction="#findDriverToBeDeleted" prefHeight="25.0" prefWidth="77.0" style="-fx-background-color: #02f3e9; -fx-text-fill: #1f2a44;" text="Find" />
+      <Label layoutX="217.0" layoutY="230.0" prefHeight="20.0" prefWidth="311.0" text="ENTER THE NAME OF THE DRIVER" textFill="WHITE">
+         <font>
+            <Font name="Futura Medium" size="12.0" />
+         </font></Label>
+      <Button layoutX="495.0" layoutY="253.0" mnemonicParsing="false" onAction="#findDriverToBeDeleted" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: #02f3e9; -fx-text-fill: #1f2a44;">
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/searchIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <Label fx:id="successLabel" alignment="CENTER" layoutX="244.0" layoutY="1.0" opacity="0.0" prefHeight="36.0" prefWidth="735.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
       
-      <AnchorPane fx:id="deletePane" layoutX="658.0" layoutY="253.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" prefHeight="284.0" prefWidth="355.0" style="-fx-background-color: #333;">
+      <AnchorPane fx:id="deletePane" layoutX="642.0" layoutY="233.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" prefHeight="308.0" prefWidth="355.0" style="-fx-background-color: #333;">
          <children>
-            <Label layoutX="8.0" layoutY="18.0" text="Are you absolutely sure?" textFill="WHITE">
+            <Label layoutX="8.0" layoutY="18.0" opacity="0.75" text="Are you absolutely sure?" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutY="48.0" prefHeight="60.0" prefWidth="355.0" style="-fx-background-color: #9A763C;" text="  Unexpected bad things will happen if you don’t read this!" textFill="WHITE">
+            <Label layoutY="48.0" opacity="0.46" prefHeight="60.0" prefWidth="355.0" style="-fx-background-color: #9A763C;" text="  Unexpected bad things will happen if you don’t read this!" textFill="WHITE">
                <effect>
                   <DropShadow height="5.0" radius="0.75" spread="1.0" width="0.0">
                      <color>
@@ -187,10 +197,10 @@
                   </DropShadow>
                </effect>
             </Label>
-            <Label layoutX="8.0" layoutY="114.0" prefHeight="86.0" prefWidth="335.0" text="This action cant be undone. This will permanently delete the driver details, records, from the system. Therefore please be mindful before proceeding with the deletion." textFill="WHITE" wrapText="true" />
-            <Button fx:id="deleteConformation" layoutX="8.0" layoutY="227.0" mnemonicParsing="false" onAction="#onDeleteConfirmationClicked" prefHeight="43.0" prefWidth="335.0" style="-fx-background-color: #5b5b5b; -fx-text-fill: #f59800;" text="I understand the consequences, delete this driver">
+            <Label layoutX="8.0" layoutY="114.0" opacity="0.69" prefHeight="86.0" prefWidth="335.0" text="This action cant be undone. This will permanently delete the driver details, records, from the system. Therefore please be mindful before proceeding with the deletion." textFill="WHITE" wrapText="true" />
+            <Button fx:id="deleteConformation" layoutX="8.0" layoutY="226.0" mnemonicParsing="false" onAction="#onDeleteConfirmationClicked" prefHeight="62.0" prefWidth="335.0" style="-fx-background-color: #5b5b5b; -fx-text-fill: #f59800;" text="I UNDERSTAND THE CONSEQUENCES, DELETE THIS DRIVER" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="Futura Medium" size="13.0" />
                </font>
             </Button>
          </children>
