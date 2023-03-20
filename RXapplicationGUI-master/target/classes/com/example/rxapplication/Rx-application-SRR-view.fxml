@@ -2,13 +2,14 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.shape.Circle?>
 <AnchorPane prefHeight="680.0" prefWidth="1050.0" style="-fx-background-color: ffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rxapplication.Controller">
     <AnchorPane fx:id="navBar" prefHeight="680.0" prefWidth="146.0">
         <children>
@@ -133,10 +134,13 @@
             </VBox>
         </children>
     </AnchorPane>
-   <Button fx:id="simulateRaceButtonClicked" layoutX="435.0" layoutY="354.0" mnemonicParsing="false" onAction="#startSimulationClicked" prefHeight="60.0" prefWidth="253.0" styleClass="navBarButton" stylesheets="@mainstylesheet.css" text="Start Simulation">
+   <Button fx:id="simulateRaceButtonClicked" contentDisplay="CENTER" layoutX="435.0" layoutY="314.0" mnemonicParsing="false" onAction="#startSimulationClicked" prefHeight="100.0" prefWidth="292.0" style="-fx-background-color: #02f3e9; -fx-text-fill: #1f2a44;" stylesheets="@mainstylesheet.css" text="START SIMULATION" textAlignment="CENTER" wrapText="true">
       <font>
-         <Font size="28.0" />
+         <Font name="Futura Medium" size="30.0" />
       </font>
+      <effect>
+         <Glow level="0.0" />
+      </effect>
    </Button>
    <Label fx:id="successLabel" alignment="CENTER" layoutX="255.0" layoutY="3.0" opacity="0.0" prefHeight="36.0" prefWidth="716.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">
       <font>
