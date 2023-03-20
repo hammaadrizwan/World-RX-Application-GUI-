@@ -28,7 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.lang.*;
 
-//This is the real deal. All functions, controlls and every single thing of the application runs from here.
+//All functions, controlls and every single thing of the application runs from here.
 public class Controller {
     // Declaring all the variables that would be used from the FXML application.
     // sets it to private as it can be accessed only from inside this code
