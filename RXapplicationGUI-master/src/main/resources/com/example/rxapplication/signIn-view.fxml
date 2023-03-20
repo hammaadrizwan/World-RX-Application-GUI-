@@ -35,10 +35,7 @@
             <Font name="Futura Medium" size="13.0" />
          </font></Label>
       <Label fx:id="emailInputMessage" layoutX="68.0" layoutY="323.0" prefHeight="17.0" prefWidth="194.0" textFill="#ff6969" />
-      <Label fx:id="passwordInputMessage" layoutX="68.0" layoutY="433.0" prefHeight="17.0" prefWidth="337.0" textFill="#ff6969">
-         <font>
-            <Font size="17.0" />
-         </font></Label>
+      <Label fx:id="passwordInputMessage" layoutX="68.0" layoutY="433.0" prefHeight="17.0" prefWidth="337.0" textFill="#ff6969" />
       <Label fx:id="successLabel" alignment="CENTER" layoutX="146.0" layoutY="2.0" opacity="0.0" prefHeight="36.0" prefWidth="735.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">
          <font>
             <Font size="16.0" />
