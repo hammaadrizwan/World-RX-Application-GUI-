@@ -92,6 +92,7 @@ public class Controller {
 //    String raceDataFilePath="src/main/resources/com/example/files/raceData.txt"; // the path of the file is being stored in the variable
 //    String adminDataFilePath="src/main/resources/com/example/files/adminData.txt";
     Random random = new Random();
+    int loginAttempts =0;
 
 
 
@@ -142,10 +143,21 @@ public class Controller {
                 }
             }
         }
+
+
         if (!loginSuccessfull && !fieldEmpty){
             successLabel.setOpacity(0.0f);
-            passwordInputMessage.setText("Invalid Username or password");
+            passwordInputMessage.setText("Invalid Username or password,try again");
+            passwordInput.clear();
+            emailInput.clear();
+            loginAttempts++;
         }
+
+        if (loginAttempts==3){
+            System.out.println(opertionTime()+" 3 attempts are unsuccessful, try again later");
+            System.exit(0);
+        }
+
         writeToFileAdminData(admins);
 
 

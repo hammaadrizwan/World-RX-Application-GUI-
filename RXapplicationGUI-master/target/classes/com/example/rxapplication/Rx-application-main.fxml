@@ -166,7 +166,8 @@
                               <Font name="Arial Bold" size="23.0" />
                            </font>
                         </Label>
-                     </children></AnchorPane>
+                     </children>
+                  </AnchorPane>
                   <AnchorPane fx:id="lastraceSection" layoutX="58.0" layoutY="84.0" prefHeight="179.0" prefWidth="821.0" style="-fx-background-color: #e9e9e9;">
                      <children>
                         <VBox layoutX="364.0" layoutY="14.0" prefHeight="138.0" prefWidth="446.0" style="-fx-background-color: f1f2f5;">
@@ -349,12 +350,16 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="refreshButton" layoutX="-1.0" mnemonicParsing="false" onAction="#loadLastRaceData" opacity="0.83" prefHeight="683.0" prefWidth="901.0" text="CLICK HERE TO ACCESS LIVE UPDATES. REFRESH NOW" wrapText="true">
+                  <Button fx:id="refreshButton" layoutX="-1.0" mnemonicParsing="false" onAction="#loadLastRaceData" opacity="0.84" prefHeight="683.0" prefWidth="901.0" text="CLICK HERE TO ACCESS LIVE UPDATES. REFRESH NOW" wrapText="true">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Button>
                   <Button fx:id="viewRaceDataButton" layoutX="422.0" layoutY="226.0" mnemonicParsing="false" onAction="#onVRLButtonClicked" opacity="0.0" prefHeight="25.0" prefWidth="446.0" style="-fx-background-color: #e9e9e9;" text="View the entire race date here" />
+                  <ImageView fitHeight="440.0" fitWidth="810.0" layoutX="64.0" layoutY="721.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Locations.gif" />
+                     </image></ImageView>
                </children>
             </AnchorPane>
         </content>
