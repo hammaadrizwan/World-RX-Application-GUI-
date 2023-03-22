@@ -48,7 +48,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button fx:id="deleteDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="52.0" prefWidth="144.0" styleClass="navBarButton" text="                 DELETE DRIVER" textAlignment="RIGHT" wrapText="true">
+                  <Button fx:id="deleteDriverButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="52.0" prefWidth="144.0" styleClass="navBarButton" text="            DELETE DRIVER" textAlignment="RIGHT" wrapText="true">
                      <font>
                         <Font name="Futura Medium" size="12.0" />
                      </font>
@@ -118,9 +118,9 @@
             </VBox>
             <Button layoutX="73.0" layoutY="-2.0" mnemonicParsing="false" onAction="#onUserIconClicked" prefHeight="77.0" prefWidth="72.0" style="-fx-background-color: #1f2a44;">
                <graphic>
-                  <ImageView fitHeight="60.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="52.0" fitWidth="57.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/userIcon.png" />
+                        <Image url="@../images/largeUserIcon.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -350,7 +350,7 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="refreshButton" layoutX="-1.0" mnemonicParsing="false" onAction="#loadLastRaceData" opacity="0.84" prefHeight="683.0" prefWidth="901.0" text="CLICK HERE TO ACCESS LIVE UPDATES. REFRESH NOW" wrapText="true">
+                  <Button fx:id="refreshButton" layoutX="-1.0" mnemonicParsing="false" onAction="#loadLastRaceData" opacity="0.8" prefHeight="683.0" prefWidth="901.0" text="CLICK HERE TO ACCESS LIVE UPDATES. REFRESH NOW" wrapText="true">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
                      </font>
@@ -360,6 +360,11 @@
                      <image>
                         <Image url="@../images/Locations.gif" />
                      </image></ImageView>
+                  <Label layoutX="70.0" layoutY="661.0" prefHeight="62.0" prefWidth="475.0" text="RACE LOCATIONS" textFill="#1f2a44">
+                     <font>
+                        <Font name="Futura Medium" size="32.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
         </content>
