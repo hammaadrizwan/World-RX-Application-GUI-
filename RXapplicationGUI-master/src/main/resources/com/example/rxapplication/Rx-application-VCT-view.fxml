@@ -135,7 +135,12 @@
             </VBox>
         </children>
     </AnchorPane>
-  <TableView fx:id="championshipDataView" layoutX="188.0" layoutY="139.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="433.0" prefWidth="803.0">
+   <ImageView fitHeight="693.0" fitWidth="906.0" layoutX="145.0" layoutY="-13.0" opacity="0.69" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../images/VCT_background.png" />
+      </image>
+   </ImageView>
+  <TableView fx:id="championshipDataView" layoutX="188.0" layoutY="139.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" pickOnBounds="false" prefHeight="376.0" prefWidth="803.0">
     <columns>
       <TableColumn fx:id="firstnameColumnChampionshipData" editable="false" prefWidth="177.0" sortable="false" text="NAME" />
       <TableColumn fx:id="ageColumnChampionshipData" editable="false" minWidth="0.0" prefWidth="62.0" sortable="false" text="AGE" />
@@ -147,7 +152,7 @@
          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
       </columnResizePolicy>
   </TableView>
-   <Button fx:id="refreshButtonVCTWindow" layoutX="447.0" layoutY="327.0" mnemonicParsing="false" onAction="#onRefreshButtonVCTWindowClicked" prefHeight="101.0" prefWidth="288.0" style="-fx-background-color: ffffff; -fx-text-fill: #02f3e9;" styleClass="navBarButton">
+   <Button fx:id="refreshButtonVCTWindow" layoutX="447.0" layoutY="327.0" mnemonicParsing="false" onAction="#onRefreshButtonVCTWindowClicked" prefHeight="101.0" prefWidth="288.0" styleClass="refreshButton" stylesheets="@mainstylesheet.css">
       <font>
          <Font size="13.0" />
       </font>

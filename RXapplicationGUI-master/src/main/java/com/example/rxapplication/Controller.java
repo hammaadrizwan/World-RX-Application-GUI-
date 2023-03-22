@@ -447,7 +447,6 @@ public class Controller {
         boolean found = false;
         String nameOfDriverToBeUpdated = nameInputofDriver.getText();
 
-        int index = 0;
         for (Driver driver:drivers){
             String availableDriverName = driver.getFname()+" "+driver.getLname();
             if (availableDriverName.equals(nameOfDriverToBeUpdated)){
@@ -455,7 +454,6 @@ public class Controller {
                 nameInputStored.setText(nameOfDriverToBeUpdated);
                 break;
             }
-            index++;
         }
         if (!found){
             successLabel.setOpacity(1.0f);
@@ -477,11 +475,11 @@ public class Controller {
 
     public void onDeleteConfirmationClicked() throws IOException, ClassNotFoundException {
         drivers = readFromFileChampionshipData();
-        String nameOfDriverToBeUpdated = nameInputStored.getText();
+        String nameOfDriverToBeDeleted = nameInputStored.getText();
         for (Driver driver:drivers){
             String availableDriverName = driver.getFname()+" "+driver.getLname();
-            if (availableDriverName.equals(nameOfDriverToBeUpdated)){
-                drivers.remove(driver);
+            if (availableDriverName.equals(nameOfDriverToBeDeleted)){
+                drivers.remove(driver);// the driver is
                 System.out.println(opertionTime()+" : Deleted "+driver.getDetails()+".");
                 break;
             }
@@ -489,7 +487,7 @@ public class Controller {
 
         writeToFileChampionshipData(drivers);
         successLabel.setOpacity(1.0f);
-        successLabel.setText(("Deleted records of "+nameOfDriverToBeUpdated));
+        successLabel.setText(("Deleted records of "+nameOfDriverToBeDeleted));
         successLabel.setTextFill(Color.rgb(47, 130, 73));
         successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
     }
@@ -875,6 +873,7 @@ public class Controller {
     public void onRefreshButtonVCTWindowClicked() throws IOException, ClassNotFoundException { //This is to populate the fields of table view with the realvent data type
         drivers = readFromFileChampionshipData();
         refreshButtonVCTWindow.setOpacity(0.0f);//once clicked the refresh button dissapears
+        championshipDataView.setOpacity(1.0f);
         firstnameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Details"));// this sets the value which is stored under the fname property of the drivers object
         //lastnameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Details"));
         ageColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver, Integer>("Age"));
