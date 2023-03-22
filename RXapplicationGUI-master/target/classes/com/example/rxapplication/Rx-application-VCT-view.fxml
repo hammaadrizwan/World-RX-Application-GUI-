@@ -158,12 +158,12 @@
             </image>
          </ImageView>
       </graphic></Button>
-   <Label layoutX="156.0" layoutY="25.0" prefHeight="83.0" prefWidth="269.0" text="CHAMPIONSHIP" textFill="#5e5b5b">
+   <Label layoutX="189.0" layoutY="25.0" prefHeight="83.0" prefWidth="269.0" text="CHAMPIONSHIP" textFill="#5e5b5b">
       <font>
          <Font name="Futura Medium" size="27.0" />
       </font>
    </Label>
-   <Label layoutX="158.0" layoutY="59.0" prefHeight="69.0" prefWidth="301.0" text="STANDINGS">
+   <Label layoutX="189.0" layoutY="59.0" prefHeight="69.0" prefWidth="301.0" text="STANDINGS">
       <font>
          <Font name="Futura Medium" size="29.0" />
       </font>
