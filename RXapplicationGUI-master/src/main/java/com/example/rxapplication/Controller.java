@@ -159,9 +159,8 @@ public class Controller {
         }
 
         writeToFileAdminData(admins);
-
-
     }
+
     public void onUserIconClicked(){
         optionsPane.setOpacity(1.0f);
     }
@@ -260,7 +259,42 @@ public class Controller {
         stage.setResizable(false);
 
     }
+    public boolean validateAddDriverDetails(Object fname,Object lname,Object age,Object team,Object car,Object points){
 
+        if (fname.toString().equals("")||lname.toString().equals("")||age.toString().equals("")||team.toString().equals("")||car.toString().equals("")||points.toString().equals("")){
+            return false;
+        }
+        char[] fnameCharacters= fname.toString().toCharArray();// converts the string to a sqeuence of characters
+        for (char character: fnameCharacters) {//and by using an enhanced for loop, the program checks whether a number is present in the list of characters
+            if (Character.isDigit(character)){// using Character object's in buikt isDigit() methid to check whehter the character is a digit
+                return false;
+            }
+        }
+        char[] lnameCharacters= lname.toString().toCharArray();// converts the string to a sqeuence of characters
+        for (char character: lnameCharacters) {//and by using an enhanced for loop, the program checks whether a number is present in the list of characters
+            if (Character.isDigit(character)){// using Character object's in buikt isDigit() methid to check whehter the character is a digit
+                return false;
+            }
+        }
+
+        char[] ageCharacters = age.toString().toCharArray();// for age we check if there is no digit in the character sequence meaning it is not an integer
+        for (char character: ageCharacters) {
+            if (!Character.isDigit(character)) {
+                return false;
+            }
+        }
+        char[] pointsCharacters = points.toString().toCharArray();// for age we check if there is no digit in the character sequence meaning it is not an integer
+        for (char character: pointsCharacters) {
+            if (!Character.isDigit(character)) {
+                return false;
+            }
+        }
+        if (fname.toString().split(" ").length>1 || lname.toString().split(" ").length>1){//checks if more than one name has been entered
+            return false;
+        }
+
+        return true;
+    }
     public void addButtonSignupClicked() throws IOException, ClassNotFoundException { //To save the driver detials into the system
         drivers = readFromFileChampionshipData(); // reads the drivers data to the system
 
@@ -366,60 +400,64 @@ public class Controller {
             String team = (teamInput.getText().strip());
             String car = (carInput.getText().strip());
             Integer points = Integer.parseInt(pointsInput.getText());
+            boolean allFieldsAreValid = validateAddDriverDetails(firstName,lastName,age,team,car,points);
+            if (allFieldsAreValid){
+                Driver driver = new Driver(firstName, lastName, age, team, car, points);//creates a new driver of the Driver class
+                boolean recordExsists = false;
+                for (Driver availableDriver:drivers) {
+                    if (driver.getFname().equals(availableDriver.getFname())&&driver.getLname().equals(availableDriver.getLname())){
+                        recordExsists=true;
+                        break;
+                    }
+                }
+                if (!recordExsists){
+                    drivers.add(driver);// adds the driver to the list of available drivers
 
-            Driver driver = new Driver(firstName, lastName, age, team, car, points);//creates a new driver of the Driver class
-            boolean recordExsists = false;
-            for (Driver availableDriver:drivers) {
-                if (driver.getFname().equals(availableDriver.getFname())&&driver.getLname().equals(availableDriver.getLname())){
-                    recordExsists=true;
-                    break;
+                    writeToFileChampionshipData(drivers);//saves the updated changes into the championshipData
+                    System.out.println(opertionTime()+" : added "+driver.getDetails()+".");
+                    successLabel.setOpacity(1.0f);
+                    successLabel.setText(("Successfully added "+driver.getFname()));
+                    RaceCar raceCar;
+                    switch (carInput.getText()) {
+                        case "PWR RX1e" -> {
+                            raceCar = new RaceCar("PWR RX1e", "500kW", driver.getDetails());
+                            raceCar.getVehicleDetails();
+                            break;
+                        }
+                        case "Volkswagen RX1e" -> {
+                            raceCar = new RaceCar("Volkswagen RX1e", "NA", driver.getDetails());
+                            raceCar.getVehicleDetails();
+                            break;
+                        }
+                        case "Lancia Delta Evo-e RX" -> {
+                            raceCar = new RaceCar("Lancia Delta Evo-e RX", "158kW", driver.getDetails());
+                            raceCar.getVehicleDetails();
+                            break;
+                        }
+                        case "Peugeot 208 RX1e" -> {
+                            raceCar = new RaceCar("Peugeot 208 RX1e", " 500kW ", driver.getDetails());
+                            raceCar.getVehicleDetails();
+                            break;
+                        }
+                        default -> {
+                            raceCar = new RaceCar(car, "NA", driver.getDetails());
+                            raceCar.getVehicleDetails();
+                            break;
+                        }
+
+                    }
+                    successLabel.setTextFill(Color.rgb(47, 130, 73));
+                    successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
+                }else {
+                    successLabel.setOpacity(1.0f);
+                    successLabel.setText(("Error: "+driver.getFname()+" ,already exists!"));
+                    successLabel.setTextFill(Color.rgb(117, 29, 29));
+                    successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
                 }
             }
-            if (!recordExsists){
-                drivers.add(driver);// adds the driver to the list of available drivers
-
-                writeToFileChampionshipData(drivers);//saves the updated changes into the championshipData
-                System.out.println(opertionTime()+" : added "+driver.getDetails()+".");
-                successLabel.setOpacity(1.0f);
-                successLabel.setText(("Successfully added "+driver.getFname()));
-                RaceCar raceCar;
-                switch (carInput.getText()) {
-                    case "PWR RX1e" -> {
-                        raceCar = new RaceCar("PWR RX1e", "500kW", driver.getDetails());
-                        raceCar.getVehicleDetails();
-                        break;
-                    }
-                    case "Volkswagen RX1e" -> {
-                        raceCar = new RaceCar("Volkswagen RX1e", "NA", driver.getDetails());
-                        raceCar.getVehicleDetails();
-                        break;
-                    }
-                    case "Lancia Delta Evo-e RX" -> {
-                        raceCar = new RaceCar("Lancia Delta Evo-e RX", "158kW", driver.getDetails());
-                        raceCar.getVehicleDetails();
-                        break;
-                    }
-                    case "Peugeot 208 RX1e" -> {
-                        raceCar = new RaceCar("Peugeot 208 RX1e", " 500kW ", driver.getDetails());
-                        raceCar.getVehicleDetails();
-                        break;
-                    }
-                    default -> {
-                        raceCar = new RaceCar(car, "NA", driver.getDetails());
-                        raceCar.getVehicleDetails();
-                        break;
-                    }
-
-                }
-                successLabel.setTextFill(Color.rgb(47, 130, 73));
-                successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
-            }else {
-                successLabel.setOpacity(1.0f);
-                successLabel.setText(("Error: "+driver.getFname()+" ,already exists!"));
-                successLabel.setTextFill(Color.rgb(117, 29, 29));
-                successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
+            else{
+                System.out.println(opertionTime()+" ERROR: Invalid inputs, Try again");
             }
-
             fnameInput.setText("");
             lnameInput.setText("");
             ageInput.setText("");
@@ -427,6 +465,42 @@ public class Controller {
             carInput.setText("");
             pointsInput.setText("");
         }
+    }
+    public boolean validateDeletingAndUpdatingDriverDetails(Object name){
+        if (name.toString().equals("")){
+            return false;
+        }
+        String[] names = name.toString().split(" ");
+        if (names.length==1){
+            return false;
+        }
+        if (names.length>2){
+            return false;
+        }
+        String fname= names[0];
+        String lname= names[1];
+        char[] fnameCharacters= fname.toString().toCharArray();// converts the string to a sqeuence of characters
+        for (char character: fnameCharacters) {//and by using an enhanced for loop, the program checks whether a number is present in the list of characters
+            if (Character.isDigit(character)){// using Character object's in buikt isDigit() methid to check whehter the character is a digit
+                return false;
+            }
+        }
+        char[] lnameCharacters= lname.toString().toCharArray();// converts the string to a sqeuence of characters
+        for (char character: lnameCharacters) {//and by using an enhanced for loop, the program checks whether a number is present in the list of characters
+            if (Character.isDigit(character)){// using Character object's in buikt isDigit() methid to check whehter the character is a digit
+                return false;
+            }
+        }
+//        boolean found=false;
+//        for(Driver driver:drivers){
+//            if (driver.getFname().equals(fname)&&driver.getLname().equals(lname)){
+//                found=true;
+//            }
+//        }
+//        if (!found){
+//            return false;
+//        }
+        return true;
     }
 
 
@@ -445,37 +519,54 @@ public class Controller {
     public void findDriverToBeDeleted() throws IOException, ClassNotFoundException {
         drivers=readFromFileChampionshipData();
         boolean found = false;
-        String nameOfDriverToBeUpdated = nameInputofDriver.getText();
+        String nameOfDriverToBeDeleted = nameInputofDriver.getText();
+        if (validateDeletingAndUpdatingDriverDetails(nameOfDriverToBeDeleted)){
+            for (Driver driver:drivers){
+                String availableDriverName = driver.getFname()+" "+driver.getLname();
+                if (availableDriverName.equals(nameOfDriverToBeDeleted)){
+                    found=true;
+                    nameInputStored.setText(nameOfDriverToBeDeleted);
+                    break;
+                }
+            }if (found){
+                successLabel.setTextFill(Color.rgb(47, 130, 73));
+                successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
+                successLabel.setText(("Found records of "+nameOfDriverToBeDeleted));
+                deletePane.setOpacity(1.0f);
 
-        for (Driver driver:drivers){
-            String availableDriverName = driver.getFname()+" "+driver.getLname();
-            if (availableDriverName.equals(nameOfDriverToBeUpdated)){
-                found=true;
-                nameInputStored.setText(nameOfDriverToBeUpdated);
-                break;
-            }
-        }
-        if (!found){
-            successLabel.setOpacity(1.0f);
-            if (nameInputofDriver.getText().equals("")){
-                successLabel.setText(("Cannot be empty."));
             }else{
-                successLabel.setText(("Error: "+nameOfDriverToBeUpdated+", does not exist!"));
+                successLabel.setTextFill(Color.rgb(117, 29, 29));
+                successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
+                successLabel.setOpacity(1.0f);
+                if (nameInputofDriver.getText().equals("")) {
+                    successLabel.setText(("Cannot be empty."));
+                } else {
+                    successLabel.setText(("Error: " + nameOfDriverToBeDeleted + ", does not exist!"));
+                }
+
+                deletePane.setOpacity(0.0f);
             }
+        }else{
+            System.out.println(opertionTime()+" ERROR: Please enter a valid name");
             successLabel.setTextFill(Color.rgb(117, 29, 29));
             successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
-        }else {
             successLabel.setOpacity(1.0f);
-            successLabel.setText(("Found records of "+nameOfDriverToBeUpdated));
-            successLabel.setTextFill(Color.rgb(47, 130, 73));
-            successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
-            deletePane.setOpacity(1.0f);
+            if (nameInputofDriver.getText().equals("")) {
+                successLabel.setText(("Cannot be empty."));
+            } else {
+                successLabel.setText(("Error: " + nameOfDriverToBeDeleted + ", does not exist!"));
+            }
+            deletePane.setOpacity(0.0f);
         }
     }
+
+
+
 
     public void onDeleteConfirmationClicked() throws IOException, ClassNotFoundException {
         drivers = readFromFileChampionshipData();
         String nameOfDriverToBeDeleted = nameInputStored.getText();
+
         for (Driver driver:drivers){
             String availableDriverName = driver.getFname()+" "+driver.getLname();
             if (availableDriverName.equals(nameOfDriverToBeDeleted)){
@@ -484,12 +575,13 @@ public class Controller {
                 break;
             }
         }
-
         writeToFileChampionshipData(drivers);
         successLabel.setOpacity(1.0f);
         successLabel.setText(("Deleted records of "+nameOfDriverToBeDeleted));
         successLabel.setTextFill(Color.rgb(47, 130, 73));
         successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
+
+
     }
 
 
@@ -512,176 +604,177 @@ public class Controller {
         String nameOfDriverToBeUpdated = nameInputofDriver.getText();
 
         int index = 0;
-        for (Driver driver:drivers){
-            String availableDriverName = driver.getFname()+" "+driver.getLname();
-            if (availableDriverName.equals(nameOfDriverToBeUpdated)){
-                found=true;
-                break;
-            }
-            index++;
-        }
-        if (!found){
-            successLabel.setOpacity(1.0f);
-            if (nameInputofDriver.getText().equals("")){
-                successLabel.setText(("Cannot be empty."));
-            }else{
-                successLabel.setText(("Error: "+nameOfDriverToBeUpdated+", does not exist!"));
-            }
-            successLabel.setTextFill(Color.rgb(117, 29, 29));
-            successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
-            updateFieldsPane.setOpacity(0.0f);
-
-        }else {
-            successLabel.setOpacity(1.0f);
-            successLabel.setText(("Found records of "+nameOfDriverToBeUpdated));
-            successLabel.setTextFill(Color.rgb(47, 130, 73));
-            successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
-            updateFieldsPane.setOpacity(1.0f);
-        }
-        boolean fnameValid=true;// initally all the input fields are set to be valid
-        boolean lnameValid=true;
-        boolean ageValid=true;
-        boolean teamValid=true;
-        boolean carValid=true;
-        boolean pointsValid=true;
-
-        if (fnameInput.getText().equals("")){//checks if the first name input field is blank
-            fnameMessage.setText("Cannot be empty");//displays a message to the user to re-enter
-            fnameValid=false;//sets fname validity to be false
-        }else{//checks whether there is atleast one integer in the firstname: since name cannot contain any number/digits
-            char[] fnameCharacters= fnameInput.getText().toCharArray();// converts the string to a sqeuence of characters
-            for (char character: fnameCharacters) {//and by using an enhanced for loop, the program checks whether a number is present in the list of characters
-                if (Character.isDigit(character)){// using Character object's in buikt isDigit() methid to check whehter the character is a digit
-                    fnameValid=false;//if it is then fnameInput will be invalid and the loop will break
+        if (validateDeletingAndUpdatingDriverDetails(nameOfDriverToBeUpdated)){
+            for (Driver driver:drivers){
+                String availableDriverName = driver.getFname()+" "+driver.getLname();
+                if (availableDriverName.equals(nameOfDriverToBeUpdated)){
+                    found=true;
                     break;
                 }
+                index++;
             }
-            if (!fnameValid){//if the fname is invalid, a message will be displayed to the user saying its incorrect
-                fnameMessage.setText("Incorrect Value");
-            }else{
-                fnameMessage.setText("");//if it is valid there will be no message dispalyed as the field is of correct data type.
-
-            }
-        }
-
-        if (lnameInput.getText().equals("")){//the same procedure to check for correct value entered in lastname field
-            lnameMessage.setText("Cannot be empty");
-            lnameValid=false;
-        }else{
-            char[] lnameCharacters= lnameInput.getText().toCharArray();
-            for (char character: lnameCharacters) {
-                if (Character.isDigit(character)){
-                    lnameValid=false;
-                    break;
-                }
-            }
-            if (!lnameValid){
-                lnameMessage.setText("Incorrect Value");
-            }else{
-                lnameMessage.setText("");
-
-            }
-        }
-
-        if (ageInput.getText().equals("")){
-            ageMessage.setText("Cannot be empty");
-            ageValid=false;
-        }else{
-            char[] ageCharacters = ageInput.getText().toCharArray();// for age we check if there is no digit in the character sequence meaning it is not an integer
-            for (char character: ageCharacters) {
-                if (!Character.isDigit(character)){
-                    ageValid=false;//if there is atleast one non integer element the validity will be false
-                    break;
-                }
-            }if (!ageValid){
-                ageMessage.setText("Incorrect Type");
-            }else{
-                ageValid = true;
-                ageMessage.setText("");
-
-            }
-        }
-
-        if (carInput.getText().equals("")){//checks if the car input field is empty as these inputs are important
-            carMessage.setText("Cannot be empty");
-            carValid=false;
-        }else{
-            carMessage.setText("");
-        }
-
-        if (teamInput.getText().equals("")){//same procedure as carInput field
-            teamMessage.setText("Cannot be empty");
-            teamValid=false;
-        }else{
-            teamMessage.setText("");
-        }
-
-        if (pointsInput.getText().equals("")){//validation procedure is same as age as we only check if the data tpe for the field is an integer.
-            pointsMessage.setText("Cannot be empty");
-            pointsValid=false;
-        }else{
-            char[] pointsCharacters = pointsInput.getText().toCharArray();
-            for (char character: pointsCharacters) {
-                if (!Character.isDigit(character)){
-                    pointsValid=false;
-                    break;
-                }
-            }if (!pointsValid){
-                pointsMessage.setText("Incorrect Type");
-            }else{
-                pointsMessage.setText("");
-            }
-        }
-
-        if (fnameValid && lnameValid && ageValid && teamValid && carValid && pointsValid) {// if all are valid
-            String firstName = toTitleCase(fnameInput.getText().strip());// we clean all the input as it is ready for the being written to the file
-            String lastName = toTitleCase(lnameInput.getText().strip());
-            Integer age = Integer.parseInt(ageInput.getText());//convert the string to an integer
-            String team = (teamInput.getText().strip());
-            String car = (carInput.getText().strip());
-            Integer points = Integer.parseInt(pointsInput.getText());
-
-            boolean recordExsists = false;
-            int availableIndex = 0;
-            for (Driver driver:drivers) {
-                if (availableIndex ==index){
-                    continue;
-                }
-                if ((drivers.get(availableIndex).getFname().equals(firstName)&&drivers.get(availableIndex).getLname().equals(lastName))){
-                    recordExsists=true;
-                    break;
-                }
-                availableIndex++;
-            }
-            if (!recordExsists){
-                Driver storedDriver = drivers.get(index);
-                storedDriver.setFname(new SerializableSimpleStringProperty(firstName));// adds the driver to the list of available drivers
-                storedDriver.setLname(new SerializableSimpleStringProperty(lastName));
-                storedDriver.setCar(new SerializableSimpleStringProperty(car));
-                storedDriver.setAge(new SerializableSimpleIntegerProperty(age));
-                storedDriver.setTeam(new SerializableSimpleStringProperty(team));
-                storedDriver.setPoints(new SerializableSimpleIntegerProperty(points));
-                writeToFileChampionshipData(drivers);//saves the updated changes into the championshipData
-                System.out.println(opertionTime()+" : Updated records of "+storedDriver.getDetails()+".");
-
-                successLabel.setOpacity(1.0f);
-                successLabel.setText(("Successfully updated "+firstName));
+            if (found){
                 successLabel.setTextFill(Color.rgb(47, 130, 73));
                 successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
-            }else {
+                successLabel.setText(("Found records of "+nameOfDriverToBeUpdated));
                 successLabel.setOpacity(1.0f);
-                successLabel.setText(("Error: "+firstName+" ,already exists!"));
-                successLabel.setTextFill(Color.rgb(117, 29, 29));
-                successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
+                updateFieldsPane.setOpacity(1.0f);
+                boolean fnameValid=true;// initally all the input fields are set to be valid
+                boolean lnameValid=true;
+                boolean ageValid=true;
+                boolean teamValid=true;
+                boolean carValid=true;
+                boolean pointsValid=true;
+
+                if (fnameInput.getText().equals("")){//checks if the first name input field is blank
+                    fnameMessage.setText("Cannot be empty");//displays a message to the user to re-enter
+                    fnameValid=false;//sets fname validity to be false
+                }else{//checks whether there is atleast one integer in the firstname: since name cannot contain any number/digits
+                    char[] fnameCharacters= fnameInput.getText().toCharArray();// converts the string to a sqeuence of characters
+                    for (char character: fnameCharacters) {//and by using an enhanced for loop, the program checks whether a number is present in the list of characters
+                        if (Character.isDigit(character)){// using Character object's in buikt isDigit() methid to check whehter the character is a digit
+                            fnameValid=false;//if it is then fnameInput will be invalid and the loop will break
+                            break;
+                        }
+                    }
+                    if (!fnameValid){//if the fname is invalid, a message will be displayed to the user saying its incorrect
+                        fnameMessage.setText("Incorrect Value");
+                    }else{
+                        fnameMessage.setText("");//if it is valid there will be no message dispalyed as the field is of correct data type.
+
+                    }
+                }
+
+                if (lnameInput.getText().equals("")){//the same procedure to check for correct value entered in lastname field
+                    lnameMessage.setText("Cannot be empty");
+                    lnameValid=false;
+                }else{
+                    char[] lnameCharacters= lnameInput.getText().toCharArray();
+                    for (char character: lnameCharacters) {
+                        if (Character.isDigit(character)){
+                            lnameValid=false;
+                            break;
+                        }
+                    }
+                    if (!lnameValid){
+                        lnameMessage.setText("Incorrect Value");
+                    }else{
+                        lnameMessage.setText("");
+
+                    }
+                }
+
+                if (ageInput.getText().equals("")){
+                    ageMessage.setText("Cannot be empty");
+                    ageValid=false;
+                }else{
+                    char[] ageCharacters = ageInput.getText().toCharArray();// for age we check if there is no digit in the character sequence meaning it is not an integer
+                    for (char character: ageCharacters) {
+                        if (!Character.isDigit(character)){
+                            ageValid=false;//if there is atleast one non integer element the validity will be false
+                            break;
+                        }
+                    }if (!ageValid){
+                        ageMessage.setText("Incorrect Type");
+                    }else{
+                        ageValid = true;
+                        ageMessage.setText("");
+
+                    }
+                }
+
+                if (carInput.getText().equals("")){//checks if the car input field is empty as these inputs are important
+                    carMessage.setText("Cannot be empty");
+                    carValid=false;
+                }else{
+                    carMessage.setText("");
+                }
+
+                if (teamInput.getText().equals("")){//same procedure as carInput field
+                    teamMessage.setText("Cannot be empty");
+                    teamValid=false;
+                }else{
+                    teamMessage.setText("");
+                }
+
+                if (pointsInput.getText().equals("")){//validation procedure is same as age as we only check if the data tpe for the field is an integer.
+                    pointsMessage.setText("Cannot be empty");
+                    pointsValid=false;
+                }else{
+                    char[] pointsCharacters = pointsInput.getText().toCharArray();
+                    for (char character: pointsCharacters) {
+                        if (!Character.isDigit(character)){
+                            pointsValid=false;
+                            break;
+                        }
+                    }if (!pointsValid){
+                        pointsMessage.setText("Incorrect Type");
+                    }else{
+                        pointsMessage.setText("");
+                    }
+                }
+
+                if (fnameValid && lnameValid && ageValid && teamValid && carValid && pointsValid) {// if all are valid
+                    String firstName = toTitleCase(fnameInput.getText().strip());// we clean all the input as it is ready for the being written to the file
+                    String lastName = toTitleCase(lnameInput.getText().strip());
+                    Integer age = Integer.parseInt(ageInput.getText());//convert the string to an integer
+                    String team = (teamInput.getText().strip());
+                    String car = (carInput.getText().strip());
+                    Integer points = Integer.parseInt(pointsInput.getText());
+
+                    boolean recordExsists = false;
+                    int availableIndex = 0;
+                    for (Driver driver:drivers) {
+                        if (availableIndex ==index){
+                            continue;
+                        }
+                        if ((drivers.get(availableIndex).getFname().equals(firstName)&&drivers.get(availableIndex).getLname().equals(lastName))){
+                            recordExsists=true;
+                            break;
+                        }
+                        availableIndex++;
+                    }
+                    if (!recordExsists){
+                        Driver storedDriver = drivers.get(index);
+                        storedDriver.setFname(new SerializableSimpleStringProperty(firstName));// adds the driver to the list of available drivers
+                        storedDriver.setLname(new SerializableSimpleStringProperty(lastName));
+                        storedDriver.setCar(new SerializableSimpleStringProperty(car));
+                        storedDriver.setAge(new SerializableSimpleIntegerProperty(age));
+                        storedDriver.setTeam(new SerializableSimpleStringProperty(team));
+                        storedDriver.setPoints(new SerializableSimpleIntegerProperty(points));
+                        writeToFileChampionshipData(drivers);//saves the updated changes into the championshipData
+                        System.out.println(opertionTime()+" : Updated records of "+storedDriver.getDetails()+".");
+
+
+                        successLabel.setTextFill(Color.rgb(47, 130, 73));
+                        successLabel.setBackground(Background.fill(Color.rgb(171, 235, 196)));
+                        successLabel.setOpacity(1.0f);
+                        successLabel.setText(("Successfully updated "+firstName));
+                    }else {
+                        successLabel.setTextFill(Color.rgb(117, 29, 29));
+                        successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
+                        successLabel.setOpacity(1.0f);
+                        successLabel.setText(("Error: "+firstName+" ,already exists!"));
+                    }
+                    fnameInput.setText("");//clears all the inputs,after updating
+                    lnameInput.setText("");
+                    ageInput.setText("");
+                    teamInput.setText("");
+                    carInput.setText("");
+                    pointsInput.setText("");
+                }
             }
-
-            fnameInput.setText("");//clears all the inputs,after updating
-            lnameInput.setText("");
-            ageInput.setText("");
-            teamInput.setText("");
-            carInput.setText("");
-            pointsInput.setText("");
-
+        }else{
+            System.out.println(opertionTime()+" ERROR: Please enter a valid name");
+            successLabel.setTextFill(Color.rgb(117, 29, 29));
+            successLabel.setBackground(Background.fill(Color.rgb(245, 110, 110)));
+            successLabel.setOpacity(1.0f);
+            if (nameInputofDriver.getText().equals("")) {
+                successLabel.setText(("Cannot be empty."));
+            } else {
+                successLabel.setText(("Error: " + nameOfDriverToBeUpdated + ", does not exist!"));
+            }
+            updateFieldsPane.setOpacity(0.0f);
         }
     }
 

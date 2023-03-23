@@ -140,7 +140,7 @@
          <Image url="@../images/VCT_background.png" />
       </image>
    </ImageView>
-  <TableView fx:id="championshipDataView" layoutX="188.0" layoutY="139.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" pickOnBounds="false" prefHeight="433.0" prefWidth="803.0">
+  <TableView fx:id="championshipDataView" layoutX="188.0" layoutY="139.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" pickOnBounds="false" prefHeight="376.0" prefWidth="803.0">
     <columns>
       <TableColumn fx:id="firstnameColumnChampionshipData" editable="false" prefWidth="177.0" sortable="false" text="NAME" />
       <TableColumn fx:id="ageColumnChampionshipData" editable="false" minWidth="0.0" prefWidth="62.0" sortable="false" text="AGE" />
