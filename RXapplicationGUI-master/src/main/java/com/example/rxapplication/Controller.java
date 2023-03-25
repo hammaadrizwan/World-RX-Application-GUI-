@@ -1017,6 +1017,8 @@ public class Controller {
     public void onRefreshButtonVRLWindowClicked() throws IOException, ClassNotFoundException {
         races=readFromFileRaceData();
         refreshButtonVRLWindow.setOpacity(0.0f);//once clicked the refresh button dissapears
+        raceDataView.setOpacity(1.0f);
+
         dateColumnRaceData.setCellValueFactory(new PropertyValueFactory<RaceResult,String>("Date"));
         locationColumnRaceData.setCellValueFactory(new PropertyValueFactory<RaceResult,String>("Location"));
         nameColumnRaceData.setCellValueFactory(new PropertyValueFactory<RaceResult,String>("Fullname"));
