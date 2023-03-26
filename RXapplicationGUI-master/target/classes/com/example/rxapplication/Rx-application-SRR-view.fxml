@@ -144,7 +144,7 @@
    </Button>
    <Label fx:id="successLabel" alignment="CENTER" layoutX="255.0" layoutY="3.0" opacity="0.0" prefHeight="36.0" prefWidth="716.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">
       <font>
-         <Font size="16.0" />
+         <Font name="Futura Medium" size="16.0" />
       </font>
    </Label>
    <AnchorPane fx:id="raceInfoPane" layoutX="596.0" layoutY="121.0" opacity="0.0" prefHeight="464.0" prefWidth="435.0" style="-fx-background-color: D8D3CC;">
@@ -152,98 +152,98 @@
          <ImageView fx:id="raceLocationFlag" fitHeight="268.0" fitWidth="406.0" layoutX="15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
          <Label fx:id="raceLocationLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="282.0" prefHeight="83.0" prefWidth="406.0">
             <font>
-               <Font name="System Bold" size="48.0" />
+               <Font name="Futura Medium" size="48.0" />
             </font>
          </Label>
          <Label fx:id="raceDateLabel" alignment="CENTER" layoutX="52.0" layoutY="366.0" prefHeight="52.0" prefWidth="333.0">
             <font>
-               <Font size="34.0" />
+               <Font name="Futura Medium" size="34.0" />
             </font>
          </Label>
       </children>
    </AnchorPane>
    <Label fx:id="srrLapByLap2" layoutX="248.0" layoutY="160.0" opacity="0.0" prefHeight="36.0" prefWidth="302.0" text="Initialising Data for simulation of the race.">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font></Label>
    <Label fx:id="srrLapByLap4" layoutX="248.0" layoutY="205.0" opacity="0.0" prefHeight="73.0" prefWidth="302.0" text="Choosing a location means selecting a venue that meets FIA World Rallycross Championship regulations." wrapText="true">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
    <Label fx:id="srrLapByLap6" layoutX="246.0" layoutY="286.0" opacity="0.0" prefHeight="73.0" prefWidth="302.0" text="Assembling driver positions calculates starting order based on previous heats and penalties." wrapText="true">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
    <Label fx:id="srrLapByLap8" layoutX="246.0" layoutY="359.0" opacity="0.0" prefHeight="60.0" prefWidth="314.0" text="Lights out and away we go." wrapText="true">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
    <Label fx:id="srrLapByLap10" layoutX="243.0" layoutY="410.0" opacity="0.0" prefHeight="60.0" prefWidth="314.0" text="Car 45 takes the joker lap." wrapText="true">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
    <Label fx:id="srrLapByLap12" layoutX="243.0" layoutY="472.0" opacity="0.0" prefHeight="73.0" prefWidth="314.0" text="Updating lap times and positions during the race ,tracking drivers' progress and updating times and positions." wrapText="true">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
    <Label fx:id="srrLapByLap1" layoutX="185.0" layoutY="167.0" opacity="0.0" prefHeight="25.0" prefWidth="49.0" text="1min" textFill="#757575">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
    <Label fx:id="srrLapByLap3" layoutX="185.0" layoutY="222.0" opacity="0.0" prefHeight="25.0" prefWidth="49.0" text="2min" textFill="#757575">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
    <Label fx:id="srrLapByLap5" layoutX="185.0" layoutY="296.0" opacity="0.0" prefHeight="25.0" prefWidth="49.0" text="2min" textFill="#757575">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
    <Label fx:id="srrLapByLap7" layoutX="185.0" layoutY="377.0" opacity="0.0" prefHeight="25.0" prefWidth="49.0" text="5min" textFill="#757575">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
    <Label fx:id="srrLapByLap9" layoutX="185.0" layoutY="426.0" opacity="0.0" prefHeight="25.0" prefWidth="49.0" text="28min" textFill="#757575">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
    <Label fx:id="srrLapByLap11" layoutX="182.0" layoutY="492.0" opacity="0.0" prefHeight="25.0" prefWidth="49.0" text="49min" textFill="#757575">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
    <Label fx:id="srrLapByLap14" layoutX="241.0" layoutY="537.0" opacity="0.0" prefHeight="60.0" prefWidth="314.0" text="Session completed sucessfully." wrapText="true">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
    <Label fx:id="srrLapByLap13" layoutX="180.0" layoutY="556.0" opacity="0.0" prefHeight="25.0" prefWidth="49.0" text="1h" textFill="#757575">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
    <Label fx:id="windowHeading1" layoutX="182.0" layoutY="3.0" opacity="0.0" prefHeight="83.0" prefWidth="203.0" text="RACE">
       <font>
-         <Font size="31.0" />
+         <Font name="Futura Medium" size="31.0" />
       </font>
    </Label>
-   <Label fx:id="windowHeading2" layoutX="183.0" layoutY="33.0" opacity="0.0" prefHeight="69.0" prefWidth="301.0" text="SIMULATION">
+   <Label fx:id="windowHeading2" layoutX="183.0" layoutY="35.0" opacity="0.0" prefHeight="69.0" prefWidth="301.0" text="SIMULATION">
       <font>
-         <Font name="System Bold" size="26.0" />
+         <Font name="Futura Medium" size="26.0" />
       </font>
    </Label>
    <Label fx:id="srrLapByLap0" layoutX="187.0" layoutY="118.0" opacity="0.0" prefHeight="25.0" prefWidth="143.0" text="LAP BY LAP UPDATE" textFill="#757575">
       <font>
-         <Font size="15.0" />
+         <Font name="Futura Medium" size="15.0" />
       </font>
    </Label>
 </AnchorPane>

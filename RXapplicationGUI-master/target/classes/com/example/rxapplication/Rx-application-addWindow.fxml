@@ -212,9 +212,9 @@
          <image>
             <Image url="@../images/AddImages.jpg" />
          </image></ImageView>
-      <Label fx:id="successLabel" alignment="CENTER" layoutX="261.0" opacity="0.0" prefHeight="36.0" prefWidth="735.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">
+      <Label fx:id="successLabel" alignment="CENTER" layoutX="255.0" layoutY="3.0" opacity="0.0" prefHeight="36.0" prefWidth="716.0" style="-fx-background-color: #ABEBC6; -fx-text-fill: #2F824C;">
          <font>
-            <Font size="16.0" />
+            <Font name="Futura Medium" size="16.0" />
          </font>
       </Label>
    </children>
