@@ -64,7 +64,7 @@ public class Controller {
     //VCT window elements
     @FXML private Button refreshButtonVCTWindow; //to refresh championship standings
     @FXML private TableView<Driver> championshipDataView; //table to display the data
-    @FXML private TableColumn<Driver,String> firstnameColumnChampionshipData,teamColumnChampionshipData,carColumnChampionshipData; //each and every column and the data type it will store
+    @FXML private TableColumn<Driver,String> nameColumnChampionshipData,teamColumnChampionshipData,carColumnChampionshipData; //each and every column and the data type it will store
     @FXML private TableColumn<Driver,Integer> ageColumnChampionshipData,pointsColumnChampionshipData;
 
     //SRR window elements
@@ -809,9 +809,8 @@ public class Controller {
             srrLapByLap4.setOpacity(1.0f);
         }));
         timeline.play();
-        String[] possibleLocations = {"Nyirád","Höljes","Montalegre","Barcelona","Rīga","Norway"};
-        int randomLocationIndex = random.nextInt(possibleLocations.length); //generate a random index from 0 until the last index of the list - https://www.geeksforgeeks.org/generating-random-numbers-in-java/
-        String raceLocation = possibleLocations[randomLocationIndex];
+
+        String raceLocation = randomLocation();
         String raceDate = randomDate();
         timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
             raceInfoPane.setOpacity(1.0f);
@@ -948,6 +947,12 @@ public class Controller {
         String date = ((day)+"/"+(month)+"/23");//creates a String of Date format
         return date;
     }
+    public String randomLocation(){
+        String[] possibleLocations = {"Nyirád","Höljes","Montalegre","Barcelona","Rīga","Norway"};
+        int randomLocationIndex = random.nextInt(possibleLocations.length); //generate a random index from 0 until the last index of the list - https://www.geeksforgeeks.org/generating-random-numbers-in-java/
+        String raceLocation = possibleLocations[randomLocationIndex];
+        return raceLocation;
+    }
 
 
     //VCT Window Methods
@@ -967,8 +972,7 @@ public class Controller {
         drivers = readFromFileChampionshipData();
         refreshButtonVCTWindow.setOpacity(0.0f);//once clicked the refresh button dissapears
         championshipDataView.setOpacity(1.0f);
-        firstnameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Details"));// this sets the value which is stored under the fname property of the drivers object
-        //lastnameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Details"));
+        nameColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Details"));// this sets the value which is stored under the detials property of the drivers object(fname and lname)
         ageColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver, Integer>("Age"));
         teamColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Team"));
         carColumnChampionshipData.setCellValueFactory(new PropertyValueFactory<Driver,String>("Car"));
