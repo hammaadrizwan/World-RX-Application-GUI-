@@ -142,7 +142,7 @@
    </ImageView>
   <TableView fx:id="championshipDataView" layoutX="188.0" layoutY="139.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" pickOnBounds="false" prefHeight="376.0" prefWidth="803.0">
     <columns>
-      <TableColumn fx:id="firstnameColumnChampionshipData" editable="false" prefWidth="177.0" sortable="false" text="NAME" />
+      <TableColumn fx:id="nameColumnChampionshipData" editable="false" prefWidth="177.0" sortable="false" text="NAME" />
       <TableColumn fx:id="ageColumnChampionshipData" editable="false" minWidth="0.0" prefWidth="62.0" sortable="false" text="AGE" />
       <TableColumn fx:id="teamColumnChampionshipData" editable="false" minWidth="0.0" prefWidth="253.0" sortable="false" text="TEAM" />
       <TableColumn fx:id="carColumnChampionshipData" editable="false" minWidth="0.0" prefWidth="240.0" sortable="false" text="CAR" />
