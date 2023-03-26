@@ -149,7 +149,7 @@
                         </Label>
                         <Label fx:id="firstPlaceDriverLname" alignment="CENTER" layoutX="7.0" layoutY="24.0" prefHeight="63.0" prefWidth="212.0" text="LASTNAME">
                            <font>
-                              <Font name="Arial Bold" size="23.0" />
+                              <Font name="Arial Bold" size="22.0" />
                            </font>
                         </Label>
                      </children>
@@ -163,7 +163,7 @@
                         </Label>
                         <Label fx:id="secondPlaceDriverLname" alignment="CENTER" layoutX="224.0" layoutY="23.0" prefHeight="63.0" prefWidth="215.0" text="LASTNAME">
                            <font>
-                              <Font name="Arial Bold" size="23.0" />
+                              <Font name="Arial Bold" size="22.0" />
                            </font>
                         </Label>
                      </children>
